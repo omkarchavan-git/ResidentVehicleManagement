@@ -1,17 +1,18 @@
 package com.AutoTrack.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.AutoTrack.eNum.ResidentType;
+import jakarta.persistence.*;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 @Entity
 
 @ToString
-
+@Setter
+@Getter
 public class Resident {
 
 
@@ -30,46 +31,13 @@ public class Resident {
 
     private String email;
 
+    // eNum field
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ResidentType residentType;
 
-    public String getFirstname() {
-        return firstname;
-    }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
 
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public Long getContactno() {
-        return contactno;
-    }
-
-    public void setContactno(Long contactno) {
-        this.contactno = contactno;
-    }
-
-    public String getFlatno() {
-        return flatno;
-    }
-
-    public void setFlatno(String flatno) {
-        this.flatno = flatno;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
 
 }
