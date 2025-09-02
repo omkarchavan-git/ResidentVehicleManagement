@@ -5,16 +5,19 @@ import com.AutoTrack.eNum.ResidentType;
 import jakarta.persistence.*;
 
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
-@Entity
+import java.util.List;
 
+@Entity
 @ToString
+
 
 public class Resident {
 
-
-
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -31,9 +34,12 @@ public class Resident {
 
     // eNum field
     @Enumerated(EnumType.STRING)
-
     private ResidentType residentType;
 
+
+    // mapping with vehicle
+    @OneToMany(mappedBy = "resident", cascade = CascadeType.ALL)
+    private List<Vehicles> vehicles;
 
     public int getId() {
         return id;
@@ -89,5 +95,13 @@ public class Resident {
 
     public void setResidentType(ResidentType residentType) {
         this.residentType = residentType;
+    }
+
+    public List<Vehicles> getVehicles() {
+        return vehicles;
+    }
+
+    public void setVehicles(List<Vehicles> vehicles) {
+        this.vehicles = vehicles;
     }
 }
