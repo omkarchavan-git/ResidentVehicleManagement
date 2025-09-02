@@ -27,7 +27,7 @@ public class ResidentService {
 
         resident.getVehicles().forEach( v -> {
             v.setResident(resident);
-            v.setIntime(LocalDateTime.now());
+            v.setIntime(LocalDateTime.MIN.now());
         } );
 
         return residentRepo.save(resident);
