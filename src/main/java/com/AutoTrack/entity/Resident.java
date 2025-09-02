@@ -4,15 +4,13 @@ package com.AutoTrack.entity;
 import com.AutoTrack.eNum.ResidentType;
 import jakarta.persistence.*;
 
-import lombok.Getter;
-import lombok.Setter;
+
 import lombok.ToString;
 
 @Entity
 
 @ToString
-@Setter
-@Getter
+
 public class Resident {
 
 
@@ -33,11 +31,63 @@ public class Resident {
 
     // eNum field
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+
     private ResidentType residentType;
 
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    public String getFirstname() {
+        return firstname;
+    }
 
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public Long getContactno() {
+        return contactno;
+    }
+
+    public void setContactno(Long contactno) {
+        this.contactno = contactno;
+    }
+
+    public String getFlatno() {
+        return flatno;
+    }
+
+    public void setFlatno(String flatno) {
+        this.flatno = flatno;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public ResidentType getResidentType() {
+        return residentType;
+    }
+
+    public void setResidentType(ResidentType residentType) {
+        this.residentType = residentType;
+    }
 }
