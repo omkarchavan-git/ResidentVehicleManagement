@@ -17,6 +17,8 @@ public class ResidentController {
     @Autowired
     private ResidentService residentService;
 
+
+    // add resident with vehicles
     @PostMapping("addResident")
     public ResponseEntity<String> addResident(@RequestBody Resident resident)
     {
