@@ -2,6 +2,8 @@ package com.AutoTrack.controller;
 
 import com.AutoTrack.entity.Resident;
 import com.AutoTrack.service.ResidentService;
+
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +21,9 @@ public class ResidentController {
 
 
     // add resident with vehicles
-    @PostMapping("addResident")
-    public ResponseEntity<String> addResident(@RequestBody Resident resident)
-    {
-        System.out.println("Received Resident: " + resident);
-        residentService.saveResident(resident);
-        return new ResponseEntity<>("Resident Saved" , HttpStatus.CREATED);
+    @PostMapping("/saveResidents")
+    public ResponseEntity<?> addResident(@Valid @RequestBody Resident resident) {
+         residentService.saveResident(resident);
+        return new ResponseEntity<>("saved Resident", HttpStatus.CREATED);
     }
 }

@@ -1,6 +1,7 @@
 package com.AutoTrack.service;
 
 import com.AutoTrack.entity.Resident;
+import com.AutoTrack.exception.FieldMissingException;
 import com.AutoTrack.repository.ResidentRepo;
 import com.AutoTrack.repository.VehiclrRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +22,34 @@ public class ResidentService {
     private VehiclrRepo vehiclrRepo;
 
 
-
     // to save Resident data with vehicles
     public Resident saveResident(Resident resident) {
 
-        resident.getVehicles().forEach( v -> {
-            v.setResident(resident);
-            v.setIntime(LocalDateTime.now().withNano(0));
-        } );
+        // Manual validation
+        if (resident.getFirstname() == null || resident.getFirstname().isBlank()) {
+            throw new FieldMissingException("Firstname is mandatory");
+        }
+        if (resident.getLastname() == null || resident.getLastname().isBlank()) {
+            throw new FieldMissingException("Lastname is mandatory");
+        }
+        if (resident.getContactno() == null) {
+            throw new FieldMissingException("Contact number is mandatory");
+        }
+        if (resident.getFlatno() == null || resident.getFlatno().isBlank()) {
+            throw new FieldMissingException("Flat number is mandatory");
+        }
+        if (resident.getEmail() != null && !resident.getEmail().matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+            throw new FieldMissingException("Email is invalid");
+        }
+        if (resident.getVehicles() != null) {
+            resident.getVehicles().forEach(v -> {
+                v.setResident(resident);
+                v.setIntime(LocalDateTime.now().withNano(0));
+            });
+        }
 
         return residentRepo.save(resident);
-
     }
+
 
 }

@@ -2,12 +2,15 @@ package com.AutoTrack.entity;
 
 
 import com.AutoTrack.eNum.ResidentType;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-
-
-
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,24 +24,31 @@ public class Resident {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(nullable = false)
+    @NotEmpty(message = "Firstname is mandatory")
     private String firstname;
 
+    @NotBlank(message = "Lastname is mandatory")
     private String lastname;
 
+    @NotNull(message = "Contact is mandatory")
     private Long contactno;
 
+    @NotBlank(message = "flatno is mandatory")
     private String flatno;
 
+    @Email(message = "Lastname is mandatory")
     private String email;
 
     // eNum field
+
     @Enumerated(EnumType.STRING)
     private ResidentType residentType;
 
 
     // mapping with vehicle
     @OneToMany(mappedBy = "resident", cascade = CascadeType.ALL)
-    private List<Vehicles> vehicles;
+    private List<Vehicles> vehicles = new ArrayList<>();
 
     public int getId() {
         return id;
