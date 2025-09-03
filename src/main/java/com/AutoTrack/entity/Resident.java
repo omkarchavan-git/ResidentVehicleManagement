@@ -2,6 +2,7 @@ package com.AutoTrack.entity;
 
 
 import com.AutoTrack.eNum.ResidentType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -48,6 +49,7 @@ public class Resident {
 
     // mapping with vehicle
     @OneToMany(mappedBy = "resident", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Vehicles> vehicles = new ArrayList<>();
 
     public int getId() {

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @Component
@@ -22,7 +23,7 @@ public class ResidentService {
     private VehiclrRepo vehiclrRepo;
 
 
-    // to save Resident data with vehicles
+    // to save Resident data with vehicles with having validations
     public Resident saveResident(Resident resident) {
 
         // Manual validation
@@ -47,9 +48,17 @@ public class ResidentService {
                 v.setIntime(LocalDateTime.now().withNano(0));
             });
         }
-
         return residentRepo.save(resident);
     }
+
+
+    // method to get all residents
+
+    public List<Resident> getAllDevelopers(){
+        List<Resident> residentList = residentRepo.findAll();
+        return residentList;
+    }
+
 
 
 }

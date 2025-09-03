@@ -1,6 +1,7 @@
 package com.AutoTrack.entity;
 
 import com.AutoTrack.eNum.VehicleType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -46,6 +47,7 @@ public class Vehicles {
     // Mapping with resident
     @ManyToOne
     @JoinColumn(name = "resident_id")
+    @JsonBackReference
     private Resident resident;
 
 
