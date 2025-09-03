@@ -2,11 +2,11 @@ package com.AutoTrack.entity;
 
 import com.AutoTrack.eNum.VehicleType;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+
 
 @Entity
 
@@ -18,7 +18,7 @@ public class Vehicles {
     private int id;
 
     @Column(nullable = false)
-    private String registrationNumber;
+    private String regNum;
 
     @Column(nullable = false)
     private String vehName;
@@ -26,8 +26,7 @@ public class Vehicles {
     @Column(nullable = false)
     private String color;
 
-    @Column(nullable = false)
-    private String type;
+
 
     //eNum Filed
     @Enumerated(EnumType.STRING)
@@ -41,7 +40,7 @@ public class Vehicles {
     private LocalDateTime  outtime;
 
     @Column(nullable = false)
-    private boolean isVehicle_active;
+    private boolean isVehActive;
 
 
     // Mapping with resident
@@ -58,12 +57,20 @@ public class Vehicles {
         this.id = id;
     }
 
-    public String getRegistrationNumber() {
-        return registrationNumber;
+    public String getRegNum() {
+        return regNum;
     }
 
-    public void setRegistrationNumber(String registrationNumber) {
-        this.registrationNumber = registrationNumber;
+    public void setRegNum(String regNum) {
+        this.regNum = regNum;
+    }
+
+    public boolean isVehActive() {
+        return isVehActive;
+    }
+
+    public void setVehActive(boolean vehActive) {
+        isVehActive = vehActive;
     }
 
     public String getVehName() {
@@ -82,13 +89,6 @@ public class Vehicles {
         this.color = color;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public VehicleType getVehicleType() {
         return vehicleType;
@@ -115,11 +115,11 @@ public class Vehicles {
     }
 
     public boolean isVehicle_active() {
-        return isVehicle_active;
+        return isVehActive;
     }
 
     public void setVehicle_active(boolean vehicle_active) {
-        isVehicle_active = vehicle_active;
+        isVehActive = vehicle_active;
     }
 
     public Resident getResident() {
@@ -130,3 +130,4 @@ public class Vehicles {
         this.resident = resident;
     }
 }
+
