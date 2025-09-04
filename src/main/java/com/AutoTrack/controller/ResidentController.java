@@ -33,5 +33,25 @@ public class ResidentController {
         return new ResponseEntity<>(residentList,HttpStatus.OK);
     }
 
+    @GetMapping("/getByName")
+    public ResponseEntity<?> getByName(@RequestParam(required = false) String firstname,
+                                       @RequestParam(required = false) String lastname) {
 
+        // validation: no numbers allowed
+        if ((firstname != null && firstname.matches(".*\\d.*")) ||
+                (lastname != null && lastname.matches(".*\\d.*"))) {
+            return ResponseEntity.badRequest().body("Firstname/Lastname should not contain numbers.");
+        }
+
+        List<Resident> residents = residentService.findByName(firstname, lastname);
+
+        if (residents.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("First name OR last name is required...");
+        }
+        return ResponseEntity.ok(residents);
+    }
 }
+
+
+
+
