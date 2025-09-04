@@ -1,6 +1,17 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+### [2.1.0]
+# Added 
+- Implemented find user by first name
+- Implemented find user by last name
+- Implemented find by Either firstname or lastname
+
+### Fixed
+- Not getting data on single parameter
+- getting all data with no parameters
+
+
 ## [2.0.0]
 ### Added
 - Configured error message in json format
