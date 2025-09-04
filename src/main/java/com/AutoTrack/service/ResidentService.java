@@ -54,11 +54,23 @@ public class ResidentService {
 
     // method to get all residents
 
-    public List<Resident> getAllDevelopers(){
+    public List<Resident> getAllDevelopers() {
         List<Resident> residentList = residentRepo.findAll();
         return residentList;
     }
 
 
+    //method to find by first name or lastname or both
+    public List<Resident> findByName(String firstname, String lastname) {
+        if (firstname != null && !firstname.isBlank() && lastname != null && !lastname.isBlank()) {
+            return residentRepo.findByFirstnameIgnoreCaseAndLastnameIgnoreCase(firstname, lastname);
+        } else if (firstname != null && !firstname.isBlank()) {
+            return residentRepo.findByFirstnameIgnoreCase(firstname);
+        } else if (lastname != null && !lastname.isBlank()) {
+            return residentRepo.findByLastnameIgnoreCase(lastname);
+        }
+        return List.of();
+    }
 
 }
+
