@@ -4,6 +4,7 @@ import com.AutoTrack.eNum.VehicleType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
@@ -18,13 +19,14 @@ public class Vehicles {
     @Column(nullable = false)
     private int id;
 
-    @Column(nullable = false)
+    @NotBlank(message = "Vehicle registration number is mandatory")
+    @Column(nullable = false, unique = true)
     private String regNum;
 
-    @Column(nullable = false)
+    @NotBlank(message = "Vehicle name is mandatory")
     private String vehName;
 
-    @Column(nullable = false)
+    @NotBlank(message = "Vehicle color is mandatory")
     private String color;
 
 
