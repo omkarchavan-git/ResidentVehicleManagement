@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-### [2.1.0]
+### [2.1.0] - 3-9-25
 # Added 
 - Implemented find user by first name
 - Implemented find user by last name
