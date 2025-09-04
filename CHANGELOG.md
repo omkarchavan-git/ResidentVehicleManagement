@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ### [2.2.0] - 3-9-25
-# Added
+## Added
 - Implemented add Vehicle details with resident id
 - Validate ID is present in the db
  
@@ -12,7 +12,7 @@ All notable changes to this project will be documented in this file.
 
 
 ### [2.1.0] - 3-9-25
-# Added 
+## Added 
 - Implemented find user by first name
 - Implemented find user by last name
 - Implemented find by Either firstname or lastname
