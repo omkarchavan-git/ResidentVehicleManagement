@@ -1,10 +1,9 @@
 package com.AutoTrack.service;
 
-import com.AutoTrack.eNum.VehicleType;
 import com.AutoTrack.entity.Resident;
 import com.AutoTrack.entity.Vehicles;
 import com.AutoTrack.repository.ResidentRepo;
-import com.AutoTrack.repository.VehiclrRepo;
+import com.AutoTrack.repository.VehicleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +13,7 @@ import java.time.LocalDateTime;
 public class VehicleService {
 
     @Autowired
-    private VehiclrRepo vehiclrRepo;
+    private VehicleRepo vehiclrRepo;
 
     @Autowired
     private ResidentRepo residentRepo;
@@ -39,4 +38,14 @@ public class VehicleService {
 
         return vehiclrRepo.save(vehicles);
     }
+
+    //
+    public Resident getResidentByRegNum(String regNum) {
+        Vehicles vehicle = vehiclrRepo.findByRegNum(regNum)
+                .orElseThrow(() -> new RuntimeException("Vehicle not found with registration number: " + regNum));
+
+        // ✅ Step 3: Return only resident details
+        return vehicle.getResident();
+    }
+
 }
