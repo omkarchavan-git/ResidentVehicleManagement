@@ -1,5 +1,6 @@
 package com.AutoTrack.controller;
 
+import com.AutoTrack.entity.Resident;
 import com.AutoTrack.entity.Vehicles;
 import com.AutoTrack.service.VehicleService;
 import jakarta.validation.Valid;
@@ -28,5 +29,17 @@ public class VehicleController {
         }
     }
 
+    // API to get Resident details by Vehicle Registration Number
+    @GetMapping("/resident")
+    public ResponseEntity<?> getResidentByRegNum(@RequestParam String regNum) {
+        try {
+            Resident resident = vehicleService.getResidentByRegNum(regNum);
+            return ResponseEntity.ok(resident); // ✅ Only Resident details
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 
 }
