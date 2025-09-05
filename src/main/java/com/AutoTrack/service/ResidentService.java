@@ -3,7 +3,7 @@ package com.AutoTrack.service;
 import com.AutoTrack.entity.Resident;
 import com.AutoTrack.exception.FieldMissingException;
 import com.AutoTrack.repository.ResidentRepo;
-import com.AutoTrack.repository.VehiclrRepo;
+import com.AutoTrack.repository.VehicleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class ResidentService {
     private ResidentRepo residentRepo;
 
     @Autowired
-    private VehiclrRepo vehiclrRepo;
+    private VehicleRepo vehiclrRepo;
 
 
     // to save Resident data with vehicles with having validations
