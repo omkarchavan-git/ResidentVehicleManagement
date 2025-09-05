@@ -1,5 +1,6 @@
 package com.AutoTrack.service;
 
+import com.AutoTrack.dtoClasses.VisitorResidentDTO;
 import com.AutoTrack.entity.Visitor;
 import com.AutoTrack.repository.ResidentRepo;
 import com.AutoTrack.repository.VisitorRepo;
@@ -20,4 +21,13 @@ public class VisitorService {
     public Visitor addVisitor(Visitor visitor) {
         return visitorRepo.save(visitor);
     }
+
+
+    public VisitorResidentDTO getVisitorByRegNum(String regNum) {
+        Visitor visitor = visitorRepo.findByVehicalRegisterationNumber(regNum)
+                .orElseThrow(() -> new RuntimeException("Visitor not found with registration: " + regNum));
+
+        return new VisitorResidentDTO(visitor);
+    }
+
 }
