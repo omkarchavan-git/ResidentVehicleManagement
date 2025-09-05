@@ -53,7 +53,6 @@ public class ResidentService {
 
 
     // method to get all residents
-
     public List<Resident> getAllDevelopers() {
         List<Resident> residentList = residentRepo.findAll();
         return residentList;
