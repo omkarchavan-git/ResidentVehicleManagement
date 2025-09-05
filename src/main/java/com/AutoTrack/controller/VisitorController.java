@@ -1,5 +1,6 @@
 package com.AutoTrack.controller;
 
+import com.AutoTrack.dtoClasses.VisitorResidentDTO;
 import com.AutoTrack.entity.Resident;
 import com.AutoTrack.entity.Visitor;
 import com.AutoTrack.service.VisitorService;
@@ -7,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -26,6 +24,12 @@ public class VisitorController {
     public ResponseEntity<Visitor> addVisitor(@RequestBody Visitor visitor) {
         Visitor savedVisitor = visitorService.addVisitor(visitor);
         return new ResponseEntity<>(savedVisitor, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/byRegNum/{regNum}")
+    public ResponseEntity<VisitorResidentDTO> getVisitorByRegNum(@PathVariable String regNum) {
+        VisitorResidentDTO dto = visitorService.getVisitorByRegNum(regNum);
+        return ResponseEntity.ok(dto);
     }
 
 }
