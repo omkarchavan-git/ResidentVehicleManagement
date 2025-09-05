@@ -24,7 +24,7 @@ public class Visitor {
 
     @Column(nullable = false, unique = true)
     @NotBlank(message = "Vehicle registration number is mandatory")
-    private String vehicalRegNum;
+    private String vehicalRegisterationNum;
 
     private String visitPurpose;
 
@@ -70,12 +70,12 @@ public class Visitor {
         this.vehicleName = vehicleName;
     }
 
-    public @NotBlank(message = "Vehicle registration number is mandatory") String getVehicalRegNum() {
-        return vehicalRegNum;
+    public @NotBlank(message = "Vehicle registration number is mandatory") String getVehicalRegisterationNum() {
+        return vehicalRegisterationNum;
     }
 
-    public void setVehicalRegNum(@NotBlank(message = "Vehicle registration number is mandatory") String vehicalRegNum) {
-        this.vehicalRegNum = vehicalRegNum;
+    public void setVehicalRegisterationNum(@NotBlank(message = "Vehicle registration number is mandatory") String vehicalRegisterationNum) {
+        this.vehicalRegisterationNum = vehicalRegisterationNum;
     }
 
     public String getVisitPurpose() {
