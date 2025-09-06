@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 
@@ -35,7 +36,21 @@ public class Visitor {
     @NotNull(message = "Phone number is mandatory")
     private Long phoneNumber;
 
-    private boolean isActiveVisitor;
+    private boolean isActiveVisitor = true;
+
+    @Column(name = "visit_duration")
+    private String visitDuration;   // HH:MM format
+
+    @PreUpdate                            // to auto calculate & update duration hours
+    public void calculateDuration() {
+        if (timeIn != null && timeOut != null) {
+            Duration duration = Duration.between(timeIn, timeOut);
+            long hours = duration.toHours();
+            long minutes = duration.toMinutes() % 60;
+            this.visitDuration = String.format("%02d:%02d", hours, minutes);
+        }
+    }
+
 
     @Enumerated(EnumType.STRING)
     private VisitorType visitorType;
@@ -132,5 +147,13 @@ public class Visitor {
 
     public void setResident(Resident resident) {
         this.resident = resident;
+    }
+
+    public String getVisitDuration() {
+        return visitDuration;
+    }
+
+    public void setVisitDuration(String visitDuration) {
+        this.visitDuration = visitDuration;
     }
 }
