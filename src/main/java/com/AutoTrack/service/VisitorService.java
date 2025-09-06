@@ -8,6 +8,7 @@ import com.AutoTrack.repository.VisitorRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,18 +30,14 @@ public class VisitorService {
 
 
     // method to get Resident details using visitor regNum
-    public List<VisitorResidentDTO> getVisitorResidentDetailsByRegNum(String regNum) {
-        List<Visitor> visitors = visitorRepo.findByVehicalRegisterationNum(regNum);
+    // method to get Resident details using visitor regNum
+    public VisitorResidentDTO getVisitorResidentDetailsByRegNum(String regNum) {
+        Visitor visitor = visitorRepo.findByVehicalRegisterationNum(regNum)
+                .orElseThrow(() -> new RuntimeException("No visitor found with vehicle registration number: " + regNum));
 
-        if (visitors.isEmpty()) {
-            throw new RuntimeException("No visitor found with vehicle registration number: " + regNum);
-        }
-
-        // Convert Visitor list to DTO list
-        return visitors.stream()
-                .map(VisitorResidentDTO::new)
-                .collect(Collectors.toList());
+        return new VisitorResidentDTO(visitor);
     }
+
 
 
     // method to update timeout of visitor
@@ -59,7 +56,6 @@ public class VisitorService {
     }
 
     // method to get visitor by their Type
-
     public List<VisitorResidentDTO> getVisitorsByFilter(List<String> types) {
         List<Visitor> visitors;
 
@@ -82,4 +78,26 @@ public class VisitorService {
                 .toList();
     }
 
+    // updated method to add outTime and update the Duration Hours
+    // Update timeOut and auto-calculate visitDuration
+    public Visitor updateVisitorExit(String vehicalRegisterationNum, LocalDateTime timeOut) {
+        Visitor visitor = visitorRepo.findByVehicalRegisterationNum(vehicalRegisterationNum)
+                .orElseThrow(() -> new RuntimeException("Visitor not found with reg number: " + vehicalRegisterationNum));
+
+        // set timeOut
+        visitor.setTimeOut(timeOut);
+
+        // calculate duration only if timeIn is present
+        if (visitor.getTimeIn() != null && timeOut != null) {
+            Duration duration = Duration.between(visitor.getTimeIn(), timeOut);
+            long hours = duration.toHours();
+            long minutes = duration.toMinutesPart();
+            String formatted = String.format("%02d:%02d", hours, minutes);
+            visitor.setVisitDuration(formatted);
+
+            // mark visitor inactive
+            visitor.setActiveVisitor(false);
+        }
+        return visitorRepo.save(visitor);
+    }
 }

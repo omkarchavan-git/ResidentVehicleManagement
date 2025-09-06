@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface VisitorRepo extends JpaRepository<Visitor, Integer> {
-    List<Visitor> findByVehicalRegisterationNum(String vehicalRegisterationNum);
+
+    Optional<Visitor> findByVehicalRegisterationNum(String vehicalRegisterationNum);
 
     List<Visitor> findByVisitorTypeIn(List<VisitorType> visitorTypes);
 
