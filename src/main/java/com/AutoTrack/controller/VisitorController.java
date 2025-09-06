@@ -32,8 +32,8 @@ public class VisitorController {
 
     // controller to get visitor details by regNum
     @GetMapping("/resident/{regNum}")
-    public ResponseEntity<List<VisitorResidentDTO>> getVisitorResidentDetails(@PathVariable String regNum) {
-        List<VisitorResidentDTO> details = visitorService.getVisitorResidentDetailsByRegNum(regNum);
+    public ResponseEntity<VisitorResidentDTO> getVisitorResidentDetails(@PathVariable String regNum) {
+        VisitorResidentDTO details = visitorService.getVisitorResidentDetailsByRegNum(regNum);
         return ResponseEntity.ok(details);
     }
 
@@ -51,7 +51,7 @@ public class VisitorController {
 
 
     // API to filter visitor by their type
-    @GetMapping("/filter")
+    @GetMapping("/filter/{regNum}")
     public ResponseEntity<List<VisitorResidentDTO>> getVisitorsByFilter(
             @RequestParam(required = false) List<String> types) {
 
