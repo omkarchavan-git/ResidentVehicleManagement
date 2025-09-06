@@ -7,6 +7,9 @@ import com.AutoTrack.repository.VisitorRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class VisitorService {
 
@@ -23,11 +26,17 @@ public class VisitorService {
     }
 
 
-    public VisitorResidentDTO getVisitorByRegNum(String regNum) {
-        Visitor visitor = visitorRepo.findByVehicalRegisterationNumber(regNum)
-                .orElseThrow(() -> new RuntimeException("Visitor not found with registration: " + regNum));
+    public List<VisitorResidentDTO> getVisitorResidentDetailsByRegNum(String regNum) {
+        List<Visitor> visitors = visitorRepo.findByVehicalRegisterationNum(regNum);
 
-        return new VisitorResidentDTO(visitor);
+        if (visitors.isEmpty()) {
+            throw new RuntimeException("No visitor found with vehicle registration number: " + regNum);
+        }
+
+        // Convert Visitor list to DTO list
+        return visitors.stream()
+                .map(VisitorResidentDTO::new)
+                .collect(Collectors.toList());
     }
 
 }
