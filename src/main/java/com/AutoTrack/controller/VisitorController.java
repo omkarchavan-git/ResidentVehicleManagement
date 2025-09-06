@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/visitor")
@@ -26,10 +28,11 @@ public class VisitorController {
         return new ResponseEntity<>(savedVisitor, HttpStatus.CREATED);
     }
 
-    @GetMapping("/byRegNum/{regNum}")
-    public ResponseEntity<VisitorResidentDTO> getVisitorByRegNum(@PathVariable String regNum) {
-        VisitorResidentDTO dto = visitorService.getVisitorByRegNum(regNum);
-        return ResponseEntity.ok(dto);
+    // controller to get visitor details by regNum
+    @GetMapping("/resident/{regNum}")
+    public ResponseEntity<List<VisitorResidentDTO>> getVisitorResidentDetails(@PathVariable String regNum) {
+        List<VisitorResidentDTO> details = visitorService.getVisitorResidentDetailsByRegNum(regNum);
+        return ResponseEntity.ok(details);
     }
 
 }
