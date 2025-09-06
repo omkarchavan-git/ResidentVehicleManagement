@@ -2,7 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 
-
+### [2.4.0]  6-9-25
+## Added 
+- API- update endtime of visitor.
+- Implemented an API to update exit time(end time) of visitor by vehicle number.
 
 
 ### [2.3.1] 5-9-25
