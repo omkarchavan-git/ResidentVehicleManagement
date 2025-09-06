@@ -1,6 +1,7 @@
 package com.AutoTrack.service;
 
 import com.AutoTrack.dtoClasses.VisitorResidentDTO;
+import com.AutoTrack.eNum.VisitorType;
 import com.AutoTrack.entity.Visitor;
 import com.AutoTrack.repository.ResidentRepo;
 import com.AutoTrack.repository.VisitorRepo;
@@ -55,6 +56,30 @@ public class VisitorService {
         visitorRepo.save(visitor);
 
         return new VisitorResidentDTO(visitor);
+    }
+
+    // method to get visitor by their Type
+
+    public List<VisitorResidentDTO> getVisitorsByFilter(List<String> types) {
+        List<Visitor> visitors;
+
+        if (types == null || types.isEmpty()) {
+            // No filter → get all
+            visitors = visitorRepo.findAll();
+        } else {
+            // Convert String → Enum
+            List<VisitorType> visitorTypes = types.stream()
+                    .map(String::toUpperCase)
+                    .map(VisitorType::valueOf)
+                    .toList();
+
+            visitors = visitorRepo.findByVisitorTypeIn(visitorTypes);
+        }
+
+        // Convert Entity → DTO
+        return visitors.stream()
+                .map(VisitorResidentDTO::new)
+                .toList();
     }
 
 }
