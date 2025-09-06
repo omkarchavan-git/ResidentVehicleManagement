@@ -1,6 +1,26 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+
+
+
+
+### [2.3.1] 5-9-25
+
+## Added 
+- Get visitors details with resident details by registration number.
+- only resident and visitor details.
+
+### [2.3.0] - 5-9-25
+
+## Added
+- Implemented Visitor Entity
+- Added Visitor with resident data
+- Added visitor vehicle data
+
+## fixed 
+- Issue in mapping resident with visitor
+
 ### [2.2.0] - 3-9-25
 ## Added
 - Implemented add Vehicle details with resident id
