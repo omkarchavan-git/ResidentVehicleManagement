@@ -1,10 +1,13 @@
 package com.AutoTrack.repository;
 
 import com.AutoTrack.entity.Visitor;
+import jakarta.validation.constraints.Null;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface VisitorRepo extends JpaRepository<Visitor, Integer> {
-        Optional<Visitor> findByVehicalRegisterationNumber(String regNum);
+    List<Visitor> findByVehicalRegisterationNum(String vehicalRegisterationNum);
+
 }
