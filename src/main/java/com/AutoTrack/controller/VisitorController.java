@@ -49,4 +49,14 @@ public class VisitorController {
         return ResponseEntity.ok(updatedVisitor);
     }
 
+
+    // API to filter visitor by their type
+    @GetMapping("/filter")
+    public ResponseEntity<List<VisitorResidentDTO>> getVisitorsByFilter(
+            @RequestParam(required = false) List<String> types) {
+
+        List<VisitorResidentDTO> visitors = visitorService.getVisitorsByFilter(types);
+        return ResponseEntity.ok(visitors);
+    }
+
 }
