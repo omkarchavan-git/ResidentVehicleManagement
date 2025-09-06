@@ -10,7 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -33,6 +35,18 @@ public class VisitorController {
     public ResponseEntity<List<VisitorResidentDTO>> getVisitorResidentDetails(@PathVariable String regNum) {
         List<VisitorResidentDTO> details = visitorService.getVisitorResidentDetailsByRegNum(regNum);
         return ResponseEntity.ok(details);
+    }
+
+    // API to update out-time
+    @PatchMapping("/exit-time/{regNum}")
+    public ResponseEntity<VisitorResidentDTO> updateExitTime(
+            @PathVariable String regNum,
+            @RequestBody Map<String, String> requestBody) {
+
+        LocalDateTime exitTime = LocalDateTime.parse(requestBody.get("timeOut"));
+        VisitorResidentDTO updatedVisitor = visitorService.updateVisitorExitTime(regNum, exitTime);
+
+        return ResponseEntity.ok(updatedVisitor);
     }
 
 }
