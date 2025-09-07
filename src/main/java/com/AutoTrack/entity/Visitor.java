@@ -52,6 +52,7 @@ public class Visitor {
     }
 
 
+
     @Enumerated(EnumType.STRING)
     private VisitorType visitorType;
 
