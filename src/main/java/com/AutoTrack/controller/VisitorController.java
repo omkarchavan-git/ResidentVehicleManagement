@@ -1,13 +1,11 @@
 package com.AutoTrack.controller;
 
 import com.AutoTrack.dtoClasses.VisitorResidentDTO;
-import com.AutoTrack.entity.Resident;
 import com.AutoTrack.entity.Visitor;
 import com.AutoTrack.service.VisitorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
