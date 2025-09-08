@@ -34,12 +34,11 @@ public class VehicleController {
     public ResponseEntity<?> getResidentByRegNum(@RequestParam String regNum) {
         try {
             Resident resident = vehicleService.getResidentByRegNum(regNum);
-            return ResponseEntity.ok(resident); // ✅ Only Resident details
+            return ResponseEntity.ok(resident);         //  Only Resident details
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
-
 }
