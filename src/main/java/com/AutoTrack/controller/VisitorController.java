@@ -49,7 +49,7 @@ public class VisitorController {
 
 
     // API to filter visitor by their type
-    @GetMapping("/filter/{regNum}")
+    @GetMapping("/filter")
     public ResponseEntity<List<VisitorResidentDTO>> getVisitorsByFilter(
             @RequestParam(required = false) List<String> types) {
 
