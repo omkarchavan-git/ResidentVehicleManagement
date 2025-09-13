@@ -45,6 +45,7 @@ public class VisitorResidentDTO {
     }
 
     public void setVisitorName(String visitorName) {
+
         this.visitorName = visitorName;
     }
 
