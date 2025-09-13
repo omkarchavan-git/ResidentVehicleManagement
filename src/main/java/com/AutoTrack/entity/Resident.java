@@ -115,4 +115,5 @@ public class Resident {
     public void setVehicles(List<Vehicles> vehicles) {
         this.vehicles = vehicles;
     }
+
 }
