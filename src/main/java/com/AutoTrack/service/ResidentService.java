@@ -27,7 +27,7 @@ public class ResidentService {
     public Resident saveResident(Resident resident) {
 
         // Manual validation
-        if (resident.getFirstname() == null || resident.getFirstname().isBlank()) {
+        if (resident.getFirstname() == null || resident.getFirstname().trim().isBlank()) {
             throw new FieldMissingException("Firstname is mandatory");
         }
         if (resident.getLastname() == null || resident.getLastname().isBlank()) {

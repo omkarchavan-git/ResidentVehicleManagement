@@ -3,7 +3,6 @@ package com.AutoTrack.entity;
 
 import com.AutoTrack.eNum.ResidentType;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -65,7 +64,7 @@ public class Resident {
     }
 
     public void setFirstname(String firstname) {
-        this.firstname = firstname;
+        this.firstname = firstname.trim();
     }
 
     public String getLastname() {
