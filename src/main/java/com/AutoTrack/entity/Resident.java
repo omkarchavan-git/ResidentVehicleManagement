@@ -1,13 +1,9 @@
 package com.AutoTrack.entity;
 
 import com.AutoTrack.eNum.ResidentType;
-import com.AutoTrack.helperClass.ResidentHelper;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.ToString;
 
 import java.util.ArrayList;
@@ -18,17 +14,16 @@ import java.util.List;
 
 public class Resident {
 
-
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false)
-    @NotEmpty(message = "Firstname is mandatory")
+
+    @NotBlank(message = "First name cannot be blank")
+    @Pattern(regexp = "^[A-Za-z]+$", message = "Invalid first name, only alphabets are allowed")
     private String firstname;
 
+    @Pattern(regexp = "^[A-Za-z]+$", message = "wrong  name")
     @NotBlank(message = "Lastname is mandatory")
     private String lastname;
 
@@ -66,16 +61,15 @@ public class Resident {
 
     public void setFirstname(String firstname) {
 
-            this.firstname = ResidentHelper.isValidName(firstname);
+            this.firstname = firstname.trim();
         }
-
 
     public String getLastname() {
         return lastname;
     }
 
     public void setLastname(String lastname) {
-        this.lastname = lastname;
+        this.lastname = lastname.trim();
     }
 
     public Long getContactno() {
