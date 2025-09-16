@@ -4,6 +4,7 @@ import com.AutoTrack.eNum.VisitorType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -18,9 +19,11 @@ public class Visitor {
     private int id;
 
     @NotBlank(message = "Visitor name is mandatory")
+    @Pattern(regexp= "^[A-Za-z]+$", message = "Enter valid first name")
     private String visitorName;
 
     @NotBlank(message = "Vehicle name is mandatory")
+    @Pattern(regexp= "^[A-Za-z]+$", message = "Enter valid last name")
     private String vehicleName;
 
     @Column(nullable = false, unique = true)
