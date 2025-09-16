@@ -31,6 +31,7 @@ public class Resident {
     @Pattern(regexp = "^[0-9]{10}+$", message = "Invalid Contact, must be 10 digit")
     private Long contactno;
 
+
     @NotBlank(message = "flatno is mandatory")
     private String flatno;
 
