@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
@@ -21,6 +22,7 @@ public class Vehicles {
 
     @NotBlank(message = "Vehicle registration number is mandatory")
     @Column(nullable = false, unique = true)
+    @Pattern(regexp = "^[A-Za-z0-9 ]+$", message = "only characters and numbers are valid")
     private String regNum;
 
     @NotBlank(message = "Vehicle name is mandatory")
