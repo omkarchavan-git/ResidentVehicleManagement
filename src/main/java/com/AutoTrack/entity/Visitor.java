@@ -28,8 +28,10 @@ public class Visitor {
 
     @Column(nullable = false, unique = true)
     @NotBlank(message = "Vehicle registration number is mandatory")
+    @Pattern(regexp = "^[A-Za-z0-9]", message = "Enter valid regNum")
     private String vehicalRegisterationNum;
 
+    @Pattern(regexp = "^[A-Za-z]", message = "only alphabets are allowed")
     private String visitPurpose;
 
     private LocalDateTime timeIn;
@@ -37,6 +39,7 @@ public class Visitor {
     private LocalDateTime timeOut;
 
     @NotNull(message = "Phone number is mandatory")
+    @Pattern(regexp = "^[0-9]{10}", message = "enter only 10 digit number")
     private Long phoneNumber;
 
     private boolean isActiveVisitor = true;
