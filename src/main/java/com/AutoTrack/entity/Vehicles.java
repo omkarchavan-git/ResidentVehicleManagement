@@ -26,9 +26,11 @@ public class Vehicles {
     private String regNum;
 
     @NotBlank(message = "Vehicle name is mandatory")
+    @Pattern(regexp = "^[A-Za-z]+$", message = "Enter valid Vehicle Name")
     private String vehName;
 
     @NotBlank(message = "Vehicle color is mandatory")
+    @Pattern(regexp = "^[A-Za-z]+$", message = "Enter valid color")
     private String color;
 
 
