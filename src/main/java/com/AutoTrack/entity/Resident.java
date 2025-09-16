@@ -1,7 +1,7 @@
 package com.AutoTrack.entity;
 
-
 import com.AutoTrack.eNum.ResidentType;
+import com.AutoTrack.helperClass.ResidentHelper;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -16,8 +16,9 @@ import java.util.List;
 @Entity
 @ToString
 
-
 public class Resident {
+
+
 
 
     @Id
@@ -64,8 +65,10 @@ public class Resident {
     }
 
     public void setFirstname(String firstname) {
-        this.firstname = firstname.trim();
-    }
+
+            this.firstname = ResidentHelper.isValidName(firstname);
+        }
+
 
     public String getLastname() {
         return lastname;
