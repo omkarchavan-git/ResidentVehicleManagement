@@ -23,7 +23,7 @@ public class Resident {
     @Pattern(regexp = "^[A-Za-z]+$", message = "Invalid first name, only alphabets are allowed")
     private String firstname;
 
-    @Pattern(regexp = "^[A-Za-z]+$", message = "wrong  name")
+    @Pattern(regexp = "^[A-Za-z]+$", message = "Invalid lastname, only alphabets are allowed")
     @NotBlank(message = "Lastname is mandatory")
     private String lastname;
 
