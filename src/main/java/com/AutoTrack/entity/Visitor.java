@@ -92,7 +92,7 @@ public class Visitor {
         this.vehicleName = vehicleName;
     }
 
-    public @NotBlank(message = "Vehicle registration number is mandatory") String getVehicalRegisterationNum() {
+    public String getVehicalRegisterationNum() {
         return vehicalRegisterationNum;
     }
 
