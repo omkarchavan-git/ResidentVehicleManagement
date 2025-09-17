@@ -76,11 +76,11 @@ public class Visitor {
         this.id = id;
     }
 
-    public @NotBlank(message = "Visitor name is mandatory") String getVisitorName() {
+    public  String getVisitorName() {
         return visitorName;
     }
 
-    public void setVisitorName(@NotBlank(message = "Visitor name is mandatory") String visitorName) {
+    public void setVisitorName (String visitorName) {
         this.visitorName = visitorName;
     }
 
