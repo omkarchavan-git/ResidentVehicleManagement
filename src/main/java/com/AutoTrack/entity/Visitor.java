@@ -96,7 +96,7 @@ public class Visitor {
         return vehicalRegisterationNum;
     }
 
-    public void setVehicalRegisterationNum(@NotBlank(message = "Vehicle registration number is mandatory") String vehicalRegisterationNum) {
+    public void setVehicalRegisterationNum(String vehicalRegisterationNum) {
         this.vehicalRegisterationNum = vehicalRegisterationNum;
     }
 
