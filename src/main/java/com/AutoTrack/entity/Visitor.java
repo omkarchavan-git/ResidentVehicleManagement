@@ -84,7 +84,7 @@ public class Visitor {
         this.visitorName = visitorName;
     }
 
-    public @NotBlank(message = "Vehicle name is mandatory") String getVehicleName() {
+    public  String getVehicleName() {
         return vehicleName;
     }
 
