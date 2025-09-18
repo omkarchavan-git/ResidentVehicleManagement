@@ -1,0 +1,93 @@
+.heading{
+     color: aquamarine;
+
+}
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f7fb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.form-container {
+  background: #fff;
+  padding: 25px 35px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 350px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border 0.3s;
+}
+
+input:focus {
+  border-color: #0077ff;
+  outline: none;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+button {
+  width: 48%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button[type="submit"] {
+  background: #0077ff;
+  color: #fff;
+}
+
+button[type="submit"]:hover {
+  background: #005fcc;
+}
+
+#cancelBtn {
+  background: #f44336;
+  color: #fff;
+}
+
+#cancelBtn:hover {
+  background: #d32f2f;
+}
+
+#message {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+}
