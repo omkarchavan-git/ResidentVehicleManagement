@@ -1,15 +1,16 @@
 import { useState } from 'react'
-import './addResident/addResident.css'
+
 import './App.css'
 import Resident from './addResident/Resident'
-
+import AddResident from './addResident/AddResident'
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
       <div>
-        <Resident />
+        <Resident/>
+        {/* <AddResident /> */}
       </div>
     </>
   )
