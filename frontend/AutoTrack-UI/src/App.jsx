@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './addResident/addResident.css'
 import './App.css'
 import Resident from './addResident/Resident'
 
