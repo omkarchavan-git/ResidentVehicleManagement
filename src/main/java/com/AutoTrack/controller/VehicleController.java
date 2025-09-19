@@ -30,7 +30,7 @@ public class VehicleController {
     }
 
     // API to get Resident details by Vehicle Registration Number
-    @GetMapping("/resident")
+    @GetMapping("/getResidentByRegNum")
     public ResponseEntity<?> getResidentByRegNum(@RequestParam String regNum) {
         try {
             Resident resident = vehicleService.getResidentByRegNum(regNum);
