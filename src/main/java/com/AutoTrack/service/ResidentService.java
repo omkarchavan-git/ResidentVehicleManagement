@@ -4,6 +4,7 @@ import com.AutoTrack.entity.Resident;
 import com.AutoTrack.exception.FieldMissingException;
 import com.AutoTrack.repository.ResidentRepo;
 import com.AutoTrack.repository.VehicleRepo;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -51,13 +52,11 @@ public class ResidentService {
         return residentRepo.save(resident);
     }
 
-
     // method to get all residents
-    public List<Resident> getAllDevelopers() {
+    public List<Resident> getAllResident() {
         List<Resident> residentList = residentRepo.findAll();
         return residentList;
     }
-
 
     //method to find by first name or lastname or both
     public List<Resident> findByName(String firstname, String lastname) {
@@ -71,5 +70,10 @@ public class ResidentService {
         return List.of();
     }
 
+    // method to add multiple resident at once
+    public List<Resident> addAllResident(@Valid List<Resident> residentList) {
+        List<Resident> residentList1 = residentRepo.saveAll(residentList);
+        return residentList1;
+    }
 }
 
