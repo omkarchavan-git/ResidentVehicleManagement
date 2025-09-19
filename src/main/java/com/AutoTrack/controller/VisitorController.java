@@ -14,6 +14,7 @@ import java.util.Map;
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/visitor")
 public class VisitorController {
 
