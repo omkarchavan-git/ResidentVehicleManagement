@@ -46,9 +46,15 @@ public class Resident {
 
 
     // mapping with vehicle
-    @OneToMany(mappedBy = "resident", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "resident", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Vehicles> vehicles = new ArrayList<>();
+
+    // mapping with Visitor
+    @OneToMany(mappedBy = "resident", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Visitor> visitors = new ArrayList<>();
+
 
     public int getId() {
         return id;
