@@ -78,10 +78,15 @@ public class ResidentService {
 
     // method to delete resident data by id
     public Resident deleteResidentById(int id) {
-       Resident resident = residentRepo.findById(id)
-               .orElseThrow( () -> new FieldMissingException("Resident Id Not Found : " + id));
-       residentRepo.deleteById(id);
-       return null;
+        try {
+            Resident resident = residentRepo.findById(id)
+                    .orElseThrow(() -> new FieldMissingException("Resident Id Not Found : " + id));
+            residentRepo.deleteById(id);
+            return resident;
+
+        } catch (FieldMissingException ex) {
+            throw new FieldMissingException("id not found : " + id);
+        }
     }
 }
 
