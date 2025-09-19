@@ -27,13 +27,22 @@ public class ResidentController {
         return new ResponseEntity<>("saved Resident", HttpStatus.CREATED);
     }
 
+    // add list of resident once at time
+    @PostMapping("/saveAllResident")
+    public ResponseEntity<?> addAllResident(@Valid @RequestBody List<Resident> residentList)
+    {
+        List<Resident> residentList1 = residentService.addAllResident(residentList);
+        return new ResponseEntity<>(residentList1, HttpStatus.CREATED);
+    }
+
     // API to get all resident
     @GetMapping("/getAllResident")
     public ResponseEntity<List<Resident>> getallresidents () {
-        List<Resident> residentList = residentService.getAllDevelopers();
+        List<Resident> residentList = residentService.getAllResident();
         return new ResponseEntity<>(residentList,HttpStatus.OK);
     }
 
+    // get Resident data by name
     @GetMapping("/getByName")
     public ResponseEntity<?> getByName(@RequestParam(required = false) String firstname,
                                        @RequestParam(required = false) String lastname) {
