@@ -85,7 +85,7 @@ public class ResidentService {
             return resident;
 
         } catch (FieldMissingException ex) {
-            throw new FieldMissingException("id not found : " + id);
+            throw new FieldMissingException("Resident id not found : " + id);
         }
     }
 }
