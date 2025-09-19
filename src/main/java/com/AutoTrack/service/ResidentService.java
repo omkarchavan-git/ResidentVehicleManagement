@@ -75,5 +75,13 @@ public class ResidentService {
         List<Resident> residentList1 = residentRepo.saveAll(residentList);
         return residentList1;
     }
+
+    // method to delete resident data by id
+    public Resident deleteResidentById(int id) {
+       Resident resident = residentRepo.findById(id)
+               .orElseThrow( () -> new FieldMissingException("Resident Id Not Found : " + id));
+       residentRepo.deleteById(id);
+       return null;
+    }
 }
 
