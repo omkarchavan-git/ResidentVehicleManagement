@@ -1,6 +1,7 @@
 package com.AutoTrack.entity;
 
 import com.AutoTrack.eNum.VisitorType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -37,11 +38,9 @@ public class Visitor {
 
 
     private LocalDateTime timeIn;
-
     private LocalDateTime timeOut;
 
     @NotNull(message = "Phone number is mandatory")
-
     private Long phoneNumber;
 
     private boolean isActiveVisitor = true;
@@ -65,6 +64,7 @@ public class Visitor {
     //  Many-to-One mapping with Resident
     @ManyToOne
     @JoinColumn(name = "resident_id", nullable = false)
+    @JsonBackReference
     private Resident resident;
 
 
