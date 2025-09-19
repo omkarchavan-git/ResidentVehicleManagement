@@ -27,13 +27,14 @@ public class ResidentController {
         return new ResponseEntity<>("saved Resident", HttpStatus.CREATED);
     }
 
-    // add list of resident once at time
+    // add list of resident once at a time
     @PostMapping("/saveAllResident")
     public ResponseEntity<?> addAllResident(@Valid @RequestBody List<Resident> residentList)
     {
         List<Resident> residentList1 = residentService.addAllResident(residentList);
         return new ResponseEntity<>(residentList1, HttpStatus.CREATED);
     }
+
 
     // API to get all resident
     @GetMapping("/getAllResident")
@@ -46,19 +47,25 @@ public class ResidentController {
     @GetMapping("/getByName")
     public ResponseEntity<?> getByName(@RequestParam(required = false) String firstname,
                                        @RequestParam(required = false) String lastname) {
-
         // validation: no numbers allowed
         if ((firstname != null && firstname.matches(".*\\d.*")) ||
                 (lastname != null && lastname.matches(".*\\d.*"))) {
             return ResponseEntity.badRequest().body("Firstname/Lastname should not contain numbers.");
         }
-
         List<Resident> residents = residentService.findByName(firstname, lastname);
-
         if (residents.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("First name OR last name is required...");
         }
         return ResponseEntity.ok(residents);
+    }
+
+
+    // Delete Resident data by id
+    @DeleteMapping("/deleteResidentById/{id}")
+    public ResponseEntity<Resident> deleteById(@PathVariable("id") int id)
+    {
+        Resident resident = residentService.deleteResidentById(id);
+        return new ResponseEntity<>(resident, HttpStatus.OK);
     }
 }
 
