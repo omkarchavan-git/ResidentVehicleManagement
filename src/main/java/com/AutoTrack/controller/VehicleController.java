@@ -2,7 +2,7 @@ package com.AutoTrack.controller;
 
 import com.AutoTrack.entity.Resident;
 import com.AutoTrack.entity.Vehicles;
-import com.AutoTrack.service.VehicleService;
+import com.AutoTrack.serviceImpl.VehicleServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class VehicleController {
 
     @Autowired
-    private VehicleService vehicleService;
+    private VehicleServiceImpl vehicleServiceImpl;
 
     // API to add vehicle data with resident
     @PostMapping("/addVehicle")
@@ -22,7 +22,7 @@ public class VehicleController {
                                          @RequestParam int residentId)
     {
         try {
-            Vehicles savedVehicle = vehicleService.createVehicle(vehicles, residentId);
+            Vehicles savedVehicle = vehicleServiceImpl.createVehicle(vehicles, residentId);
             return new ResponseEntity<>(savedVehicle, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -33,7 +33,7 @@ public class VehicleController {
     @GetMapping("/getResidentByRegNum")
     public ResponseEntity<?> getResidentByRegNum(@RequestParam String regNum) {
         try {
-            Resident resident = vehicleService.getResidentByRegNum(regNum);
+            Resident resident = vehicleServiceImpl.getResidentByRegNum(regNum);
             return ResponseEntity.ok(resident);         //  Only Resident details
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
