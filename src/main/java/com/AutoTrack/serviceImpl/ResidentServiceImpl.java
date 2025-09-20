@@ -1,5 +1,6 @@
-package com.AutoTrack.service;
+package com.AutoTrack.serviceImpl;
 
+import com.AutoTrack.Service.ResidentService;
 import com.AutoTrack.entity.Resident;
 import com.AutoTrack.exception.FieldMissingException;
 import com.AutoTrack.repository.ResidentRepo;
@@ -15,7 +16,7 @@ import java.util.List;
 @Service
 @Component
 
-public class ResidentService {
+public class ResidentServiceImpl implements ResidentService {
 
     @Autowired
     private ResidentRepo residentRepo;
@@ -25,6 +26,7 @@ public class ResidentService {
 
 
     // to save Resident data with vehicles with having validations
+    @Override
     public Resident saveResident(Resident resident) {
 
         // Manual validation
@@ -53,12 +55,14 @@ public class ResidentService {
     }
 
     // method to get all residents
+    @Override
     public List<Resident> getAllResident() {
         List<Resident> residentList = residentRepo.findAll();
         return residentList;
     }
 
     //method to find by first name or lastname or both
+    @Override
     public List<Resident> findByName(String firstname, String lastname) {
         if (firstname != null && !firstname.isBlank() && lastname != null && !lastname.isBlank()) {
             return residentRepo.findByFirstnameIgnoreCaseAndLastnameIgnoreCase(firstname, lastname);
@@ -71,12 +75,14 @@ public class ResidentService {
     }
 
     // method to add multiple resident at once
+    @Override
     public List<Resident> addAllResident(@Valid List<Resident> residentList) {
         List<Resident> residentList1 = residentRepo.saveAll(residentList);
         return residentList1;
     }
 
     // method to delete resident data by id
+    @Override
     public Resident deleteResidentById(int id) {
         try {
             Resident resident = residentRepo.findById(id)
@@ -87,6 +93,13 @@ public class ResidentService {
         } catch (FieldMissingException ex) {
             throw new FieldMissingException("Resident id not found : " + id);
         }
+    }
+
+    // method to  update resident by name
+    @Override
+    public Resident updateresidentByName(Resident resident) {
+       Resident updatedResident =  residentRepo.save(resident);
+        return updatedResident;
     }
 }
 
