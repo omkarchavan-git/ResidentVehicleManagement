@@ -64,14 +64,19 @@ public class ResidentServiceImpl implements ResidentService {
     //method to find by first name or lastname or both
     @Override
     public List<Resident> findByName(String firstname, String lastname) {
-        if (firstname != null && !firstname.isBlank() && lastname != null && !lastname.isBlank()) {
-            return residentRepo.findByFirstnameIgnoreCaseAndLastnameIgnoreCase(firstname, lastname);
-        } else if (firstname != null && !firstname.isBlank()) {
-            return residentRepo.findByFirstnameIgnoreCase(firstname);
-        } else if (lastname != null && !lastname.isBlank()) {
-            return residentRepo.findByLastnameIgnoreCase(lastname);
+
+        try {
+            if (firstname != null && !firstname.isBlank() && lastname != null && !lastname.isBlank()) {
+                return residentRepo.findByFirstnameIgnoreCaseAndLastnameIgnoreCase(firstname, lastname);
+            } else if (firstname != null && !firstname.isBlank()) {
+                return residentRepo.findByFirstnameIgnoreCase(firstname);
+            } else if (lastname != null && !lastname.isBlank()) {
+                return residentRepo.findByLastnameIgnoreCase(lastname);
+            }
+            return List.of();
+        } catch (FieldMissingException ex) {
+            throw new FieldMissingException("Name not found" + firstname + lastname);
         }
-        return List.of();
     }
 
     // method to add multiple resident at once
@@ -95,12 +100,14 @@ public class ResidentServiceImpl implements ResidentService {
         }
     }
 
+    // method to  update resident by name
     @Override
     public Resident updateByName(String firstname, Resident resident) {
 
-        try {
-            Resident updatedResident = residentRepo.findByFirstname(firstname);
-
+        Resident updatedResident = residentRepo.findByFirstname(firstname);
+        if (updatedResident == null) {
+            throw new FieldMissingException("Resident not found name = " + firstname);
+        }
             updatedResident.setFirstname(resident.getFirstname());
             updatedResident.setLastname((resident.getLastname()));
             updatedResident.setContactno((resident.getContactno()));
@@ -109,15 +116,30 @@ public class ResidentServiceImpl implements ResidentService {
             updatedResident.setFlatno(resident.getFlatno());
 
             return residentRepo.save(updatedResident);
-        }
-        catch (FieldMissingException ex)
-        {
-            throw new FieldMissingException("Resident not found name = " + firstname);
-        }
 
     }
 
-    // method to  update resident by name
+    @Override
+    public Resident updateByFlatNo(String flatno, Resident resident) {
+        Resident resident1 = residentRepo.findByFlatno(flatno);
+
+        if (resident1 == null)
+        {
+            throw  new FieldMissingException("Flat No: "+flatno + " not Found ");
+        }
+        resident1.setFirstname(resident.getFirstname());
+        resident1.setLastname((resident.getLastname()));
+        resident1.setContactno((resident.getContactno()));
+        resident1.setResidentType(resident.getResidentType());
+        resident1.setEmail(resident.getEmail());
+        resident1.setFlatno(resident.getFlatno());
+
+        return residentRepo.save(resident1);
+    }
 
 }
+
+
+
+
 

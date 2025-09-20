@@ -54,7 +54,7 @@ public class ResidentController {
         }
         List<Resident> residents = residentService.findByName(firstname, lastname);
         if (residents.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("First name OR last name is required...");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("First name OR last name is not Exist...");
         }
         return ResponseEntity.ok(residents);
     }
@@ -77,6 +77,13 @@ public class ResidentController {
     }
 
 
+    // API to update by flatNo
+    @PutMapping("/updateByFlatNo")
+    public ResponseEntity<Resident> updateByflatNo(@RequestParam("flatno") String flatno, @RequestBody Resident resident)
+    {
+      Resident resident1 =   residentService.updateByFlatNo(flatno, resident);
+      return new ResponseEntity<>(resident1, HttpStatus.OK);
+    }
 
 }
 
