@@ -85,6 +85,29 @@ public class ResidentController {
       return new ResponseEntity<>(resident1, HttpStatus.OK);
     }
 
+    // delete resident data by flat no
+    @DeleteMapping("/deleteByFlatNo/{flatno}")
+    public ResponseEntity<String> deleteByflatno(@PathVariable("flatno") String flatno)
+    {
+        residentService.deleteByFlaytNo(flatno);
+        return new ResponseEntity<>("Resident with Flat Number  : " + flatno + " Deleted", HttpStatus.OK);
+    }
+
+    // API to find Resident by flatno
+    @GetMapping("/findByFlatNo/{flatno}")
+    public ResponseEntity<Resident> findbyflatno(@PathVariable("flatno") String flatno, Resident resident)
+    {
+       Resident resident1 = residentService.getByflatNo(flatno, resident);
+       return new ResponseEntity<>(resident1, HttpStatus.OK);
+    }
+
+    // API to  Find Resident by Parking lot
+    @GetMapping("/getResidentByParkinglot/{parkinglot}")
+    public ResponseEntity<Resident> findbyparkinglot(@PathVariable("parkinglot") String parkinglot, Resident resident)
+    {
+       Resident resident1 = residentService.getResidentByParkinglot(parkinglot, resident);
+       return new ResponseEntity<>(resident1, HttpStatus.OK);
+    }
 }
 
 
