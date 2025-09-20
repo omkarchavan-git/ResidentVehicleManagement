@@ -17,4 +17,6 @@ public interface ResidentRepo extends JpaRepository<Resident, Integer> {
 
     Resident findByFlatno(String flatno);
 
+    Resident findByParkinglot(String parkinglot);
+
 }

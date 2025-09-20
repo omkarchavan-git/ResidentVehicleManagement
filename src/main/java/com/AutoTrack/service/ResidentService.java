@@ -25,4 +25,17 @@ public interface ResidentService {
     // method to update resident by name
    public Resident updateByName(String firstname, Resident resident);
 
+   // update resident by flatno
+    public Resident updateByFlatNo(String flatno, Resident resident);
+
+
+    // delete by flatno
+    public List<Resident> deleteByFlaytNo(String flatno);
+
+    // get resident by flat No
+    public Resident getByflatNo(String flatno, Resident resident);
+
+    // Find resident by parking lot
+    public Resident getResidentByParkinglot(String parkinglot, Resident resident);
+
 }

@@ -108,24 +108,24 @@ public class ResidentServiceImpl implements ResidentService {
         if (updatedResident == null) {
             throw new FieldMissingException("Resident not found name = " + firstname);
         }
-            updatedResident.setFirstname(resident.getFirstname());
-            updatedResident.setLastname((resident.getLastname()));
-            updatedResident.setContactno((resident.getContactno()));
-            updatedResident.setResidentType(resident.getResidentType());
-            updatedResident.setEmail(resident.getEmail());
-            updatedResident.setFlatno(resident.getFlatno());
+        updatedResident.setFirstname(resident.getFirstname());
+        updatedResident.setLastname((resident.getLastname()));
+        updatedResident.setContactno((resident.getContactno()));
+        updatedResident.setResidentType(resident.getResidentType());
+        updatedResident.setEmail(resident.getEmail());
+        updatedResident.setFlatno(resident.getFlatno());
 
-            return residentRepo.save(updatedResident);
+        return residentRepo.save(updatedResident);
 
     }
 
+    // update by flat no
     @Override
     public Resident updateByFlatNo(String flatno, Resident resident) {
         Resident resident1 = residentRepo.findByFlatno(flatno);
 
-        if (resident1 == null)
-        {
-            throw  new FieldMissingException("Flat No: "+flatno + " not Found ");
+        if (resident1 == null) {
+            throw new FieldMissingException("Flat No: " + flatno + " not Found ");
         }
         resident1.setFirstname(resident.getFirstname());
         resident1.setLastname((resident.getLastname()));
@@ -136,6 +136,41 @@ public class ResidentServiceImpl implements ResidentService {
 
         return residentRepo.save(resident1);
     }
+
+    // delete by flat no
+    @Override
+    public List<Resident> deleteByFlaytNo(String flatno) {
+
+        Resident resident = residentRepo.findByFlatno(flatno);
+        if (resident == null) {
+            throw new FieldMissingException("Flat Number : " + flatno + " not found");
+        }
+        residentRepo.delete(resident);
+        return null;
+    }
+
+    // get by flat no
+    @Override
+    public Resident getByflatNo(String flatno, Resident resident) {
+        Resident residentList = residentRepo.findByFlatno(flatno);
+
+        if (residentList == null) {
+            throw new FieldMissingException("flat no not found " + flatno);
+        }
+        return residentList;
+
+    }
+
+    @Override
+    public Resident getResidentByParkinglot(String parkinglot, Resident resident) {
+      Resident resident1 =  residentRepo.findByParkinglot(parkinglot);
+      if (resident1 == null)
+      {
+          throw new FieldMissingException("Resident data for parking slot : " + parkinglot + "Not Found ");
+      }
+        return resident1;
+    }
+
 
 }
 
