@@ -44,6 +44,8 @@ public class Resident {
     @Enumerated(EnumType.STRING)
     private ResidentType residentType;
 
+    private String parkinglot;
+
 
     // mapping with vehicle
     @OneToMany(mappedBy = "resident", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -120,4 +122,11 @@ public class Resident {
         this.vehicles = vehicles;
     }
 
+    public String getParkinglot() {
+        return parkinglot;
+    }
+
+    public void setParkinglot(String parkinglot) {
+        this.parkinglot = parkinglot;
+    }
 }
