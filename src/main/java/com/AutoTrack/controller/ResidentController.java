@@ -2,7 +2,6 @@ package com.AutoTrack.controller;
 
 import com.AutoTrack.Service.ResidentService;
 import com.AutoTrack.entity.Resident;
-import com.AutoTrack.serviceImpl.ResidentServiceImpl;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,13 +68,16 @@ public class ResidentController {
         return new ResponseEntity<>(resident, HttpStatus.OK);
     }
 
-    //Update resident by name
-    @PutMapping("/updateResidentByName/{name}")
-    public ResponseEntity<?> updateResidentByname (@PathVariable("name") @RequestBody Resident resident)
+//    Update resident by name
+    @PutMapping("/updateResidentByName/{firstname}")
+    public ResponseEntity<?> updateResidentByname (@PathVariable("firstname") String firstname, @RequestBody Resident resident)
     {
-        Resident resident1 = residentService.updateresidentByName(resident);
-        return new ResponseEntity<>(resident1, HttpStatus.OK);
+      Resident resident1 = residentService.updateByName(firstname, resident);
+       return new ResponseEntity<>(resident1, HttpStatus.OK);
     }
+
+
+
 }
 
 
