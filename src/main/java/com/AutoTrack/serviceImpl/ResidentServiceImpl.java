@@ -97,16 +97,23 @@ public class ResidentServiceImpl implements ResidentService {
 
     @Override
     public Resident updateByName(String firstname, Resident resident) {
-        Resident updatedResident =  residentRepo.findByFirstname(firstname);
 
-        updatedResident.setFirstname(resident.getFirstname());
-        updatedResident.setLastname((resident.getLastname()));
-        updatedResident.setContactno((resident.getContactno()));
-        updatedResident.setResidentType(resident.getResidentType());
-        updatedResident.setEmail(resident.getEmail());
-        updatedResident.setFlatno(resident.getFlatno());
+        try {
+            Resident updatedResident = residentRepo.findByFirstname(firstname);
 
-        return residentRepo.save(updatedResident);
+            updatedResident.setFirstname(resident.getFirstname());
+            updatedResident.setLastname((resident.getLastname()));
+            updatedResident.setContactno((resident.getContactno()));
+            updatedResident.setResidentType(resident.getResidentType());
+            updatedResident.setEmail(resident.getEmail());
+            updatedResident.setFlatno(resident.getFlatno());
+
+            return residentRepo.save(updatedResident);
+        }
+        catch (FieldMissingException ex)
+        {
+            throw new FieldMissingException("Resident not found name = " + firstname);
+        }
 
     }
 
