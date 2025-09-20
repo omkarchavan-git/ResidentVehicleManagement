@@ -10,7 +10,6 @@ import jakarta.validation.constraints.Pattern;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-
 @Entity
 
 public class Visitor {
