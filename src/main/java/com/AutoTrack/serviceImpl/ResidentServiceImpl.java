@@ -95,11 +95,22 @@ public class ResidentServiceImpl implements ResidentService {
         }
     }
 
-    // method to  update resident by name
     @Override
-    public Resident updateresidentByName(Resident resident) {
-       Resident updatedResident =  residentRepo.save(resident);
-        return updatedResident;
+    public Resident updateByName(String firstname, Resident resident) {
+        Resident updatedResident =  residentRepo.findByFirstname(firstname);
+
+        updatedResident.setFirstname(resident.getFirstname());
+        updatedResident.setLastname((resident.getLastname()));
+        updatedResident.setContactno((resident.getContactno()));
+        updatedResident.setResidentType(resident.getResidentType());
+        updatedResident.setEmail(resident.getEmail());
+        updatedResident.setFlatno(resident.getFlatno());
+
+        return residentRepo.save(updatedResident);
+
     }
+
+    // method to  update resident by name
+
 }
 
