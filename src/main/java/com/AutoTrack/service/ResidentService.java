@@ -1,10 +1,8 @@
 package com.AutoTrack.Service;
 
 import com.AutoTrack.entity.Resident;
-import com.AutoTrack.exception.FieldMissingException;
 import jakarta.validation.Valid;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ResidentService {
@@ -25,6 +23,6 @@ public interface ResidentService {
     public Resident deleteResidentById(int id) ;
 
     // method to update resident by name
-    Resident updateresidentByName(Resident resident);
+   public Resident updateByName(String firstname, Resident resident);
 
 }
