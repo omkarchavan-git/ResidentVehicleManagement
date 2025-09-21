@@ -18,7 +18,7 @@ public class Vehicles {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
-    private int id;
+    private long id;
 
     @NotBlank(message = "Vehicle registration number is mandatory")
     @Column(nullable = false, unique = true)
@@ -56,12 +56,22 @@ public class Vehicles {
     @JsonBackReference
     private Resident resident;
 
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
-    public int getId() {
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
