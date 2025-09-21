@@ -4,6 +4,7 @@ import com.AutoTrack.Service.ResidentService;
 import com.AutoTrack.entity.Resident;
 
 import jakarta.validation.Valid;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -108,6 +109,15 @@ public class ResidentController {
        Resident resident1 = residentService.getResidentByParkinglot(parkinglot, resident);
        return new ResponseEntity<>(resident1, HttpStatus.OK);
     }
+
+    // API to filter by Resident type
+    @GetMapping("/filterByResidentType")
+    public ResponseEntity<List<Resident>> filterByResidentType(@RequestParam("residentType")String residentType)
+    {
+      List<Resident>  residentList =  residentService.fiterbyResidentType(residentType);
+      return new ResponseEntity<>(residentList, HttpStatus.OK);
+    }
+
 }
 
 
