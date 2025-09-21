@@ -38,4 +38,7 @@ public interface ResidentService {
     // Find resident by parking lot
     public Resident getResidentByParkinglot(String parkinglot, Resident resident);
 
+    // method to filter by Resident type
+    public List<Resident> fiterbyResidentType(String residentType);
+
 }
