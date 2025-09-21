@@ -7,7 +7,9 @@ import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +59,25 @@ public class Resident {
     @JsonManagedReference
     private List<Visitor> visitors = new ArrayList<>();
 
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    public List<Visitor> getVisitors() {
+
+        return visitors;
+    }
+
+    public void setVisitors(List<Visitor> visitors) {
+        this.visitors = visitors;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 
     public int getId() {
         return id;
