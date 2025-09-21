@@ -14,9 +14,9 @@ function Navbar() {
         <div className="nav-links">
           {/* Resident with Dropdown */}
           <div className="dropdown">
-            <Link to="/resident" className="nav-item">Resident</Link>
+            <Link to="/resident/Resident" className="nav-item">Resident</Link>
             <div className="dropdown-content">
-              <Link to="./resident/addResident">Add Resident</Link>
+              <Link to="/resident/AddResident">Add Resident</Link>
               <Link to="/resident/list">Resident List</Link>
               <Link to="/resident/payments">Payments</Link>
               <Link to="/resident/settings">Settings</Link>
