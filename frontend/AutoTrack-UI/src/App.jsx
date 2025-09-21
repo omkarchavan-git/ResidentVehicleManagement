@@ -6,6 +6,7 @@ import Navbar from './navbar/Navbar'
 
 
 import './App.css'
+import AddResident from './addResident/AddResident'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -16,7 +17,8 @@ function App() {
           <Navbar />
           <div className="pt-16"> {/* padding so content doesn’t hide behind navbar */}
             <Routes>
-              <Route path="/resident" element={<Resident />} />
+              <Route path="/resident/addResident" element={<AddResident />} />
+              <Route path="/resident/Resident" element={<Resident />} />
               <Route path="/visitor" element={<Visitor />} />
               {/* <Route path="/vehicle" element={<Vehicle />} /> */}
             </Routes>
