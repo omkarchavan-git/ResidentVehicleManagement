@@ -6,6 +6,7 @@ function AddResident() {
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
+    parkinglot: "",
     email: "",
     contactno: "",
     flatno: "",
@@ -34,7 +35,7 @@ function AddResident() {
 
     try {
       const response = await fetch(
-        "http://localhost:8080/Resident/saveResidents",
+        "http://localhost:8085/Resident/saveResidents",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -47,6 +48,7 @@ function AddResident() {
         setFormData({
           firstname: "",
           lastname: "",
+          parkinglot: "",
           email: "",
           contactno: "",
           flatno: "",
@@ -66,6 +68,7 @@ function AddResident() {
     setFormData({
       firstname: "",
       lastname: "",
+      parkinglot: "",
       email: "",
       contactno: "",
       flatno: "",
@@ -92,6 +95,14 @@ function AddResident() {
           value={formData.lastname}
           onChange={handleChange}
           placeholder="Last Name"
+          required
+        />
+        <input
+          type="text"
+          name="parkinglot"
+          value={formData.parkinglot}
+          onChange={handleChange}
+          placeholder="parkinglot"
           required
         />
         <input
