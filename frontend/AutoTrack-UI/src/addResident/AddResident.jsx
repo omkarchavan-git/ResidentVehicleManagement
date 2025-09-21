@@ -103,7 +103,7 @@ function AddResident() {
           value={formData.parkinglot}
           onChange={handleChange}
           placeholder="parkinglot"
-          required
+          
         />
         <input
           type="email"
