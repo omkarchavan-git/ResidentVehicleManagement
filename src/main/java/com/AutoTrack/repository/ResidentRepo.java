@@ -1,5 +1,6 @@
 package com.AutoTrack.repository;
 
+import com.AutoTrack.eNum.ResidentType;
 import com.AutoTrack.entity.Resident;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -18,5 +19,7 @@ public interface ResidentRepo extends JpaRepository<Resident, Integer> {
     Resident findByFlatno(String flatno);
 
     Resident findByParkinglot(String parkinglot);
+
+    List<Resident> findByResidentType(ResidentType residentType);
 
 }
