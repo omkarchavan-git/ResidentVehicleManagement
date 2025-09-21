@@ -1,9 +1,6 @@
 package com.AutoTrack.dtoClasses;
 
 import com.AutoTrack.entity.Visitor;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.time.LocalDateTime;
 
 
