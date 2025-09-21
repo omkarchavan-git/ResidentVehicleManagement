@@ -1,6 +1,7 @@
 package com.AutoTrack.serviceImpl;
 
 import com.AutoTrack.Service.ResidentService;
+import com.AutoTrack.eNum.ResidentType;
 import com.AutoTrack.entity.Resident;
 import com.AutoTrack.exception.FieldMissingException;
 import com.AutoTrack.repository.ResidentRepo;
@@ -169,6 +170,12 @@ public class ResidentServiceImpl implements ResidentService {
           throw new FieldMissingException("Resident data for parking slot : " + parkinglot + "Not Found ");
       }
         return resident1;
+    }
+
+    @Override
+    public List<Resident> fiterbyResidentType(String residentType) {
+      ResidentType residentType1 =  ResidentType.valueOf(residentType.toUpperCase());
+        return residentRepo.findByResidentType(residentType1);
     }
 
 
