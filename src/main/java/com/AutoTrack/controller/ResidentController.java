@@ -20,7 +20,6 @@ public class ResidentController {
     @Autowired
     private ResidentService residentService;
 
-
     // add resident with vehicles
     @PostMapping("/saveResidents")
     public ResponseEntity<?> addResident(@Valid @RequestBody Resident resident) {
@@ -69,11 +68,11 @@ public class ResidentController {
         return new ResponseEntity<>(resident, HttpStatus.OK);
     }
 
-//    Update resident by name
-    @PutMapping("/updateResidentByName/{firstname}")
-    public ResponseEntity<?> updateResidentByname (@PathVariable("firstname") String firstname, @RequestBody Resident resident)
+//    Update resident by id
+    @PutMapping("/updateResidentById/{id}")
+    public ResponseEntity<?> updateResidentByid (@PathVariable("id") int id, @RequestBody Resident resident)
     {
-      Resident resident1 = residentService.updateByName(firstname, resident);
+      Resident resident1 = residentService.updateById(id, resident);
        return new ResponseEntity<>(resident1, HttpStatus.OK);
     }
 
