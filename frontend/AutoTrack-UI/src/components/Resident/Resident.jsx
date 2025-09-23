@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import DeleteResident from "../deleteResident/DeleteResident";
 import './Resident.css'
 
 function Resident() {
@@ -9,6 +10,9 @@ function Resident() {
   // search states
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
+
+  const [toast, setToast] = useState("");  // to handle delte
+
 
   // fetch all residents initially
   useEffect(() => {
@@ -56,6 +60,39 @@ function Resident() {
   const startIndex = (page - 1) * rowsPerPage;
   const selectedResidents = residents.slice(startIndex, startIndex + rowsPerPage);
   const totalPages = Math.ceil(residents.length / rowsPerPage);
+
+
+  // // delete function
+
+  const removeResidentFromTable = (id) => {
+    setResidents(residents.filter(r => r.id !== id));
+  };
+
+  // const [toast, setToast] = useState("");
+
+  // const handleDelete = async (id) => {
+  //   const confirmDelete = window.confirm("Are you sure you want to delete this resident?");
+  //   if (!confirmDelete) return;
+
+  //   try {
+  //     const response = await fetch(`http://localhost:8085/Resident/deleteResidentById/${id}`, {
+  //       method: "DELETE",
+  //     });
+
+  //     if (response.ok) {
+  //       alert("Resident deleted successfully!");
+  //       // Remove deleted resident from state to refresh table
+  //       setResidents(residents.filter(resident => resident.id !== id));
+  //     } else {
+  //       const errorText = await response.text();
+  //       alert("Failed to delete: " + errorText);
+  //     }
+  //   } catch (error) {
+  //     alert("Error connecting to server!");
+  //     console.error(error);
+  //   }
+  // };
+
 
   return (
     <div style={{ padding: "20px" }}>
@@ -119,9 +156,25 @@ function Resident() {
                 <td>{resident.residentType}</td>
                 <td>{resident.parkinglot || "N/A"}</td>
                 <td>
-                  
-                  <button className="update-btn" onClick={() => console.log("Update", resident.id)}>Update</button>
-                  <button className="delete-btn" onClick={() => console.log("Delete", resident.id)}>Delete</button>
+
+                  {/* <button className="update-btn" onClick={() => console.log("Update", resident.id)}>Update</button>
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleDelete(resident.id)}
+                  >
+                    Delete
+                  </button> */}
+
+                  <button className="update-btn" onClick={() => console.log("Update", resident.id)}>
+                    Update
+                  </button>
+
+                  <DeleteResident
+                    resident={resident}
+                    onDeleted={(id) => setResidents(residents.filter(r => r.id !== id))}
+                    setToast={setToast}   // <-- Pass the parent toast setter here
+                  />
+
 
                 </td>
               </tr>
@@ -153,6 +206,24 @@ function Resident() {
           </button>
         ))}
       </div>
+
+      {/* for deltete to render the page as we delete */}
+      {toast && (
+        <div style={{
+          position: "fixed",
+          bottom: "20px",
+          right: "20px",
+          backgroundColor: "#333",
+          color: "#fff",
+          padding: "12px 20px",
+          borderRadius: "6px",
+          boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
+          zIndex: 1000
+        }}>
+          {toast}
+        </div>
+      )}
+
     </div>
   );
 }
