@@ -236,44 +236,45 @@ function Resident() {
         </div>
       )}
 
-      
 
-        {/*updation */}
-        {showUpdate && editingResident && (
-          <UpdateResident
-            resident={editingResident}
-            setToast={setToast}
-            onUpdated={(updated) => {
-              setResidents(prev =>
-                prev.map(r => (r.id === (updated.id ?? editingResident.id) ? { ...r, ...updated } : r))
-              );
-            }}
-            onClose={() => {
-              setShowUpdate(false);
-              setEditingResident(null);
-            }}
-          />
-        )}
 
-        {/* ✅ Toast message also here */}
-        {toast && (
-          <div style={{
-            position: "fixed",
-            bottom: "20px",
-            right: "20px",
-            backgroundColor: "#333",
-            color: "#fff",
-            padding: "12px 20px",
-            borderRadius: "6px",
-            boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
-            zIndex: 1000
-          }}>
-            {toast}
-          </div>
-        )}
-      </div>
+      {/*updation */}
+      {showUpdate && editingResident && (
+        <UpdateResident
+          resident={editingResident}
+          setToast={setToast}       // ← pass setToast here
+          onUpdated={(updated) => {
+            setResidents(prev =>
+              prev.map(r => (r.id === updated.id ? { ...r, ...updated } : r))
+            );
+          }}
+          onClose={() => {
+            setShowUpdate(false);
+            setEditingResident(null);
+          }}
+        />
+      )}
 
-   
+
+      {showUpdate && editingResident && (
+        <UpdateResident
+          resident={editingResident}
+          setToast={setToast}       // ← important for toast to work
+          onUpdated={(updated) => {
+            setResidents(prev =>
+              prev.map(r => (r.id === updated.id ? { ...r, ...updated } : r))
+            );
+          }}
+          onClose={() => {
+            setShowUpdate(false);
+            setEditingResident(null);
+          }}
+        />
+      )}
+
+    </div>
+
+
 
   );
 }
