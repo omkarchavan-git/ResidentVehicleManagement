@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import Resident from './addResident/Resident';
-import Visitor from './addVisitor/Visitor';
-import Navbar from './navbar/Navbar';
-import HomeDashboard from './Dashboard/HomeDashboard';
-import AddResident from './addResident/AddResident';
+import Resident from './components/Resident/Resident';
+import Visitor from './components/Visitor/Visitor';
+import Navbar from './components/navbar/Navbar';
+import HomeDashboard from './components/Dashboard/HomeDashboard';
+import AddResident from './components/Resident/AddResident';
 
 import './App.css';
 
