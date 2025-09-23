@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import DeleteResident from "../deleteResident/DeleteResident";
 import './Resident.css'
+import UpdateResident from "../updateResident/UpdateResident";
 
 function Resident() {
   const [residents, setResidents] = useState([]);
@@ -12,6 +13,13 @@ function Resident() {
   const [lastname, setLastname] = useState("");
 
   const [toast, setToast] = useState("");  // to handle delte
+
+  // handle update
+  const [editingResident, setEditingResident] = useState(null);
+  const [showUpdate, setShowUpdate] = useState(false);
+
+
+
 
 
   // fetch all residents initially
@@ -165,9 +173,13 @@ function Resident() {
                     Delete
                   </button> */}
 
-                  <button className="update-btn" onClick={() => console.log("Update", resident.id)}>
+                  <button
+                    className="update-btn"
+                    onClick={() => { setEditingResident(resident); setShowUpdate(true); }}
+                  >
                     Update
                   </button>
+
 
                   <DeleteResident
                     resident={resident}
@@ -224,7 +236,45 @@ function Resident() {
         </div>
       )}
 
-    </div>
+      
+
+        {/*updation */}
+        {showUpdate && editingResident && (
+          <UpdateResident
+            resident={editingResident}
+            setToast={setToast}
+            onUpdated={(updated) => {
+              setResidents(prev =>
+                prev.map(r => (r.id === (updated.id ?? editingResident.id) ? { ...r, ...updated } : r))
+              );
+            }}
+            onClose={() => {
+              setShowUpdate(false);
+              setEditingResident(null);
+            }}
+          />
+        )}
+
+        {/* ✅ Toast message also here */}
+        {toast && (
+          <div style={{
+            position: "fixed",
+            bottom: "20px",
+            right: "20px",
+            backgroundColor: "#333",
+            color: "#fff",
+            padding: "12px 20px",
+            borderRadius: "6px",
+            boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
+            zIndex: 1000
+          }}>
+            {toast}
+          </div>
+        )}
+      </div>
+
+   
+
   );
 }
 
