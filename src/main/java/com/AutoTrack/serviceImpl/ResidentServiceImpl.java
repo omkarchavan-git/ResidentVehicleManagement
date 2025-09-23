@@ -101,24 +101,23 @@ public class ResidentServiceImpl implements ResidentService {
         }
     }
 
-    // method to  update resident by name
+    // method to  update resident by id
     @Override
-    public Resident updateByName(String firstname, Resident resident) {
+    public Resident updateById(int id, Resident resident) {
+        Resident existingResident = residentRepo.findById(id)
+                .orElseThrow(() -> new FieldMissingException("Resident not found with id: " + id));
 
-        Resident updatedResident = residentRepo.findByFirstname(firstname);
-        if (updatedResident == null) {
-            throw new FieldMissingException("Resident not found name = " + firstname);
-        }
-        updatedResident.setFirstname(resident.getFirstname());
-        updatedResident.setLastname((resident.getLastname()));
-        updatedResident.setContactno((resident.getContactno()));
-        updatedResident.setResidentType(resident.getResidentType());
-        updatedResident.setEmail(resident.getEmail());
-        updatedResident.setFlatno(resident.getFlatno());
+        // update fields only if provided (avoid overwriting with null)
+        if (resident.getFirstname() != null) existingResident.setFirstname(resident.getFirstname());
+        if (resident.getLastname() != null) existingResident.setLastname(resident.getLastname());
+        if (resident.getContactno() != null) existingResident.setContactno(resident.getContactno());
+        if (resident.getResidentType() != null) existingResident.setResidentType(resident.getResidentType());
+        if (resident.getEmail() != null) existingResident.setEmail(resident.getEmail());
+        if (resident.getFlatno() != null) existingResident.setFlatno(resident.getFlatno());
 
-        return residentRepo.save(updatedResident);
-
+        return residentRepo.save(existingResident);
     }
+
 
     // update by flat no
     @Override
