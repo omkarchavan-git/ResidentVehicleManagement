@@ -22,8 +22,8 @@ public interface ResidentService {
     // method to delete resident data by id
     public Resident deleteResidentById(int id) ;
 
-    // method to update resident by name
-   public Resident updateByName(String firstname, Resident resident);
+    // method to update resident by ID
+   public Resident updateById(int id, Resident resident);
 
    // update resident by flatno
     public Resident updateByFlatNo(String flatno, Resident resident);
