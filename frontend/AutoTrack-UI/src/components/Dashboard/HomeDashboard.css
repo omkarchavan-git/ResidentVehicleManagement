@@ -1,0 +1,142 @@
+.dashboard-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #ff6f3c;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.card {
+  background: linear-gradient(135deg, #ff9966, #ff5e62);
+  color: rgb(17, 17, 17);
+  padding: 20px;
+  border-radius: 12px;
+  width: 180px;
+  text-align: center;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.card h2 {
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.recent-lists {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.recent-section {
+  background: #fff3f0;
+  color: black;
+  padding: 15px 20px;
+  border-radius: 12px;
+  width: 250px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.recent-section h3 {
+  margin-bottom: 10px;
+  color: #ff6f3c;
+}
+
+.recent-section ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.recent-section li {
+  padding: 5px 0;
+  border-bottom: 1px solid #ffd6c5;
+}
+
+.recent-section li:last-child {
+  border-bottom: none;
+}
+
+.loading {
+  text-align: center;
+  font-size: 18px;
+  color: #ff6f3c;
+}
+
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: rgb(255, 255, 255);
+  padding: 20px 30px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+.modal-content h3 {
+  margin-bottom: 15px;
+  color: #ff6f3c;
+}
+
+.modal-content ul {
+  list-style: none;
+  padding-left: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 15px;
+}
+
+.modal-content li {
+  padding: 5px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.modal-content li:last-child {
+  border-bottom: none;
+}
+
+.modal-content button {
+  background: #ff6f3c;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background: #ff4b00;
+}
