@@ -1,0 +1,32 @@
+/* Update button */
+button.update-btn {
+  margin-right: 10px;
+  background: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+button.update-btn:hover {
+  background: #45a049;   /* slightly darker green */
+  transform: scale(1.05); /* small zoom effect */
+
+}
+
+/* Delete button */
+button.delete-btn {
+  background: #f44336;
+ 
+  color: #fff;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+button.delete-btn:hover {
+  background: #d32f2f;   /* slightly darker red */
+  transform: scale(1.05); /* small zoom effect */
+}
