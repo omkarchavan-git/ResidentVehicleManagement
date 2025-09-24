@@ -3,6 +3,11 @@ import DeleteResident from "../deleteResident/DeleteResident";
 import './Resident.css'
 import UpdateResident from "../updateResident/UpdateResident";
 
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+
+
+
 function Resident() {
   const [residents, setResidents] = useState([]);
   const [page, setPage] = useState(1);
@@ -102,11 +107,50 @@ function Resident() {
   // };
 
 
+  // export to pdf functionalityt
+  const exportToPDF = () => {
+    if (residents.length === 0) {
+      alert("No resident data to export!");
+      return;
+    }
+
+    const doc = new jsPDF();
+    doc.setFontSize(18);
+    doc.text("Resident List", 14, 22);
+
+    const columns = [
+      "ID", "Contact No", "Email", "First Name", "Flat No", "Last Name", "Resident Type", "Parking Lot"
+    ];
+
+    const rows = residents.map((res) => [
+      res.id,
+      res.contactno,
+      res.email,
+      res.firstname,
+      res.flatno,
+      res.lastname,
+      res.residentType,
+      res.parkinglot || "N/A"
+    ]);
+
+    autoTable(doc, {  // ← use autoTable(doc, {...}) instead of doc.autoTable
+      head: [columns],
+      body: rows,
+      startY: 30,
+      styles: { fontSize: 10 }
+    });
+
+    doc.save("resident_list.pdf");
+  };
+
+
+
   return (
     <div style={{ padding: "20px" }}>
       <h2>Resident List</h2>
 
       {/* Search Bar */}
+
       <div style={{ marginBottom: "20px" }}>
         <input
           type="text"
@@ -134,6 +178,24 @@ function Resident() {
         >
           Reset
         </button>
+
+        {/* Export to pdf button */}
+
+        <button
+          onClick={exportToPDF}
+          style={{
+            padding: "6px 12px",
+            margin: "10px",
+            marginRight: "10px",
+            background: "#e65100",
+            color: "#fff",
+            border: "none",
+            cursor: "pointer"
+          }}
+        >
+          Export to PDF
+        </button>
+
       </div>
 
       {/* Table */}
