@@ -102,3 +102,7 @@ button.cancel-btn:hover {
   background-color: #999;
   transform: translateY(-2px);
 }
+
+input, placeholder {
+  color: #ff7300;
+}
