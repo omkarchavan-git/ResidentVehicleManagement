@@ -81,6 +81,7 @@ function AddResident() {
     <div className="resident-container">
       <h2>Add Resident</h2>
       <form onSubmit={handleSubmit} className="resident-form">
+       
         <input
           type="text"
           name="firstname"
@@ -88,6 +89,7 @@ function AddResident() {
           onChange={handleChange}
           placeholder="First Name"
           required
+       
         />
         <input
           type="text"
