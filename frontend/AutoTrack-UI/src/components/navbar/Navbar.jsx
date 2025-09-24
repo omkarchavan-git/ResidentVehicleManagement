@@ -14,21 +14,6 @@ function Navbar({ residentList, exportToPDF }) {
             <Link to="/resident/Resident" className="nav-item">Resident</Link>
             <div className="dropdown-content">
               <Link to="/resident/AddResident">Add Resident</Link>
-              <div style={{ marginBottom: "10px" }}>
-                <button
-                  onClick={exportToPDF}
-                  style={{
-                    padding: "6px 12px",
-                    marginRight: "10px",
-                    background: "#e65100",
-                    color: "#fff",
-                    border: "none",
-                    cursor: "pointer"
-                  }}
-                >
-                  Export to PDF
-                </button>
-              </div>
 
               <Link to="/resident/payments">Payments</Link>
               <Link to="/resident/settings">Settings</Link>
