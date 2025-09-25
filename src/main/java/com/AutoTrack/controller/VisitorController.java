@@ -32,9 +32,9 @@ public class VisitorController {
 
     // get all resident
     @GetMapping("/getAllVisitor")
-    public ResponseEntity<List<Visitor>> getallvisitor(List<Visitor> visitor)
+    public ResponseEntity<List<Visitor>> getallvisitor()
     {
-      List<Visitor> visitorList =   visitorService.getAllVisitor(visitor);
+      List<Visitor> visitorList =   visitorService.getAllVisitor();
       return new ResponseEntity<>(visitorList, HttpStatus.OK);
     }
 
