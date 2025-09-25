@@ -1,5 +1,6 @@
 package com.AutoTrack.serviceImpl;
 
+import com.AutoTrack.Service.VisitorService;
 import com.AutoTrack.dtoClasses.VisitorResidentDTO;
 import com.AutoTrack.eNum.VisitorType;
 import com.AutoTrack.entity.Visitor;
@@ -13,23 +14,23 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class VisitorServiceImpl {
+public class VisitorServiceImpl implements VisitorService {
 
     @Autowired
     private VisitorRepo visitorRepo;
-
 
     @Autowired
     private ResidentRepo residentRepo;
 
     // Method to add data
+    @Override
     public Visitor addVisitor(Visitor visitor) {
         return visitorRepo.save(visitor);
     }
 
-
     // method to get Resident details using visitor regNum
     // method to get Resident details using visitor regNum
+    @Override
     public VisitorResidentDTO getVisitorResidentDetailsByRegNum(String regNum) {
         Visitor visitor = visitorRepo.findByVehicalRegisterationNum(regNum)
                 .orElseThrow(() -> new RuntimeException("No visitor found with vehicle registration number: " + regNum));
@@ -37,9 +38,8 @@ public class VisitorServiceImpl {
         return new VisitorResidentDTO(visitor);
     }
 
-
-
     // method to update timeout of visitor
+    @Override
     public VisitorResidentDTO updateVisitorExitTime(String regNum, LocalDateTime exitTime) {
         Visitor visitor = visitorRepo.findByVehicalRegisterationNum(regNum)
                 .stream()
@@ -55,6 +55,7 @@ public class VisitorServiceImpl {
     }
 
     // method to get visitor by their Type
+    @Override
     public List<VisitorResidentDTO> getVisitorsByFilter(List<String> types) {
         List<Visitor> visitors;
 
@@ -79,6 +80,7 @@ public class VisitorServiceImpl {
 
     // updated method to add outTime and update the Duration Hours
     // Update timeOut and auto-calculate visitDuration
+    @Override
     public Visitor updateVisitorExit(String vehicalRegisterationNum, LocalDateTime timeOut) {
         Visitor visitor = visitorRepo.findByVehicalRegisterationNum(vehicalRegisterationNum)
                 .orElseThrow(() -> new RuntimeException("Visitor not found with reg number: " + vehicalRegisterationNum));
@@ -99,4 +101,12 @@ public class VisitorServiceImpl {
         }
         return visitorRepo.save(visitor);
     }
+
+    @Override
+    public List<Visitor> getAllVisitor(List<Visitor> visitors) {
+        List<Visitor> visitorList = visitorRepo.findAll();
+        return visitorList;
+    }
+
+
 }
