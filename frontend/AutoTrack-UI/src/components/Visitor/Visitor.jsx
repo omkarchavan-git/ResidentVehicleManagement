@@ -1,200 +1,197 @@
-import React, { useState } from "react";
-import "./addVisitor.css";
+import { useState, useEffect } from "react";
+// import './Visitor.css';
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 function Visitor() {
-    const [formData, setFormData] = useState({
-        visitorName: "",
-        vehicleName: "",
-        vehicalRegisterationNum: "",
-        visitPurpose: "",
-        phoneNumber: "",
-        visitorType: "",
-        residentId: "",
-        timeIn: "",
-        timeOut: "",
+  const [visitors, setVisitors] = useState([]);
+  const [page, setPage] = useState(1);
+  const rowsPerPage = 7;
+
+  const [toast, setToast] = useState("");
+  const [editingVisitor, setEditingVisitor] = useState(null);
+  const [showUpdate, setShowUpdate] = useState(false);
+
+  // fetch all visitors
+  useEffect(() => {
+    fetchAllVisitors();
+  }, []);
+
+  const fetchAllVisitors = () => {
+    fetch("http://localhost:8085/visitor/getAllVisitor")
+      .then(res => res.json())
+      .then(data => {
+        const sorted = data.sort((a, b) => b.id - a.id);
+        setVisitors(sorted);
+      })
+      .catch(err => console.error("Error fetching visitors:", err));
+  };
+
+  // pagination
+  const startIndex = (page - 1) * rowsPerPage;
+  const selectedVisitors = visitors.slice(startIndex, startIndex + rowsPerPage);
+  const totalPages = Math.ceil(visitors.length / rowsPerPage);
+
+  // export to PDF
+  const exportToPDF = () => {
+    if (visitors.length === 0) {
+      alert("No visitor data to export!");
+      return;
+    }
+
+    const doc = new jsPDF();
+    doc.setFontSize(18);
+    doc.text("Visitor List", 14, 22);
+
+    const columns = [
+      "ID", "Visitor Name", "Vehicle Name", "Vehicle Reg. No", "Purpose",
+      "Phone", "Time In", "Time Out", "Duration", "Type"
+    ];
+
+    const rows = visitors.map(v => [
+      v.id,
+      v.visitorName,
+      v.vehicleName,
+      v.vehicalRegisterationNum,
+      v.visitPurpose || "N/A",
+      v.phoneNumber,
+      v.timeIn || "N/A",
+      v.timeOut || "N/A",
+      v.visitDuration || "N/A",
+      v.visitorType
+    ]);
+
+    autoTable(doc, {
+      head: [columns],
+      body: rows,
+      startY: 30,
+      styles: { fontSize: 9 }
     });
 
-    const [useCurrentTime, setUseCurrentTime] = useState(false);
-    const [message, setMessage] = useState("");
+    doc.save("visitor_list.pdf");
+  };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>Visitor List</h2>
 
-    const handleCheckboxChange = (e) => {
-        const checked = e.target.checked;
-        setUseCurrentTime(checked);
+      {/* Export to PDF */}
+      <button
+        onClick={exportToPDF}
+        style={{
+          padding: "6px 12px",
+          marginBottom: "10px",
+          background: "#e65100",
+          color: "#fff",
+          border: "none",
+          cursor: "pointer"
+        }}
+      >
+        Export to PDF
+      </button>
 
-        if (checked) {
-            // set current time in ISO format
-            const now = new Date().toISOString().slice(0, 16); // yyyy-MM-ddTHH:mm
-            setFormData({ ...formData, timeIn: now });
-        } else {
-            // clear so user can select manually
-            setFormData({ ...formData, timeIn: "" });
-        }
-    };
+      {/* Table */}
+      <table border="1" cellPadding="8" style={{ width: "100%", marginTop: "15px" }}>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Visitor Name</th>
+            <th>Vehicle Name</th>
+            <th>Vehicle Reg. No</th>
+            <th>Purpose</th>
+            <th>Phone</th>
+            <th>Time In</th>
+            <th>Time Out</th>
+            <th>Duration</th>
+            <th>Type</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {selectedVisitors.length > 0 ? (
+            selectedVisitors.map(visitor => (
+              <tr key={visitor.id}>
+                <td>{visitor.id}</td>
+                <td>{visitor.visitorName}</td>
+                <td>{visitor.vehicleName}</td>
+                <td>{visitor.vehicalRegisterationNum}</td>
+                <td>{visitor.visitPurpose || "N/A"}</td>
+                <td>{visitor.phoneNumber}</td>
+                <td>{visitor.timeIn || "N/A"}</td>
+                <td>{visitor.timeOut || "N/A"}</td>
+                <td>{visitor.visitDuration || "N/A"}</td>
+                <td>{visitor.visitorType}</td>
+                <td>
+                  <button
+                    className="update-btn"
+                    onClick={() => { setEditingVisitor(visitor); setShowUpdate(true); }}
+                  >
+                    Update
+                  </button>
+                  <button
+                    className="delete-btn"
+                    onClick={() => {
+                      fetch(`http://localhost:8085/visitor/deleteVisitorById/${visitor.id}`, { method: "DELETE" })
+                        .then(res => {
+                          if (res.ok) {
+                            setVisitors(visitors.filter(v => v.id !== visitor.id));
+                            setToast("Visitor deleted successfully!");
+                          }
+                        })
+                        .catch(err => console.error(err));
+                    }}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="11" style={{ textAlign: "center" }}>No visitors found</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+      {/* Pagination */}
+      <div style={{ marginTop: "20px" }}>
+        {Array.from({ length: totalPages }, (_, i) => (
+          <button
+            key={i}
+            onClick={() => setPage(i + 1)}
+            style={{
+              margin: "0 5px",
+              padding: "6px 12px",
+              background: page === i + 1 ? "#e65100" : "#fff",
+              color: page === i + 1 ? "#fff" : "#000",
+              border: "1px solid #ccc",
+              cursor: "pointer"
+            }}
+          >
+            {i + 1}
+          </button>
+        ))}
+      </div>
 
-        const payload = {
-            ...formData,
-            visitorType: formData.visitorType,        // "GUEST" or "DELIVERY"
-            resident: { id: formData.residentId },    // must match your Resident entity
-            timeIn: formData.timeIn || null,          // DateTime string or null
-            timeOut: formData.timeOut || null,        // DateTime string or null
-            isActiveVisitor: formData.isActiveVisitor // true/false
-        };
-
-        try {
-            const response = await fetch("http://localhost:8080/visitor/addVisitor", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload),
-            });
-
-            if (response.ok) {
-                setMessage("✅ Visitor saved successfully!");
-                setFormData({
-                    visitorName: "",
-                    vehicleName: "",
-                    vehicalRegisterationNum: "",
-                    visitPurpose: "",
-                    phoneNumber: "",
-                    visitorType: "",
-                    residentId: "",
-                    timeIn: "",
-                    timeOut: "",
-                });
-                setUseCurrentTime(false);
-            } else {
-                const errorText = await response.text();
-                setMessage(`❌ Failed: ${errorText}`);
-            }
-        } catch (error) {
-            setMessage("⚠️ Error connecting to server!");
-        }
-    };
-
-    const handleCancel = () => {
-        setFormData({
-            visitorName: "",
-            vehicleName: "",
-            vehicalRegisterationNum: "",
-            visitPurpose: "",
-            phoneNumber: "",
-            visitorType: "",
-            residentId: "",
-            timeIn: "",
-            timeOut: "",
-        });
-        setUseCurrentTime(false);
-        setMessage("");
-    };
-
-    return (
-        <div className="visitor-container">
-            <h2>Add Visitor</h2>
-            <form className="visitor-form" onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    name="visitorName"
-                    placeholder="Visitor Name"
-                    value={formData.visitorName}
-                    onChange={handleChange}
-                    required
-                />
-                <input
-                    type="text"
-                    name="vehicleName"
-                    placeholder="Vehicle Name"
-                    value={formData.vehicleName}
-                    onChange={handleChange}
-                    required
-                />
-                <input
-                    type="text"
-                    name="vehicalRegisterationNum"
-                    placeholder="Vehicle Registration Number"
-                    value={formData.vehicalRegisterationNum}
-                    onChange={handleChange}
-                    required
-                />
-                <input
-                    type="text"
-                    name="visitPurpose"
-                    placeholder="Visit Purpose"
-                    value={formData.visitPurpose}
-                    onChange={handleChange}
-                />
-                <input
-                    type="text"
-                    name="phoneNumber"
-                    placeholder="Phone Number"
-                    value={formData.phoneNumber}
-                    onChange={handleChange}
-                    required
-                />
-                <select
-                    name="visitorType"
-                    value={formData.visitorType}
-                    onChange={handleChange}
-                    required
-                >
-                    <option value="">Select Visitor Type</option>
-                    <option value="GUEST">Guest</option>
-                    <option value="DELIVERY">Delivery</option>
-                </select>
-
-
-                <input
-                    type="number"
-                    name="residentId"
-                    placeholder="Resident ID"
-                    value={formData.residentId}
-                    onChange={handleChange}
-                    required
-                />
-
-                {/* Time In with checkbox */}
-                <label>
-                    <input
-                        type="checkbox"
-                        checked={useCurrentTime}
-                        onChange={handleCheckboxChange}
-                    />
-                    Use Current Time for Time In
-                </label>
-
-                <input
-                    type="datetime-local"
-                    name="timeIn"
-                    value={formData.timeIn}
-                    onChange={handleChange}
-                    disabled={useCurrentTime}
-                    required
-                />
-
-                {/* Time Out */}
-                <input
-                    type="datetime-local"
-                    name="timeOut"
-                    value={formData.timeOut}
-                    onChange={handleChange}
-                />
-
-                <div className="form-buttons">
-                    <button type="submit">Submit</button>
-                    <button type="button" onClick={handleCancel}>
-                        Cancel
-                    </button>
-                </div>
-            </form>
-            {message && <p className="form-message">{message}</p>}
+      {/* Toast message */}
+      {toast && (
+        <div style={{
+          position: "fixed",
+          bottom: "20px",
+          right: "20px",
+          backgroundColor: "#333",
+          color: "#fff",
+          padding: "12px 20px",
+          borderRadius: "6px",
+          boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
+          zIndex: 1000
+        }}>
+          {toast}
         </div>
-    );
+      )}
+    </div>
+  );
 }
 
 export default Visitor;
