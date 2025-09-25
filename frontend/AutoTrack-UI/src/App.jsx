@@ -23,7 +23,7 @@ function App() {
               <Route path='/Dashboard' element={<HomeDashboard />} />
               <Route path="/resident/addResident" element={<AddResident />} />
               <Route path="/resident/Resident" element={<Resident />} />
-              <Route path="/visitor" element={<Visitor />} />
+              <Route path="/Visitor" element={<Visitor />} />
             </Routes>
 
           </div>
