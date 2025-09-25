@@ -1,5 +1,6 @@
 package com.AutoTrack.controller;
 
+import com.AutoTrack.Service.VisitorService;
 import com.AutoTrack.dtoClasses.VisitorResidentDTO;
 import com.AutoTrack.entity.Visitor;
 import com.AutoTrack.serviceImpl.VisitorServiceImpl;
@@ -19,20 +20,28 @@ import java.util.Map;
 public class VisitorController {
 
     @Autowired
-    private VisitorServiceImpl visitorServiceImpl;
+    private VisitorService visitorService;
 
 
     // API to add visitor data
     @PostMapping("/addVisitor")
     public ResponseEntity<Visitor> addVisitor(@RequestBody Visitor visitor) {
-        Visitor savedVisitor = visitorServiceImpl.addVisitor(visitor);
+        Visitor savedVisitor = visitorService.addVisitor(visitor);
         return new ResponseEntity<>(savedVisitor, HttpStatus.CREATED);
+    }
+
+    // get all resident
+    @GetMapping("/getAllVisitor")
+    public ResponseEntity<List<Visitor>> getallvisitor(List<Visitor> visitor)
+    {
+      List<Visitor> visitorList =   visitorService.getAllVisitor(visitor);
+      return new ResponseEntity<>(visitorList, HttpStatus.OK);
     }
 
     // controller to get visitor details by regNum
     @GetMapping("/resident/{regNum}")
     public ResponseEntity<VisitorResidentDTO> getVisitorResidentDetails(@PathVariable String regNum) {
-        VisitorResidentDTO details = visitorServiceImpl.getVisitorResidentDetailsByRegNum(regNum);
+        VisitorResidentDTO details = visitorService.getVisitorResidentDetailsByRegNum(regNum);
         return ResponseEntity.ok(details);
     }
 
@@ -43,7 +52,7 @@ public class VisitorController {
             @RequestBody Map<String, String> requestBody) {
 
         LocalDateTime exitTime = LocalDateTime.parse(requestBody.get("timeOut"));
-        VisitorResidentDTO updatedVisitor = visitorServiceImpl.updateVisitorExitTime(regNum, exitTime);
+        VisitorResidentDTO updatedVisitor = visitorService.updateVisitorExitTime(regNum, exitTime);
 
         return ResponseEntity.ok(updatedVisitor);
     }
@@ -54,7 +63,7 @@ public class VisitorController {
     public ResponseEntity<List<VisitorResidentDTO>> getVisitorsByFilter(
             @RequestParam(required = false) List<String> types) {
 
-        List<VisitorResidentDTO> visitors = visitorServiceImpl.getVisitorsByFilter(types);
+        List<VisitorResidentDTO> visitors = visitorService.getVisitorsByFilter(types);
         return ResponseEntity.ok(visitors);
     }
 
