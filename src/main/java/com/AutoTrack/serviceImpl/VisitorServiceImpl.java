@@ -103,7 +103,7 @@ public class VisitorServiceImpl implements VisitorService {
     }
 
     @Override
-    public List<Visitor> getAllVisitor(List<Visitor> visitors) {
+    public List<Visitor> getAllVisitor() {
         List<Visitor> visitorList = visitorRepo.findAll();
         return visitorList;
     }
