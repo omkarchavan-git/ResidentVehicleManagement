@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-// import './Visitor.css';
+import "./Visitor.css";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
@@ -7,7 +7,6 @@ function Visitor() {
   const [visitors, setVisitors] = useState([]);
   const [page, setPage] = useState(1);
   const rowsPerPage = 7;
-
   const [toast, setToast] = useState("");
   const [editingVisitor, setEditingVisitor] = useState(null);
   const [showUpdate, setShowUpdate] = useState(false);
@@ -20,10 +19,7 @@ function Visitor() {
   const fetchAllVisitors = () => {
     fetch("http://localhost:8085/visitor/getAllVisitor")
       .then(res => res.json())
-      .then(data => {
-        const sorted = data.sort((a, b) => b.id - a.id);
-        setVisitors(sorted);
-      })
+      .then(data => setVisitors(data.sort((a, b) => b.id - a.id)))
       .catch(err => console.error("Error fetching visitors:", err));
   };
 
@@ -72,26 +68,14 @@ function Visitor() {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Visitor List</h2>
+    <div className="visitor-container">
+      <h2 className="visitor-title">Visitor List</h2>
 
-      {/* Export to PDF */}
-      <button
-        onClick={exportToPDF}
-        style={{
-          padding: "6px 12px",
-          marginBottom: "10px",
-          background: "#e65100",
-          color: "#fff",
-          border: "none",
-          cursor: "pointer"
-        }}
-      >
-        Export to PDF
-      </button>
+      <div className="visitor-actions">
+        <button className="btn-export" onClick={exportToPDF}>Export to PDF</button>
+      </div>
 
-      {/* Table */}
-      <table border="1" cellPadding="8" style={{ width: "100%", marginTop: "15px" }}>
+      <table className="visitor-table">
         <thead>
           <tr>
             <th>ID</th>
@@ -121,15 +105,10 @@ function Visitor() {
                 <td>{visitor.timeOut || "N/A"}</td>
                 <td>{visitor.visitDuration || "N/A"}</td>
                 <td>{visitor.visitorType}</td>
-                <td>
+                <td className="actions-col">
+                  <button className="btn-update" onClick={() => { setEditingVisitor(visitor); setShowUpdate(true); }}>Update</button>
                   <button
-                    className="update-btn"
-                    onClick={() => { setEditingVisitor(visitor); setShowUpdate(true); }}
-                  >
-                    Update
-                  </button>
-                  <button
-                    className="delete-btn"
+                    className="btn-delete"
                     onClick={() => {
                       fetch(`http://localhost:8085/visitor/deleteVisitorById/${visitor.id}`, { method: "DELETE" })
                         .then(res => {
@@ -148,48 +127,27 @@ function Visitor() {
             ))
           ) : (
             <tr>
-              <td colSpan="11" style={{ textAlign: "center" }}>No visitors found</td>
+              <td colSpan="11" className="no-data">No visitors found</td>
             </tr>
           )}
         </tbody>
       </table>
 
       {/* Pagination */}
-      <div style={{ marginTop: "20px" }}>
+      <div className="pagination">
         {Array.from({ length: totalPages }, (_, i) => (
           <button
             key={i}
+            className={`page-btn ${page === i + 1 ? "active" : ""}`}
             onClick={() => setPage(i + 1)}
-            style={{
-              margin: "0 5px",
-              padding: "6px 12px",
-              background: page === i + 1 ? "#e65100" : "#fff",
-              color: page === i + 1 ? "#fff" : "#000",
-              border: "1px solid #ccc",
-              cursor: "pointer"
-            }}
           >
             {i + 1}
           </button>
         ))}
       </div>
 
-      {/* Toast message */}
-      {toast && (
-        <div style={{
-          position: "fixed",
-          bottom: "20px",
-          right: "20px",
-          backgroundColor: "#333",
-          color: "#fff",
-          padding: "12px 20px",
-          borderRadius: "6px",
-          boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
-          zIndex: 1000
-        }}>
-          {toast}
-        </div>
-      )}
+      {/* Toast */}
+      {toast && <div className="toast">{toast}</div>}
     </div>
   );
 }
