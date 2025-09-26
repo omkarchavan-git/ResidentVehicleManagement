@@ -108,5 +108,10 @@ public class VisitorServiceImpl implements VisitorService {
         return visitorList;
     }
 
+    @Override
+    public Visitor updateVisitor(Visitor visitor) {
+        Visitor updatedVisitor = visitorRepo.save(visitor);
+        return updatedVisitor;
+    }
 
 }
