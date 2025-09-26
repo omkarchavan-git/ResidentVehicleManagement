@@ -68,7 +68,7 @@ public class VisitorController {
     }
 
     // update visitor data
-    @PostMapping("/updateVisitor")
+    @PutMapping("/updateVisitor")
     public ResponseEntity<Visitor> updateResident(@RequestBody Visitor visitor)
     {
         Visitor updatedVisitor =  visitorService.updateVisitor(visitor);
