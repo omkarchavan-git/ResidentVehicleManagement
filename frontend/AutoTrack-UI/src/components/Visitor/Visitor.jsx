@@ -3,11 +3,17 @@ import "./Visitor.css";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
+// import delete + update components (like Resident)
+import DeleteVisitor from "../deleteVisitor/DeleteVisitor";
+import UpdateVisitor from "../updateVisitor/UpdateVisitor";
+
 function Visitor() {
   const [visitors, setVisitors] = useState([]);
   const [page, setPage] = useState(1);
   const rowsPerPage = 7;
   const [toast, setToast] = useState("");
+
+  // handle update
   const [editingVisitor, setEditingVisitor] = useState(null);
   const [showUpdate, setShowUpdate] = useState(false);
 
@@ -106,22 +112,22 @@ function Visitor() {
                 <td>{visitor.visitDuration || "N/A"}</td>
                 <td>{visitor.visitorType}</td>
                 <td className="actions-col">
-                  <button className="btn-update" onClick={() => { setEditingVisitor(visitor); setShowUpdate(true); }}>Update</button>
+
+                  {/* Update button */}
                   <button
-                    className="btn-delete"
-                    onClick={() => {
-                      fetch(`http://localhost:8085/visitor/deleteVisitorById/${visitor.id}`, { method: "DELETE" })
-                        .then(res => {
-                          if (res.ok) {
-                            setVisitors(visitors.filter(v => v.id !== visitor.id));
-                            setToast("Visitor deleted successfully!");
-                          }
-                        })
-                        .catch(err => console.error(err));
-                    }}
+                    className="btn-update"
+                    onClick={() => { setEditingVisitor(visitor); setShowUpdate(true); }}
                   >
-                    Delete
+                    Update
                   </button>
+
+                  {/* Delete component */}
+                  <DeleteVisitor
+                    visitor={visitor}
+                    onDeleted={(id) => setVisitors(visitors.filter(v => v.id !== id))}
+                    setToast={setToast}
+                  />
+
                 </td>
               </tr>
             ))
@@ -147,7 +153,38 @@ function Visitor() {
       </div>
 
       {/* Toast */}
-      {toast && <div className="toast">{toast}</div>}
+      {toast && (
+        <div style={{
+          position: "fixed",
+          bottom: "20px",
+          right: "20px",
+          backgroundColor: "#333",
+          color: "#fff",
+          padding: "12px 20px",
+          borderRadius: "6px",
+          boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
+          zIndex: 1000
+        }}>
+          {toast}
+        </div>
+      )}
+
+      {/* Update visitor modal */}
+      {showUpdate && editingVisitor && (
+        <UpdateVisitor
+          visitor={editingVisitor}
+          setToast={setToast}
+          onUpdated={(updated) => {
+            setVisitors(prev =>
+              prev.map(v => (v.id === updated.id ? { ...v, ...updated } : v))
+            );
+          }}
+          onClose={() => {
+            setShowUpdate(false);
+            setEditingVisitor(null);
+          }}
+        />
+      )}
     </div>
   );
 }
