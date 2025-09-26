@@ -1,0 +1,105 @@
+/* Overlay effect */
+.update-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 15, 15, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+  z-index: 999;
+}
+
+.update-modal-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Modal container */
+.update-modal {
+  background: #fff;
+  width: 420px;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+  transform: translateY(-40px);
+  transition: all 0.3s ease-in-out;
+}
+
+.update-modal.show {
+  transform: translateY(0);
+}
+
+.update-modal h2 {
+  margin-bottom: 18px;
+  font-size: 22px;
+  color: #ff6600;
+  text-align: center;
+}
+
+/* Form styling */
+.form-row {
+  margin-bottom: 14px;
+}
+
+.form-row input,
+.form-row select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.form-row input:focus,
+.form-row select:focus {
+  border-color: #ff6600;
+  box-shadow: 0 0 6px rgba(255, 102, 0, 0.3);
+  outline: none;
+}
+
+/* Buttons */
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+}
+
+.submit-btn,
+.cancel-btn {
+  flex: 1;
+  margin: 0 5px;
+  padding: 10px 0;
+  border-radius: 8px;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #ff7a00, #ff4500);
+  color: white;
+  font-weight: bold;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(135deg, #ff944d, #ff5c33);
+  transform: scale(1.05);
+}
+
+.cancel-btn {
+  background: #ddd;
+  color: #333;
+}
+
+.cancel-btn:hover {
+  background: #bbb;
+  transform: scale(1.05);
+}
