@@ -4,8 +4,8 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
 // import delete + update components (like Resident)
-import DeleteVisitor from "../deleteVisitor/DeleteVisitor";
-import UpdateVisitor from "../updateVisitor/UpdateVisitor";
+// import DeleteVisitor from "../deleteVisitor/DeleteVisitor";
+// import UpdateVisitor from "../updateVisitor/UpdateVisitor";
 
 function Visitor() {
   const [visitors, setVisitors] = useState([]);
@@ -24,9 +24,9 @@ function Visitor() {
 
   const fetchAllVisitors = () => {
     fetch("http://localhost:8085/visitor/getAllVisitor")
-      .then(res => res.json())
-      .then(data => setVisitors(data.sort((a, b) => b.id - a.id)))
-      .catch(err => console.error("Error fetching visitors:", err));
+      .then((res) => res.json())
+      .then((data) => setVisitors(data.sort((a, b) => b.id - a.id)))
+      .catch((err) => console.error("Error fetching visitors:", err));
   };
 
   // pagination
@@ -46,11 +46,19 @@ function Visitor() {
     doc.text("Visitor List", 14, 22);
 
     const columns = [
-      "ID", "Visitor Name", "Vehicle Name", "Vehicle Reg. No", "Purpose",
-      "Phone", "Time In", "Time Out", "Duration", "Type"
+      "ID",
+      "Visitor Name",
+      "Vehicle Name",
+      "Vehicle Reg. No",
+      "Purpose",
+      "Phone",
+      "Time In",
+      "Time Out",
+      "Duration",
+      "Type",
     ];
 
-    const rows = visitors.map(v => [
+    const rows = visitors.map((v) => [
       v.id,
       v.visitorName,
       v.vehicleName,
@@ -60,14 +68,14 @@ function Visitor() {
       v.timeIn || "N/A",
       v.timeOut || "N/A",
       v.visitDuration || "N/A",
-      v.visitorType
+      v.visitorType,
     ]);
 
     autoTable(doc, {
       head: [columns],
       body: rows,
       startY: 30,
-      styles: { fontSize: 9 }
+      styles: { fontSize: 9 },
     });
 
     doc.save("visitor_list.pdf");
@@ -78,7 +86,9 @@ function Visitor() {
       <h2 className="visitor-title">Visitor List</h2>
 
       <div className="visitor-actions">
-        <button className="btn-export" onClick={exportToPDF}>Export to PDF</button>
+        <button className="btn-export" onClick={exportToPDF}>
+          Export to PDF
+        </button>
       </div>
 
       <table className="visitor-table">
@@ -99,7 +109,7 @@ function Visitor() {
         </thead>
         <tbody>
           {selectedVisitors.length > 0 ? (
-            selectedVisitors.map(visitor => (
+            selectedVisitors.map((visitor) => (
               <tr key={visitor.id}>
                 <td>{visitor.id}</td>
                 <td>{visitor.visitorName}</td>
@@ -112,11 +122,13 @@ function Visitor() {
                 <td>{visitor.visitDuration || "N/A"}</td>
                 <td>{visitor.visitorType}</td>
                 <td className="actions-col">
-
                   {/* Update button */}
                   <button
                     className="btn-update"
-                    onClick={() => { setEditingVisitor(visitor); setShowUpdate(true); }}
+                    onClick={() => {
+                      setEditingVisitor(visitor);
+                      setShowUpdate(true);
+                    }}
                   >
                     Update
                   </button>
@@ -124,16 +136,19 @@ function Visitor() {
                   {/* Delete component */}
                   <DeleteVisitor
                     visitor={visitor}
-                    onDeleted={(id) => setVisitors(visitors.filter(v => v.id !== id))}
+                    onDeleted={(id) =>
+                      setVisitors(visitors.filter((v) => v.id !== id))
+                    }
                     setToast={setToast}
                   />
-
                 </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="11" className="no-data">No visitors found</td>
+              <td colSpan="11" className="no-data">
+                No visitors found
+              </td>
             </tr>
           )}
         </tbody>
@@ -154,17 +169,19 @@ function Visitor() {
 
       {/* Toast */}
       {toast && (
-        <div style={{
-          position: "fixed",
-          bottom: "20px",
-          right: "20px",
-          backgroundColor: "#333",
-          color: "#fff",
-          padding: "12px 20px",
-          borderRadius: "6px",
-          boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
-          zIndex: 1000
-        }}>
+        <div
+          style={{
+            position: "fixed",
+            bottom: "20px",
+            right: "20px",
+            backgroundColor: "#333",
+            color: "#fff",
+            padding: "12px 20px",
+            borderRadius: "6px",
+            boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
+            zIndex: 1000,
+          }}
+        >
           {toast}
         </div>
       )}
@@ -175,8 +192,8 @@ function Visitor() {
           visitor={editingVisitor}
           setToast={setToast}
           onUpdated={(updated) => {
-            setVisitors(prev =>
-              prev.map(v => (v.id === updated.id ? { ...v, ...updated } : v))
+            setVisitors((prev) =>
+              prev.map((v) => (v.id === updated.id ? { ...v, ...updated } : v))
             );
           }}
           onClose={() => {
