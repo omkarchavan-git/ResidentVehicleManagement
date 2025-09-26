@@ -133,7 +133,7 @@ function Resident() {
       res.parkinglot || "N/A"
     ]);
 
-    autoTable(doc, {  // ← use autoTable(doc, {...}) instead of doc.autoTable
+    autoTable(doc, {  
       head: [columns],
       body: rows,
       startY: 30,
@@ -317,22 +317,6 @@ function Resident() {
         />
       )}
 
-
-      {showUpdate && editingResident && (
-        <UpdateResident
-          resident={editingResident}
-          setToast={setToast}       // ← important for toast to work
-          onUpdated={(updated) => {
-            setResidents(prev =>
-              prev.map(r => (r.id === updated.id ? { ...r, ...updated } : r))
-            );
-          }}
-          onClose={() => {
-            setShowUpdate(false);
-            setEditingResident(null);
-          }}
-        />
-      )}
 
     </div>
 
