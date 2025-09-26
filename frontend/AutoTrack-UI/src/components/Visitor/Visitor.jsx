@@ -3,9 +3,9 @@ import "./Visitor.css";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
-// import delete + update components (like Resident)
-// import DeleteVisitor from "../deleteVisitor/DeleteVisitor";
-// import UpdateVisitor from "../updateVisitor/UpdateVisitor";
+// import delete + update components
+import DeleteVisitor from "../deleteVisitor/DeleteVisitor";
+import UpdateVisitor from "../updateVisitor/UpdateVisitor";
 
 function Visitor() {
   const [visitors, setVisitors] = useState([]);
@@ -13,9 +13,12 @@ function Visitor() {
   const rowsPerPage = 7;
   const [toast, setToast] = useState("");
 
-  // handle update
+  // update modal state
   const [editingVisitor, setEditingVisitor] = useState(null);
   const [showUpdate, setShowUpdate] = useState(false);
+
+  // delete modal state
+  const [deletingVisitor, setDeletingVisitor] = useState(null);
 
   // fetch all visitors
   useEffect(() => {
@@ -133,14 +136,13 @@ function Visitor() {
                     Update
                   </button>
 
-                  {/* Delete component */}
-                  <DeleteVisitor
-                    visitor={visitor}
-                    onDeleted={(id) =>
-                      setVisitors(visitors.filter((v) => v.id !== id))
-                    }
-                    setToast={setToast}
-                  />
+                  {/* Delete button */}
+                  <button
+                    className="btn-delete"
+                    onClick={() => setDeletingVisitor(visitor)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))
@@ -184,6 +186,18 @@ function Visitor() {
         >
           {toast}
         </div>
+      )}
+
+      {/* ✅ Single DeleteVisitor modal */}
+      {deletingVisitor && (
+        <DeleteVisitor
+          visitor={deletingVisitor}
+          setToast={setToast}
+          onDeleted={(id) =>
+            setVisitors((prev) => prev.filter((v) => v.id !== id))
+          }
+          onClose={() => setDeletingVisitor(null)}
+        />
       )}
 
       {/* Update visitor modal */}
