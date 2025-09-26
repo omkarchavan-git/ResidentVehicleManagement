@@ -1,0 +1,87 @@
+/* Overlay */
+.delete-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(20, 20, 20, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+  z-index: 999;
+}
+
+.delete-modal-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Modal box */
+.delete-modal {
+  background: #fff;
+  width: 400px;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  transform: translateY(-40px);
+  transition: all 0.3s ease-in-out;
+}
+
+.delete-modal.show {
+  transform: translateY(0);
+}
+
+.delete-modal h2 {
+  color: #d63031;
+  margin-bottom: 12px;
+}
+
+.delete-modal p {
+  font-size: 15px;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+/* Buttons */
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete-btn,
+.cancel-btn {
+  flex: 1;
+  margin: 0 5px;
+  padding: 10px 0;
+  border-radius: 8px;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.delete-btn {
+  background: linear-gradient(135deg, #ff4b2b, #ff0000);
+  color: white;
+  font-weight: bold;
+}
+
+.delete-btn:hover {
+  background: linear-gradient(135deg, #ff6b4d, #e60000);
+  transform: scale(1.05);
+}
+
+.cancel-btn {
+  background: #ddd;
+  color: #333;
+}
+
+.cancel-btn:hover {
+  background: #bbb;
+  transform: scale(1.05);
+}
