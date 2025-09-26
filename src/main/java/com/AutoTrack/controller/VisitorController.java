@@ -67,4 +67,13 @@ public class VisitorController {
         return ResponseEntity.ok(visitors);
     }
 
+    // update visitor data
+    @PostMapping("/updateVisitor")
+    public ResponseEntity<Visitor> updateResident(@RequestBody Visitor visitor)
+    {
+        Visitor updatedVisitor =  visitorService.updateVisitor(visitor);
+        return new ResponseEntity<>(updatedVisitor, HttpStatus.OK);
+
+    }
+
 }
