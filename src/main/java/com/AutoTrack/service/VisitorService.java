@@ -26,6 +26,9 @@ public interface VisitorService {
     // get all visitor
     public List<Visitor> getAllVisitor();
 
+    //update visitor
+    public Visitor updateVisitor(Visitor visitor);
+
     }
 
 
