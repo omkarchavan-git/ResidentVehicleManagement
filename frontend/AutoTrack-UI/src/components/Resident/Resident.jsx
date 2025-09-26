@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 import DeleteResident from "../deleteResident/DeleteResident";
-import './Resident.css'
+import "./Resident.css";
 import UpdateResident from "../updateResident/UpdateResident";
 
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
-
-
 
 function Resident() {
   const [residents, setResidents] = useState([]);
@@ -17,15 +15,11 @@ function Resident() {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
 
-  const [toast, setToast] = useState("");  // to handle delte
+  const [toast, setToast] = useState(""); // to handle delte
 
   // handle update
   const [editingResident, setEditingResident] = useState(null);
   const [showUpdate, setShowUpdate] = useState(false);
-
-
-
-
 
   // fetch all residents initially
   useEffect(() => {
@@ -34,12 +28,12 @@ function Resident() {
 
   const fetchAllResidents = () => {
     fetch("http://localhost:8085/Resident/getAllResident")
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         const sorted = data.sort((a, b) => b.id - a.id);
         setResidents(sorted);
       })
-      .catch(err => console.error("Error fetching residents:", err));
+      .catch((err) => console.error("Error fetching residents:", err));
   };
 
   // handle search
@@ -54,16 +48,16 @@ function Resident() {
     if (lastname) url += `lastname=${lastname}`;
 
     fetch(url)
-      .then(res => {
+      .then((res) => {
         if (!res.ok) throw new Error("No data found");
         return res.json();
       })
-      .then(data => {
+      .then((data) => {
         const sorted = data.sort((a, b) => b.id - a.id);
         setResidents(sorted);
         setPage(1); // reset page
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Error fetching search results:", err);
         setResidents([]);
       });
@@ -71,14 +65,16 @@ function Resident() {
 
   // pagination logic
   const startIndex = (page - 1) * rowsPerPage;
-  const selectedResidents = residents.slice(startIndex, startIndex + rowsPerPage);
+  const selectedResidents = residents.slice(
+    startIndex,
+    startIndex + rowsPerPage
+  );
   const totalPages = Math.ceil(residents.length / rowsPerPage);
-
 
   // // delete function
 
   const removeResidentFromTable = (id) => {
-    setResidents(residents.filter(r => r.id !== id));
+    setResidents(residents.filter((r) => r.id !== id));
   };
 
   // const [toast, setToast] = useState("");
@@ -106,7 +102,6 @@ function Resident() {
   //   }
   // };
 
-
   // export to pdf functionalityt
   const exportToPDF = () => {
     if (residents.length === 0) {
@@ -119,7 +114,14 @@ function Resident() {
     doc.text("Resident List", 14, 22);
 
     const columns = [
-      "ID", "Contact No", "Email", "First Name", "Flat No", "Last Name", "Resident Type", "Parking Lot"
+      "ID",
+      "Contact No",
+      "Email",
+      "First Name",
+      "Flat No",
+      "Last Name",
+      "Resident Type",
+      "Parking Lot",
     ];
 
     const rows = residents.map((res) => [
@@ -130,20 +132,18 @@ function Resident() {
       res.flatno,
       res.lastname,
       res.residentType,
-      res.parkinglot || "N/A"
+      res.parkinglot || "N/A",
     ]);
 
-    autoTable(doc, {  
+    autoTable(doc, {
       head: [columns],
       body: rows,
       startY: 30,
-      styles: { fontSize: 10 }
+      styles: { fontSize: 10 },
     });
 
     doc.save("resident_list.pdf");
   };
-
-
 
   return (
     <div style={{ padding: "20px" }}>
@@ -168,13 +168,30 @@ function Resident() {
         />
         <button
           onClick={handleSearch}
-          style={{ padding: "6px 12px", background: "#e65100", color: "#fff", border: "none", cursor: "pointer" }}
+          style={{
+            padding: "6px 12px",
+            background: "#e65100",
+            color: "#fff",
+            border: "none",
+            cursor: "pointer",
+          }}
         >
           Search
         </button>
         <button
-          onClick={() => { setFirstname(""); setLastname(""); fetchAllResidents(); }}
-          style={{ padding: "6px 12px", marginLeft: "10px", background: "#555", color: "#fff", border: "none", cursor: "pointer" }}
+          onClick={() => {
+            setFirstname("");
+            setLastname("");
+            fetchAllResidents();
+          }}
+          style={{
+            padding: "6px 12px",
+            marginLeft: "10px",
+            background: "#555",
+            color: "#fff",
+            border: "none",
+            cursor: "pointer",
+          }}
         >
           Reset
         </button>
@@ -190,16 +207,19 @@ function Resident() {
             background: "#e65100",
             color: "#fff",
             border: "none",
-            cursor: "pointer"
+            cursor: "pointer",
           }}
         >
           Export to PDF
         </button>
-
       </div>
 
       {/* Table */}
-      <table border="1" cellPadding="8" style={{ width: "100%", marginTop: "15px" }}>
+      <table
+        border="1"
+        cellPadding="8"
+        style={{ width: "100%", marginTop: "15px" }}
+      >
         <thead>
           <tr>
             <th>ID</th>
@@ -215,7 +235,7 @@ function Resident() {
         </thead>
         <tbody>
           {selectedResidents.length > 0 ? (
-            selectedResidents.map(resident => (
+            selectedResidents.map((resident) => (
               <tr key={resident.id}>
                 <td>{resident.id}</td>
                 <td>{resident.contactno}</td>
@@ -226,7 +246,6 @@ function Resident() {
                 <td>{resident.residentType}</td>
                 <td>{resident.parkinglot || "N/A"}</td>
                 <td>
-
                   {/* <button className="update-btn" onClick={() => console.log("Update", resident.id)}>Update</button>
                   <button
                     className="delete-btn"
@@ -237,25 +256,29 @@ function Resident() {
 
                   <button
                     className="update-btn"
-                    onClick={() => { setEditingResident(resident); setShowUpdate(true); }}
+                    onClick={() => {
+                      setEditingResident(resident);
+                      setShowUpdate(true);
+                    }}
                   >
                     Update
                   </button>
 
-
                   <DeleteResident
                     resident={resident}
-                    onDeleted={(id) => setResidents(residents.filter(r => r.id !== id))}
-                    setToast={setToast}   // <-- Pass the parent toast setter here
+                    onDeleted={(id) =>
+                      setResidents(residents.filter((r) => r.id !== id))
+                    }
+                    setToast={setToast} // <-- Pass the parent toast setter here
                   />
-
-
                 </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="9" style={{ textAlign: "center" }}>No residents found</td>
+              <td colSpan="9" style={{ textAlign: "center" }}>
+                No residents found
+              </td>
             </tr>
           )}
         </tbody>
@@ -273,7 +296,7 @@ function Resident() {
               background: page === i + 1 ? "#e65100" : "#fff",
               color: page === i + 1 ? "#fff" : "#000",
               border: "1px solid #ccc",
-              cursor: "pointer"
+              cursor: "pointer",
             }}
           >
             {i + 1}
@@ -283,31 +306,31 @@ function Resident() {
 
       {/* for deltete to render the page as we delete */}
       {toast && (
-        <div style={{
-          position: "fixed",
-          bottom: "20px",
-          right: "20px",
-          backgroundColor: "#333",
-          color: "#fff",
-          padding: "12px 20px",
-          borderRadius: "6px",
-          boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
-          zIndex: 1000
-        }}>
+        <div
+          style={{
+            position: "fixed",
+            bottom: "20px",
+            right: "20px",
+            backgroundColor: "#333",
+            color: "#fff",
+            padding: "12px 20px",
+            borderRadius: "6px",
+            boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
+            zIndex: 1000,
+          }}
+        >
           {toast}
         </div>
       )}
-
-
 
       {/*updation */}
       {showUpdate && editingResident && (
         <UpdateResident
           resident={editingResident}
-          setToast={setToast}       // ← pass setToast here
+          setToast={setToast} // ← pass setToast here
           onUpdated={(updated) => {
-            setResidents(prev =>
-              prev.map(r => (r.id === updated.id ? { ...r, ...updated } : r))
+            setResidents((prev) =>
+              prev.map((r) => (r.id === updated.id ? { ...r, ...updated } : r))
             );
           }}
           onClose={() => {
@@ -316,12 +339,7 @@ function Resident() {
           }}
         />
       )}
-
-
     </div>
-
-
-
   );
 }
 
