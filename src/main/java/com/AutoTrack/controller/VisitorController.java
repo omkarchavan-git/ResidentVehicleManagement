@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.service.annotation.PatchExchange;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
@@ -31,10 +31,9 @@ public class VisitorController {
 
     // get all resident
     @GetMapping("/getAllVisitor")
-    public ResponseEntity<List<Visitor>> getallvisitor()
-    {
-      List<Visitor> visitorList =   visitorService.getAllVisitor();
-      return new ResponseEntity<>(visitorList, HttpStatus.OK);
+    public ResponseEntity<List<Visitor>> getallvisitor() {
+        List<Visitor> visitorList = visitorService.getAllVisitor();
+        return new ResponseEntity<>(visitorList, HttpStatus.OK);
     }
 
     // controller to get visitor details by regNum
@@ -67,12 +66,9 @@ public class VisitorController {
     }
 
     // update visitor data
-    @PutMapping("/updateVisitor")
-    public ResponseEntity<Visitor> updateResident(@RequestBody Visitor visitor)
-    {
-        Visitor updatedVisitor =  visitorService.updateVisitor(visitor);
+    @PatchExchange("/updateVisitor/{id}")
+    public ResponseEntity<Visitor> updateResident(@PathVariable("id")int id, @RequestBody Visitor visitor) {
+        Visitor updatedVisitor = visitorService.updateVisitor(id, visitor);
         return new ResponseEntity<>(updatedVisitor, HttpStatus.OK);
-
     }
-
 }
