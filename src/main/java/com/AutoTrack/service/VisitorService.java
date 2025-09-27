@@ -31,7 +31,7 @@ public interface VisitorService {
     public Visitor updateVisitor(int id, Visitor visitor);
 
     // delete visitor by id
-
+    public Visitor deleteVisitor(int id);
 }
 
 
