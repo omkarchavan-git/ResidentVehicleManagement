@@ -1,6 +1,7 @@
 package com.AutoTrack.serviceImpl;
 
 import com.AutoTrack.Service.VisitorService;
+import com.AutoTrack.dtoClasses.VisitorDTO;
 import com.AutoTrack.dtoClasses.VisitorResidentDTO;
 import com.AutoTrack.eNum.VisitorType;
 import com.AutoTrack.entity.Visitor;
@@ -13,6 +14,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 public class VisitorServiceImpl implements VisitorService {
@@ -103,12 +105,34 @@ public class VisitorServiceImpl implements VisitorService {
         return visitorRepo.save(visitor);
     }
 
+    //get all visitor
     @Override
-    public List<Visitor> getAllVisitor() {
+    public List<VisitorDTO> getAllVisitor() {
         List<Visitor> visitorList = visitorRepo.findAll();
-        return visitorList;
+
+        return visitorList.stream().map(visitor -> {
+            VisitorDTO dto = new VisitorDTO();
+            dto.setId(visitor.getId());
+            dto.setVisitorName(visitor.getVisitorName());
+            dto.setVehicleName(visitor.getVehicleName());
+            dto.setVehicalRegisterationNum(visitor.getVehicalRegisterationNum());
+            dto.setVisitPurpose(visitor.getVisitPurpose());
+            dto.setTimeIn(visitor.getTimeIn() != null ? visitor.getTimeIn().toString() : null);
+            dto.setTimeOut(visitor.getTimeOut() != null ? visitor.getTimeOut().toString() : null);
+            dto.setVisitDuration(visitor.getVisitDuration());
+            dto.setVisitorType(visitor.getVisitorType());
+            dto.setPhoneNumber(visitor.getPhoneNumber());
+
+            if (visitor.getResident() != null) {
+                dto.setResidentName(visitor.getResident().getFirstname() + " " + visitor.getResident().getLastname());
+            }
+
+            return dto;
+        }).collect(Collectors.toList());
     }
 
+
+    // method to update visitor
     @Override
     public Visitor updateVisitor(int id, Visitor visitor) {
 
@@ -116,13 +140,14 @@ public class VisitorServiceImpl implements VisitorService {
                 .orElseThrow(() -> new NoSuchElementException("Visitor Id not : " + id));
 
         if (visitor.getVisitorName() != null) existingVisitor.setVisitorName(visitor.getVisitorName());
-        if(visitor.getVehicleName() != null) existingVisitor.setVehicleName(visitor.getVehicleName());
-        if(visitor.getVehicalRegisterationNum() != null) existingVisitor.setVehicalRegisterationNum(visitor.getVehicalRegisterationNum());
+        if (visitor.getVehicleName() != null) existingVisitor.setVehicleName(visitor.getVehicleName());
+        if (visitor.getVehicalRegisterationNum() != null)
+            existingVisitor.setVehicalRegisterationNum(visitor.getVehicalRegisterationNum());
         if (visitor.getVisitPurpose() != null) existingVisitor.setVisitPurpose(visitor.getVisitPurpose());
         if (visitor.getPhoneNumber() != null) existingVisitor.setPhoneNumber(visitor.getPhoneNumber());
-        if(visitor.getTimeIn() != null ) existingVisitor.setTimeIn(visitor.getTimeIn());
-        if (visitor.getTimeOut() != null)existingVisitor.setTimeOut(visitor.getTimeOut());
-        if(visitor.getVisitDuration() != null) existingVisitor.setVisitDuration(visitor.getVisitDuration());
+        if (visitor.getTimeIn() != null) existingVisitor.setTimeIn(visitor.getTimeIn());
+        if (visitor.getTimeOut() != null) existingVisitor.setTimeOut(visitor.getTimeOut());
+        if (visitor.getVisitDuration() != null) existingVisitor.setVisitDuration(visitor.getVisitDuration());
         if (visitor.getVisitorType() != null) existingVisitor.setVisitorType(visitor.getVisitorType());
 
         return visitorRepo.save(existingVisitor);
