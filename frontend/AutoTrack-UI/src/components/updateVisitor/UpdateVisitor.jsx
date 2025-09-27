@@ -134,7 +134,7 @@ function UpdateVisitor({ visitor, setToast, onClose, onUpdated }) {
             />
           </div>
 
-          <div className="form-row">
+          <div className="form-row visitorType">
             <select
               name="visitorType"
               value={formData.visitorType || ""}
