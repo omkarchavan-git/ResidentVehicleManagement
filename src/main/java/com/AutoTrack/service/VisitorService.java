@@ -26,10 +26,12 @@ public interface VisitorService {
     // get all visitor
     public List<Visitor> getAllVisitor();
 
-    //update visitor
-    public Visitor updateVisitor(Visitor visitor);
+    //update visitor by id
+    public Visitor updateVisitor(int id, Visitor visitor);
 
-    }
+    // delete visitor by id
+
+}
 
 
 
