@@ -1,6 +1,7 @@
 package com.AutoTrack.controller;
 
 import com.AutoTrack.Service.VisitorService;
+import com.AutoTrack.dtoClasses.VisitorDTO;
 import com.AutoTrack.dtoClasses.VisitorResidentDTO;
 import com.AutoTrack.entity.Visitor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +32,12 @@ public class VisitorController {
 
     // get all resident
     @GetMapping("/getAllVisitor")
-    public ResponseEntity<List<Visitor>> getallvisitor() {
-        List<Visitor> visitorList = visitorService.getAllVisitor();
-        return new ResponseEntity<>(visitorList, HttpStatus.OK);
+    public ResponseEntity<List<VisitorDTO>> getAllVisitor() {
+        List<VisitorDTO> visitors = visitorService.getAllVisitor();
+        return new ResponseEntity<>(visitors, HttpStatus.OK);
     }
+
+
 
     // controller to get visitor details by regNum
     @GetMapping("/resident/{regNum}")
