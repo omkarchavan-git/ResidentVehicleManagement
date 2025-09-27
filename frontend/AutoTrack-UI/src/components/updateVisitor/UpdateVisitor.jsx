@@ -29,7 +29,9 @@ function UpdateVisitor({ visitor, setToast, onClose, onUpdated }) {
         const updated = await res.json();
         onUpdated(updated);
 
-        setToast(`✅ Visitor ${updated.visitorName} (ID ${updated.id}) updated successfully!`);
+        setToast(
+          `✅ Visitor ${updated.visitorName} (ID ${updated.id}) updated successfully!`
+        );
 
         setShow(false);
         setTimeout(onClose, 300);
@@ -52,109 +54,113 @@ function UpdateVisitor({ visitor, setToast, onClose, onUpdated }) {
       <div className={`update-modal ${show ? "show" : ""}`}>
         <h2>Update Visitor</h2>
 
-        <div className="form-row">
-          <input
-            type="text"
-            name="visitorName"
-            value={formData.visitorName || ""}
-            onChange={handleChange}
-            placeholder="Visitor Name"
-          />
+        {/* ✅ Two-column grid starts here */}
+        <div className="form-grid">
+          <div className="form-row">
+            <input
+              type="text"
+              name="visitorName"
+              value={formData.visitorName || ""}
+              onChange={handleChange}
+              placeholder="Visitor Name"
+            />
+          </div>
+
+          <div className="form-row">
+            <input
+              type="text"
+              name="vehicleName"
+              value={formData.vehicleName || ""}
+              onChange={handleChange}
+              placeholder="Vehicle Name"
+            />
+          </div>
+
+          <div className="form-row">
+            <input
+              type="text"
+              name="vehicalRegisterationNum"
+              value={formData.vehicalRegisterationNum || ""}
+              onChange={handleChange}
+              placeholder="Vehicle Registration No"
+            />
+          </div>
+
+          <div className="form-row">
+            <input
+              type="text"
+              name="phoneNumber"
+              value={formData.phoneNumber || ""}
+              onChange={handleChange}
+              placeholder="Phone Number"
+            />
+          </div>
+
+          <div className="form-row">
+            <input
+              type="text"
+              name="visitPurpose"
+              value={formData.visitPurpose || ""}
+              onChange={handleChange}
+              placeholder="Purpose of Visit"
+            />
+          </div>
+
+          <div className="form-row">
+            <input
+              type="datetime-local"
+              name="timeIn"
+              value={formData.timeIn || ""}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="form-row">
+            <input
+              type="datetime-local"
+              name="timeOut"
+              value={formData.timeOut || ""}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="form-row">
+            <input
+              type="text"
+              name="visitDuration"
+              value={formData.visitDuration || ""}
+              onChange={handleChange}
+              placeholder="Visit Duration"
+            />
+          </div>
+
+          <div className="form-row">
+            <select
+              name="visitorType"
+              value={formData.visitorType || ""}
+              onChange={handleChange}
+            >
+              <option value="">Select Type</option>
+              <option value="GUEST">Guest</option>
+              <option value="DELIVERY">Delivery</option>
+              <option value="WORKER">Worker</option>
+            </select>
+          </div>
+
+          {/* ✅ New field: Resident to meet */}
+          <div className="form-row">
+            <input
+              type="text"
+              name="residentName"
+              value={formData.residentName || ""}
+              onChange={handleChange}
+              placeholder="Resident to Meet"
+            />
+          </div>
         </div>
 
-        <div className="form-row">
-          <input
-            type="text"
-            name="vehicleName"
-            value={formData.vehicleName || ""}
-            onChange={handleChange}
-            placeholder="Vehicle Name"
-          />
-        </div>
-
-        <div className="form-row">
-          <input
-            type="text"
-            name="vehicalRegisterationNum"
-            value={formData.vehicalRegisterationNum || ""}
-            onChange={handleChange}
-            placeholder="Vehicle Registration No"
-          />
-        </div>
-
-        <div className="form-row">
-          <input
-            type="text"
-            name="phoneNumber"
-            value={formData.phoneNumber || ""}
-            onChange={handleChange}
-            placeholder="Phone Number"
-          />
-        </div>
-
-        <div className="form-row">
-          <input
-            type="text"
-            name="visitPurpose"
-            value={formData.visitPurpose || ""}
-            onChange={handleChange}
-            placeholder="Purpose of Visit"
-          />
-        </div>
-
-        <div className="form-row">
-          <input
-            type="datetime-local"
-            name="timeIn"
-            value={formData.timeIn || ""}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="form-row">
-          <input
-            type="datetime-local"
-            name="timeOut"
-            value={formData.timeOut || ""}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="form-row">
-          <input
-            type="text"
-            name="visitDuration"
-            value={formData.visitDuration || ""}
-            onChange={handleChange}
-            placeholder="Visit Duration"
-          />
-        </div>
-
-        <div className="form-row">
-          <select
-            name="visitorType"
-            value={formData.visitorType || ""}
-            onChange={handleChange}
-          >
-            <option value="">Select Type</option>
-            <option value="Guest">Guest</option>
-            <option value="Delivery">Delivery</option>
-            <option value="Worker">Worker</option>
-          </select>
-        </div>
-
-        {/* ✅ New field: Resident to meet */}
-        <div className="form-row">
-          <input
-            type="text"
-            name="residentName"
-            value={formData.residentName || ""}
-            onChange={handleChange}
-            placeholder="Resident to Meet"
-          />
-        </div>
-
-        <div className="modal-buttons">
+        {/* Buttons full width below grid */}
+        <div className="modal-buttons form-full">
           <button className="submit-btn" onClick={handleUpdate}>
             Update
           </button>

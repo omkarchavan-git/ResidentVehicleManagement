@@ -115,14 +115,15 @@
   transition: all 0.3s ease-in-out;
 }
 
+ 
 /* Grid layout for form */
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr; /* two equal columns */
-  gap: 16px; /* space between columns */
+  gap: 15px;
 }
 
-/* Full-width rows (like buttons) */
+/* Buttons should span across both columns */
 .form-full {
-  grid-column: span 2; /* take both columns */
+  grid-column: span 2;
 }
