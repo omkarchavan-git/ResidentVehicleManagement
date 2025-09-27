@@ -99,6 +99,7 @@ function Visitor() {
           <tr>
             <th>ID</th>
             <th>Visitor Name</th>
+            <th>Resident Name</th> {/* New column */}
             <th>Vehicle Name</th>
             <th>Vehicle Reg. No</th>
             <th>Purpose</th>
@@ -111,48 +112,25 @@ function Visitor() {
           </tr>
         </thead>
         <tbody>
-          {selectedVisitors.length > 0 ? (
-            selectedVisitors.map((visitor) => (
-              <tr key={visitor.id}>
-                <td>{visitor.id}</td>
-                <td>{visitor.visitorName}</td>
-                <td>{visitor.vehicleName}</td>
-                <td>{visitor.vehicalRegisterationNum}</td>
-                <td>{visitor.visitPurpose || "N/A"}</td>
-                <td>{visitor.phoneNumber}</td>
-                <td>{visitor.timeIn || "N/A"}</td>
-                <td>{visitor.timeOut || "N/A"}</td>
-                <td>{visitor.visitDuration || "N/A"}</td>
-                <td>{visitor.visitorType}</td>
-                <td className="actions-col">
-                  {/* Update button */}
-                  <button
-                    className="btn-update"
-                    onClick={() => {
-                      setEditingVisitor(visitor);
-                      setShowUpdate(true);
-                    }}
-                  >
-                    Update
-                  </button>
-
-                  {/* Delete button */}
-                  <button
-                    className="btn-delete"
-                    onClick={() => setDeletingVisitor(visitor)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="11" className="no-data">
-                No visitors found
+          {selectedVisitors.map((visitor) => (
+            <tr key={visitor.id}>
+              <td>{visitor.id}</td>
+              <td>{visitor.visitorName}</td>
+              <td>{visitor.residentName || "N/A"}</td>  
+              <td>{visitor.vehicleName}</td>
+              <td>{visitor.vehicalRegisterationNum}</td>
+              <td>{visitor.visitPurpose || "N/A"}</td>
+              <td>{visitor.phoneNumber}</td>
+              <td>{visitor.timeIn || "N/A"}</td>
+              <td>{visitor.timeOut || "N/A"}</td>
+              <td>{visitor.visitDuration || "N/A"}</td>
+              <td>{visitor.visitorType}</td>
+              <td className="actions-col">
+                <button className="btn-update" onClick={() => { setEditingVisitor(visitor); setShowUpdate(true); }}>Update</button>
+                <button className="btn-delete" onClick={() => setDeletingVisitor(visitor)}>Delete</button>
               </td>
             </tr>
-          )}
+          ))}
         </tbody>
       </table>
 
