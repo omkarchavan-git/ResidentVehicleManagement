@@ -74,4 +74,12 @@ public class VisitorController {
         Visitor updatedVisitor = visitorService.updateVisitor(id, visitor);
         return new ResponseEntity<>(updatedVisitor, HttpStatus.OK);
     }
+
+    // delete visitor by id
+    @DeleteMapping("deleteVisitor/{id}")
+    public ResponseEntity<Visitor> deleteByID(@PathVariable("id") int id)
+    {
+       Visitor deletedVisitor = visitorService.deleteVisitor(id);
+       return new ResponseEntity<>(deletedVisitor, HttpStatus.OK);
+    }
 }
