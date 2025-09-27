@@ -103,3 +103,26 @@
   background: #bbb;
   transform: scale(1.05);
 }
+
+/* Modal container (wider for 2 columns) */
+.update-modal {
+  background: #fff;
+  width: 600px; /* increased from 420px */
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+  transform: translateY(-40px);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Grid layout for form */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* two equal columns */
+  gap: 16px; /* space between columns */
+}
+
+/* Full-width rows (like buttons) */
+.form-full {
+  grid-column: span 2; /* take both columns */
+}
