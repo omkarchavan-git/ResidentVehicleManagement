@@ -1,6 +1,8 @@
 package com.AutoTrack.dtoClasses;
 
 import com.AutoTrack.entity.Visitor;
+import jakarta.persistence.Transient;
+
 
 import java.time.LocalDateTime;
 
@@ -19,7 +21,9 @@ public class VisitorResidentDTO {
     private String vehicalRegisterationNum;
 
     // Resident details
+    @Transient
     private String residentName;
+
     private String flatno;
     private String email;
 

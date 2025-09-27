@@ -4,6 +4,7 @@ import com.AutoTrack.Service.VisitorService;
 import com.AutoTrack.dtoClasses.VisitorDTO;
 import com.AutoTrack.dtoClasses.VisitorResidentDTO;
 import com.AutoTrack.eNum.VisitorType;
+import com.AutoTrack.entity.Resident;
 import com.AutoTrack.entity.Visitor;
 import com.AutoTrack.repository.ResidentRepo;
 import com.AutoTrack.repository.VisitorRepo;
@@ -133,6 +134,7 @@ public class VisitorServiceImpl implements VisitorService {
 
 
     // method to update visitor
+    // method to update visitor
     @Override
     public Visitor updateVisitor(int id, Visitor visitor) {
 
@@ -150,8 +152,14 @@ public class VisitorServiceImpl implements VisitorService {
         if (visitor.getVisitDuration() != null) existingVisitor.setVisitDuration(visitor.getVisitDuration());
         if (visitor.getVisitorType() != null) existingVisitor.setVisitorType(visitor.getVisitorType());
 
-        return visitorRepo.save(existingVisitor);
+        VisitorDTO visitorDTO = new VisitorDTO();
+        // ✅ Update resident if provided
+        if (visitor.getResident() != null && visitor.getResident().getId() != 0) {
+            Resident res = residentRepo.findById(visitor.getResident().getId())
+                    .orElseThrow(() -> new NoSuchElementException("Resident not found"));
+            existingVisitor.setResident(res);
+        }
 
+  return visitorRepo.save(existingVisitor);
     }
-
 }

@@ -226,8 +226,8 @@ function Resident() {
             <th>Contact No</th>
             <th>Email</th>
             <th>First Name</th>
-            <th>Flat No</th>
             <th>Last Name</th>
+            <th>Flat No</th>
             <th>Resident Type</th>
             <th>Parking Lot</th>
             <th>Actions</th> {/* New column */}
@@ -241,8 +241,8 @@ function Resident() {
                 <td>{resident.contactno}</td>
                 <td>{resident.email}</td>
                 <td>{resident.firstname}</td>
-                <td>{resident.flatno}</td>
                 <td>{resident.lastname}</td>
+                <td>{resident.flatno}</td>
                 <td>{resident.residentType}</td>
                 <td>{resident.parkinglot || "N/A"}</td>
                 <td>

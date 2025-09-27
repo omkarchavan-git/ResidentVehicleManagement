@@ -26,4 +26,5 @@ public interface ResidentRepo extends JpaRepository<Resident, Integer> {
     List<Resident> findTop5ByOrderByCreatedAtDesc();
 
 
+    Resident findByFirstnameAndLastname(String firstName, String lastName);
 }

@@ -2,18 +2,31 @@ import React, { useState, useEffect } from "react";
 import "./UpdateVisitor.css";
 
 function UpdateVisitor({ visitor, setToast, onClose, onUpdated }) {
-  const [formData, setFormData] = useState({ ...visitor });
+  const [formData, setFormData] = useState({
+    ...visitor,
+    residentId: visitor.resident?.id || "", // initialize residentId
+  });
+  const [residents, setResidents] = useState([]); // for dropdown
   const [show, setShow] = useState(false);
 
+  // Open modal
   useEffect(() => {
-    setShow(true); // modal open animation
+    setShow(true);
+
+    // Fetch all residents for the dropdown
+    fetch("http://localhost:8085/Resident/getAllResident")
+      .then((res) => res.json())
+      .then((data) => setResidents(data))
+      .catch((err) => console.error("Error fetching residents:", err));
   }, []);
 
+  // Handle form field changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Update visitor
   const handleUpdate = async () => {
     try {
       const res = await fetch(
@@ -44,6 +57,7 @@ function UpdateVisitor({ visitor, setToast, onClose, onUpdated }) {
     }
   };
 
+  // Cancel modal
   const handleCancel = () => {
     setShow(false);
     setTimeout(onClose, 300);
@@ -54,7 +68,6 @@ function UpdateVisitor({ visitor, setToast, onClose, onUpdated }) {
       <div className={`update-modal ${show ? "show" : ""}`}>
         <h2>Update Visitor</h2>
 
-        {/* ✅ Two-column grid starts here */}
         <div className="form-grid">
           <div className="form-row">
             <input
@@ -147,7 +160,7 @@ function UpdateVisitor({ visitor, setToast, onClose, onUpdated }) {
             </select>
           </div>
 
-          {/* ✅ New field: Resident to meet */}
+          {/* ✅ Resident dropdown */}
           <div className="form-row">
             <input
               type="text"

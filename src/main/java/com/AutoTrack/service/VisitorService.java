@@ -1,5 +1,6 @@
 package com.AutoTrack.Service;
 
+import com.AutoTrack.dtoClasses.VisitorDTO;
 import com.AutoTrack.dtoClasses.VisitorResidentDTO;
 import com.AutoTrack.entity.Visitor;
 
@@ -24,7 +25,7 @@ public interface VisitorService {
     public Visitor updateVisitorExit(String vehicalRegisterationNum, LocalDateTime timeOut);
 
     // get all visitor
-    public List<Visitor> getAllVisitor();
+    public List<VisitorDTO> getAllVisitor();
 
     //update visitor by id
     public Visitor updateVisitor(int id, Visitor visitor);

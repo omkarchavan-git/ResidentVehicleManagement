@@ -16,6 +16,8 @@ public class VisitorDTO {
     private Long phoneNumber;
     private String residentName;    // fetch from Resident
 
+    private Long residentId; // for update resident name
+
     public VisitorDTO() {}
 
     public VisitorDTO(long id, String visitorName) {
@@ -110,5 +112,13 @@ public class VisitorDTO {
 
     public void setResidentName(String residentName) {
         this.residentName = residentName;
+    }
+
+    public Long getResidentId() {
+        return residentId;
+    }
+
+    public void setResidentId(Long residentId) {
+        this.residentId = residentId;
     }
 }
