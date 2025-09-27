@@ -6,6 +6,7 @@ import com.AutoTrack.dtoClasses.VisitorResidentDTO;
 import com.AutoTrack.eNum.VisitorType;
 import com.AutoTrack.entity.Resident;
 import com.AutoTrack.entity.Visitor;
+import com.AutoTrack.exception.FieldMissingException;
 import com.AutoTrack.repository.ResidentRepo;
 import com.AutoTrack.repository.VisitorRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -161,5 +162,13 @@ public class VisitorServiceImpl implements VisitorService {
         }
 
   return visitorRepo.save(existingVisitor);
+    }
+
+    @Override
+    public Visitor deleteVisitor(int id) {
+       Visitor visitor = visitorRepo.findById(id)
+                .orElseThrow(() ->  new FieldMissingException("Visitor with Id : " + id + "Not found"));
+         residentRepo.deleteById(id);
+         return null;
     }
 }
