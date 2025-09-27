@@ -11,7 +11,7 @@ function DeleteVisitor({ visitor, setToast, onClose, onDeleted }) {
   const handleDelete = async () => {
     try {
       const res = await fetch(
-        `http://localhost:8085/Visitor/deleteVisitorById/${visitor.id}`,
+        `http://localhost:8085/visitor/deleteVisitor/${visitor.id}`,
         {
           method: "DELETE",
         }
@@ -19,7 +19,7 @@ function DeleteVisitor({ visitor, setToast, onClose, onDeleted }) {
 
       if (res.ok) {
         onDeleted(visitor.id);
-        setToast(`🗑️ Visitor ${visitor.name} (ID ${visitor.id}) deleted successfully!`);
+        setToast(`🗑️ Visitor ${visitor.visitorName} (ID ${visitor.id}) deleted successfully!`);
 
         setShow(false);
         setTimeout(onClose, 300);
