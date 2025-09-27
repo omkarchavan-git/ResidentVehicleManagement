@@ -1,6 +1,7 @@
 package com.AutoTrack.dtoClasses;
 
 import com.AutoTrack.entity.Visitor;
+
 import java.time.LocalDateTime;
 
 
@@ -8,32 +9,42 @@ public class VisitorResidentDTO {
     private String visitorName;
     private String visitPurpose;
     private LocalDateTime timeIn;
-    private LocalDateTime timeOut;
+    private LocalDateTime timeOut; // <-- make sure this is here
     private Long phoneNumber;
     private boolean isActiveVisitor;
     private String visitorType;
+
+    // Vehicle details
+    private String vehicleName;
+    private String vehicalRegisterationNum;
 
     // Resident details
     private String residentName;
     private String flatno;
     private String email;
 
-    // constructor
+
+    // constructor for display
     public VisitorResidentDTO(Visitor visitor) {
         this.visitorName = visitor.getVisitorName();
         this.visitPurpose = visitor.getVisitPurpose();
         this.timeIn = visitor.getTimeIn();
-        this.timeOut = visitor.getTimeOut();
+        this.timeOut = visitor.getTimeOut(); // <-- map timeOut
         this.phoneNumber = visitor.getPhoneNumber();
         this.isActiveVisitor = visitor.isActiveVisitor();
         this.visitorType = visitor.getVisitorType().name();
 
-        // map resident details
+        this.vehicleName = visitor.getVehicleName(); // <-- map vehicleName
+        this.vehicalRegisterationNum = visitor.getVehicalRegisterationNum(); // <-- map reg number
+
         if(visitor.getResident() != null) {
             this.residentName = visitor.getResident().getFirstname() + " " + visitor.getResident().getLastname();
             this.flatno = visitor.getResident().getFlatno();
             this.email = visitor.getResident().getEmail();
         }
+    }
+
+    public VisitorResidentDTO() {
     }
 
 
@@ -42,7 +53,6 @@ public class VisitorResidentDTO {
     }
 
     public void setVisitorName(String visitorName) {
-
         this.visitorName = visitorName;
     }
 
@@ -78,11 +88,11 @@ public class VisitorResidentDTO {
         this.phoneNumber = phoneNumber;
     }
 
-    public boolean isActiveVisitor() {
+    public Boolean getActiveVisitor() {
         return isActiveVisitor;
     }
 
-    public void setActiveVisitor(boolean activeVisitor) {
+    public void setActiveVisitor(Boolean activeVisitor) {
         isActiveVisitor = activeVisitor;
     }
 
