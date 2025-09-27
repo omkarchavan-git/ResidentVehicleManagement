@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class VisitorServiceImpl implements VisitorService {
@@ -109,9 +110,23 @@ public class VisitorServiceImpl implements VisitorService {
     }
 
     @Override
-    public Visitor updateVisitor(Visitor visitor) {
-        Visitor updatedVisitor = visitorRepo.save(visitor);
-        return updatedVisitor;
+    public Visitor updateVisitor(int id, Visitor visitor) {
+
+        Visitor existingVisitor = visitorRepo.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Visitor Id not : " + id));
+
+        if (visitor.getVisitorName() != null) existingVisitor.setVisitorName(visitor.getVisitorName());
+        if(visitor.getVehicleName() != null) existingVisitor.setVehicleName(visitor.getVehicleName());
+        if(visitor.getVehicalRegisterationNum() != null) existingVisitor.setVehicalRegisterationNum(visitor.getVehicalRegisterationNum());
+        if (visitor.getVisitPurpose() != null) existingVisitor.setVisitPurpose(visitor.getVisitPurpose());
+        if (visitor.getPhoneNumber() != null) existingVisitor.setPhoneNumber(visitor.getPhoneNumber());
+        if(visitor.getTimeIn() != null ) existingVisitor.setTimeIn(visitor.getTimeIn());
+        if (visitor.getTimeOut() != null)existingVisitor.setTimeOut(visitor.getTimeOut());
+        if(visitor.getVisitDuration() != null) existingVisitor.setVisitDuration(visitor.getVisitDuration());
+        if (visitor.getVisitorType() != null) existingVisitor.setVisitorType(visitor.getVisitorType());
+
+        return visitorRepo.save(existingVisitor);
+
     }
 
 }
