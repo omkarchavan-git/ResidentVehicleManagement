@@ -20,11 +20,11 @@ public class Visitor {
     private long id;
 
     @NotBlank(message = "Visitor name is mandatory")
-    @Pattern(regexp= "^[A-Za-z]+$", message = "Enter valid visitor name")
+    @Pattern(regexp= "^[A-Za-z ]+$", message = "Enter valid visitor name")
     private String visitorName;
 
     @NotBlank(message = "Vehicle name is mandatory")
-    @Pattern(regexp= "^[A-Za-z]+$", message = "Enter valid vehicle name")
+    @Pattern(regexp= "^[A-Za-z ]+$", message = "Enter valid vehicle name")
     private String vehicleName;
 
     @Column(nullable = false, unique = true)
