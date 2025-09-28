@@ -22,7 +22,6 @@ public class VisitorController {
     @Autowired
     private VisitorService visitorService;
 
-
     // API to add visitor data
     @PostMapping("/addVisitor")
     public ResponseEntity<Visitor> addVisitor(@RequestBody Visitor visitor) {
@@ -36,8 +35,6 @@ public class VisitorController {
         List<VisitorDTO> visitors = visitorService.getAllVisitor();
         return new ResponseEntity<>(visitors, HttpStatus.OK);
     }
-
-
 
     // controller to get visitor details by regNum
     @GetMapping("/resident/{regNum}")
@@ -57,7 +54,6 @@ public class VisitorController {
 
         return ResponseEntity.ok(updatedVisitor);
     }
-
 
     // API to filter visitor by their type
     @GetMapping("/filter")
