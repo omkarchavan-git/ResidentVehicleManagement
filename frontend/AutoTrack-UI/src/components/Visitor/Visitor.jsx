@@ -24,7 +24,7 @@ function Visitor() {
   // state for add visitor modal
   const [showAdd, setShowAdd] = useState(false);
 
- 
+
   // fetch all visitors
   useEffect(() => {
     fetchAllVisitors();
@@ -38,8 +38,8 @@ function Visitor() {
   };
 
   const handleVisitorAdded = (newVisitor) => {
-  setVisitors((prev) => [...prev, newVisitor]); // ✅ add visitor without reload
-};
+    setVisitors((prev) => [...prev, newVisitor]); // ✅ add visitor without reload
+  };
 
   // pagination
   const startIndex = (page - 1) * rowsPerPage;
@@ -222,6 +222,18 @@ function Visitor() {
           }}
         />
       )}
+
+      {/* Auto reload after adding data */}
+      {showAdd && (
+        <AddVisitor
+          setToast={setToast}
+          onVisitorAdded={(newVisitor) => {
+            setVisitors((prev) => [newVisitor, ...prev]); // prepend new visitor
+          }}
+          onClose={() => setShowAdd(false)}
+        />
+      )}
+
 
       {/* AddVisitor modal */}
       {showAdd && (
