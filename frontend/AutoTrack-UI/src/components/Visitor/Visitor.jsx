@@ -3,9 +3,10 @@ import "./Visitor.css";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
-// import delete + update components
+// import delete + update + add components
 import DeleteVisitor from "../deleteVisitor/DeleteVisitor";
 import UpdateVisitor from "../updateVisitor/UpdateVisitor";
+import AddVisitor from "./AddVisitor"; //
 
 function Visitor() {
   const [visitors, setVisitors] = useState([]);
@@ -13,12 +14,15 @@ function Visitor() {
   const rowsPerPage = 7;
   const [toast, setToast] = useState("");
 
-  // update modal state
+  // state for update modal
   const [editingVisitor, setEditingVisitor] = useState(null);
   const [showUpdate, setShowUpdate] = useState(false);
 
-  // delete modal state
+  // state for delete modal
   const [deletingVisitor, setDeletingVisitor] = useState(null);
+
+  // state for add visitor modal
+  const [showAdd, setShowAdd] = useState(false);
 
   // fetch all visitors
   useEffect(() => {
@@ -51,6 +55,7 @@ function Visitor() {
     const columns = [
       "ID",
       "Visitor Name",
+      "Resident Name",
       "Vehicle Name",
       "Vehicle Reg. No",
       "Purpose",
@@ -64,6 +69,7 @@ function Visitor() {
     const rows = visitors.map((v) => [
       v.id,
       v.visitorName,
+      v.residentName || "N/A",
       v.vehicleName,
       v.vehicalRegisterationNum,
       v.visitPurpose || "N/A",
@@ -92,6 +98,10 @@ function Visitor() {
         <button className="btn-export" onClick={exportToPDF}>
           Export to PDF
         </button>
+
+        <button className="btn-addVisitor" onClick={() => setShowAdd(true)}>
+          Add Visitor
+        </button>
       </div>
 
       <table className="visitor-table">
@@ -99,7 +109,7 @@ function Visitor() {
           <tr>
             <th>ID</th>
             <th>Visitor Name</th>
-            <th>Resident Name</th> {/* New column */}
+            <th>Resident Name</th>
             <th>Vehicle Name</th>
             <th>Vehicle Reg. No</th>
             <th>Purpose</th>
@@ -116,7 +126,7 @@ function Visitor() {
             <tr key={visitor.id}>
               <td>{visitor.id}</td>
               <td>{visitor.visitorName}</td>
-              <td>{visitor.residentName || "N/A"}</td>  
+              <td>{visitor.residentName || "N/A"}</td>
               <td>{visitor.vehicleName}</td>
               <td>{visitor.vehicalRegisterationNum}</td>
               <td>{visitor.visitPurpose || "N/A"}</td>
@@ -126,8 +136,21 @@ function Visitor() {
               <td>{visitor.visitDuration || "N/A"}</td>
               <td>{visitor.visitorType}</td>
               <td className="actions-col">
-                <button className="btn-update" onClick={() => { setEditingVisitor(visitor); setShowUpdate(true); }}>Update</button>
-                <button className="btn-delete" onClick={() => setDeletingVisitor(visitor)}>Delete</button>
+                <button
+                  className="btn-update"
+                  onClick={() => {
+                    setEditingVisitor(visitor);
+                    setShowUpdate(true);
+                  }}
+                >
+                  Update
+                </button>
+                <button
+                  className="btn-delete"
+                  onClick={() => setDeletingVisitor(visitor)}
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
@@ -166,7 +189,7 @@ function Visitor() {
         </div>
       )}
 
-      {/* ✅ Single DeleteVisitor modal */}
+      {/* DeleteVisitor modal */}
       {deletingVisitor && (
         <DeleteVisitor
           visitor={deletingVisitor}
@@ -178,7 +201,7 @@ function Visitor() {
         />
       )}
 
-      {/* Update visitor modal */}
+      {/* UpdateVisitor modal */}
       {showUpdate && editingVisitor && (
         <UpdateVisitor
           visitor={editingVisitor}
@@ -192,6 +215,17 @@ function Visitor() {
             setShowUpdate(false);
             setEditingVisitor(null);
           }}
+        />
+      )}
+
+      {/* AddVisitor modal */}
+      {showAdd && (
+        <AddVisitor
+          setToast={setToast}
+          onAdded={(newVisitor) => {
+            setVisitors((prev) => [newVisitor, ...prev]); // prepend new visitor
+          }}
+          onClose={() => setShowAdd(false)}
         />
       )}
     </div>
