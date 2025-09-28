@@ -1,33 +1,82 @@
-.visitor-form {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2-column layout */
-  gap: 15px;
-  max-width: 800px;
-  margin: 0 auto; /* center form */
+/* Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 1000;
 }
 
-.visitor-form .form-group {
-  display: flex;
-  flex-direction: column;
+/* Form Container */
+.popup-form {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  animation: popupSlide 0.4s ease;
 }
 
-.visitor-form label {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 4px;
-  color: #ddd;
+.popup-form h2 {
+  margin-bottom: 15px;
+  color: #333;
+  text-align: center;
 }
 
-.visitor-form input,
-.visitor-form select {
-  padding: 8px 10px;
+/* Inputs */
+.popup-form input, .popup-form select {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
   border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.3s;
 }
 
-.visitor-form input:focus,
-.visitor-form select:focus {
-  border-color: #ff6a00; /* orange-red */
-  outline: none;
+.popup-form input:focus, .popup-form select:focus {
+  border-color: #ff6600;
+  box-shadow: 0 0 6px rgba(255,102,0,0.5);
+}
+
+/* Buttons */
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.btn-submit {
+  background: #ff6600;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-submit:hover {
+  background: #e65c00;
+}
+
+.btn-cancel {
+  background: #ccc;
+  color: #333;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-cancel:hover {
+  background: #999;
+}
+
+/* Animation */
+@keyframes popupSlide {
+  from { transform: translateY(-40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
