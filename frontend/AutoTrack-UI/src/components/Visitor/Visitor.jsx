@@ -24,6 +24,7 @@ function Visitor() {
   // state for add visitor modal
   const [showAdd, setShowAdd] = useState(false);
 
+ 
   // fetch all visitors
   useEffect(() => {
     fetchAllVisitors();
@@ -35,6 +36,10 @@ function Visitor() {
       .then((data) => setVisitors(data.sort((a, b) => b.id - a.id)))
       .catch((err) => console.error("Error fetching visitors:", err));
   };
+
+  const handleVisitorAdded = (newVisitor) => {
+  setVisitors((prev) => [...prev, newVisitor]); // ✅ add visitor without reload
+};
 
   // pagination
   const startIndex = (page - 1) * rowsPerPage;
