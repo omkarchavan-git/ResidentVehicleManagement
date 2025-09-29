@@ -5,13 +5,13 @@ function Navbar({ residentList, exportToPDF }) {
   return (
     <>
        
-      <div className="logo-wrapper">
+      {/* <div className="logo-wrapper">
         <img
           src="./images/logo.png"
           alt="Logo"
           className="logo-image"
         />
-      </div>
+      </div> */}
 
       <nav className="navbar">
         <div className="navbar-container">
