@@ -55,4 +55,12 @@ public class VehicleController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+
+    //api to update the resident data
+    @PatchMapping("/updateVehicleById/{id}")
+    public ResponseEntity<Vehicles> updateVehicle(@PathVariable("id") int id, @RequestBody Vehicles vehicles)
+    {
+        Vehicles updatedVehicle =  vehicleService.updatevehicle(id, vehicles);
+        return new ResponseEntity<>(updatedVehicle,HttpStatus.OK);
+    }
 }
