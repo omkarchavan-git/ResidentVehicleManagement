@@ -6,6 +6,7 @@ import Visitor from './components/Visitor/Visitor';
 import Navbar from './components/navbar/Navbar';
 import HomeDashboard from './components/Dashboard/HomeDashboard';
 import AddResident from './components/Resident/AddResident';
+import Vehicle from './components/Vehicle/Vehicle';
 
 import './App.css';
 
@@ -24,6 +25,8 @@ function App() {
               <Route path="/resident/addResident" element={<AddResident />} />
               <Route path="/resident/Resident" element={<Resident />} />
               <Route path="/Visitor" element={<Visitor />} />
+              <Route path="/Vehicle" element={<Vehicle />} />
+
             </Routes>
 
           </div>
