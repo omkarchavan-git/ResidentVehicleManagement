@@ -11,7 +11,7 @@ public class VehicleDTO {
     private String color;
     private VehicleType vehicleType;
     private boolean vehActive;
-    private String residentName; // NEW
+    private String residentName;
 
 
     // Constructor
