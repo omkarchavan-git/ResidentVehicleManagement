@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -76,10 +77,29 @@ public class VehicleServiceImpl implements VehicleService {
 
     }
 
+    @Override
+    public Vehicles updatevehicle(int id, Vehicles vehicles) {
+
+        Vehicles existingvehicles = vehiclrRepo.findById(id)
+                .orElseThrow( () -> new NoSuchElementException("Vehicle id : " + id + " Not found"));
+        if (vehicles.getVehName() != null) existingvehicles.setVehName(vehicles.getVehName());
+        if (vehicles.getRegNum() != null) existingvehicles.setRegNum(vehicles.getRegNum());
+        if (vehicles.getVehicleType() != null) existingvehicles.setVehicleType(vehicles.getVehicleType());
+        if (vehicles.getColor() != null) existingvehicles.setColor(vehicles.getColor());
+        if (vehicles.getIntime() != null) existingvehicles.setIntime(vehicles.getIntime());
+        if (vehicles.getOuttime() != null) existingvehicles.setOuttime(vehicles.getOuttime());
+        if (vehicles.getResident() != null) existingvehicles.setResident(vehicles.getResident());
+
+        //to update the resident as well
+        if (vehicles.getResident() != null && vehicles.getResident().getId() != 0) {
+            Resident res = residentRepo.findById(vehicles.getResident().getId())
+                    .orElseThrow(() -> new NoSuchElementException("Resident not found"));
+            existingvehicles.setResident(res);
+        }
 
 
-
-
+        return vehiclrRepo.save(existingvehicles);
+    }
 
 
 }

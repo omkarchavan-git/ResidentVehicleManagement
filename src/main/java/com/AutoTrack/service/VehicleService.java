@@ -18,4 +18,9 @@ public interface VehicleService  {
 
     // method to add vehicle with resident
     public Vehicles createVehicle (Vehicles vehicles, int residentId);
+
+    //method to update vehicle data
+    public Vehicles updatevehicle(int id, Vehicles vehicles);
+
+
 }
