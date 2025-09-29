@@ -6,7 +6,7 @@ function DeleteVisitor({ visitor, setToast, onClose, onDeleted }) {
 
   useEffect(() => {
     setShow(true); // trigger modal animation
-  }, []);
+  }, []);7
 
   const handleDelete = async () => {
     try {
