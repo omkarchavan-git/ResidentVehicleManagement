@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Visitor.css";
+import "./Vehicle.css";
 
 function Vehicle() {
   const [vehicles, setVehicles] = useState([]);
@@ -10,7 +10,7 @@ function Vehicle() {
 
   // ✅ Fetch vehicle data
   const fetchVehicles = () => {
-    fetch("http://localhost:8085/vehicle/vehicles") // 🔹 replace with your backend API
+    fetch("http://localhost:8085/vehicle/getallVehicles") // 🔹 replace with your backend API
       .then((res) => res.json())
       .then((data) => setVehicles(data))
       .catch((err) => console.error("Error fetching vehicles:", err));
