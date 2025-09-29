@@ -21,7 +21,7 @@ public class VehicleServiceImpl implements VehicleService {
     private ResidentRepo residentRepo;
 
     @Override
-    public List<Vehicles> getallvehiclesdata(List<Vehicles> vehiclesList) {
+    public List<Vehicles> getallvehiclesdata() {
         List<Vehicles> vehiclesList1 = vehiclrRepo.findAll();
         return vehiclesList1;
     }

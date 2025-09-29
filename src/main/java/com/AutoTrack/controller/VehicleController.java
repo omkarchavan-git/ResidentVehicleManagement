@@ -13,6 +13,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/vehicle")
+@CrossOrigin(origins = "http://localhost:5173")
+
 public class VehicleController {
 
     @Autowired
@@ -33,9 +35,9 @@ public class VehicleController {
 
     // API to get alll vehicles data
     @GetMapping("/getallVehicles")
-    public ResponseEntity<List<Vehicles>> getallvehicles(List<Vehicles> vehiclesList)
+    public ResponseEntity<List<Vehicles>> getallvehicles()
     {
-       List<Vehicles> vehiclesList1 =  vehicleService.getallvehiclesdata(vehiclesList);
+       List<Vehicles> vehiclesList1 =  vehicleService.getallvehiclesdata();
        return new ResponseEntity<>(vehiclesList1, HttpStatus.OK);
 
     }
