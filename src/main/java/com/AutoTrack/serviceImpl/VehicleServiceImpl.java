@@ -1,6 +1,7 @@
 package com.AutoTrack.serviceImpl;
 
 import com.AutoTrack.Service.VehicleService;
+import com.AutoTrack.dtoClasses.VehicleDTO;
 import com.AutoTrack.entity.Resident;
 import com.AutoTrack.entity.Vehicles;
 import com.AutoTrack.repository.ResidentRepo;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class VehicleServiceImpl implements VehicleService {
@@ -21,10 +23,28 @@ public class VehicleServiceImpl implements VehicleService {
     private ResidentRepo residentRepo;
 
     @Override
-    public List<Vehicles> getallvehiclesdata() {
-        List<Vehicles> vehiclesList1 = vehiclrRepo.findAll();
-        return vehiclesList1;
+    public List<VehicleDTO> getallvehiclesdata() {
+        List<Vehicles> vehiclesList = vehiclrRepo.findAll();
+
+        List<VehicleDTO> dtoList = vehiclesList.stream().map(vehicle -> {
+            String resName = vehicle.getResident() != null
+                    ? vehicle.getResident().getFirstname() + " " + vehicle.getResident().getLastname()
+                    : "N/A";
+
+            return new VehicleDTO(
+                    vehicle.getId(),
+                    vehicle.getRegNum(),
+                    vehicle.getVehName(),
+                    vehicle.getColor(),
+                    vehicle.getVehicleType(),
+                    vehicle.isVehActive(),
+                    resName
+            );
+        }).collect(Collectors.toList());
+
+        return dtoList;
     }
+
 
     @Override
     public Resident getResidentByRegNum(String regNum) {

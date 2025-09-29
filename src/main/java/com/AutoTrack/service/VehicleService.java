@@ -1,5 +1,6 @@
 package com.AutoTrack.Service;
 
+import com.AutoTrack.dtoClasses.VehicleDTO;
 import com.AutoTrack.entity.Resident;
 import com.AutoTrack.entity.Vehicles;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,7 +12,7 @@ public interface VehicleService  {
 
 
     //method to get all vehicle data
-    public List<Vehicles> getallvehiclesdata();
+    public List<VehicleDTO> getallvehiclesdata();
 
     public Resident getResidentByRegNum(String regNum);
 
