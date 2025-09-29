@@ -134,7 +134,7 @@ public class VisitorServiceImpl implements VisitorService {
     }
 
 
-    // method to update visitor
+
     // method to update visitor
     @Override
     public Visitor updateVisitor(int id, Visitor visitor) {
@@ -154,16 +154,25 @@ public class VisitorServiceImpl implements VisitorService {
         if (visitor.getVisitorType() != null) existingVisitor.setVisitorType(visitor.getVisitorType());
 
         VisitorDTO visitorDTO = new VisitorDTO();
-        // ✅ Update resident if provided
-        if (visitor.getResident() != null && visitor.getResident().getId() != 0) {
-            Resident res = residentRepo.findById(visitor.getResident().getId())
-                    .orElseThrow(() -> new NoSuchElementException("Resident not found"));
-            existingVisitor.setResident(res);
+
+        if (visitor.getResident() != null && existingVisitor.getResident() != null) {
+            Resident existingResident = existingVisitor.getResident();
+
+            if (visitor.getResident().getFirstname() != null) {
+                existingResident.setFirstname(visitor.getResident().getFirstname());
+            }
+            if (visitor.getResident().getLastname() != null) {
+                existingResident.setLastname(visitor.getResident().getLastname());
+            }
+
+            residentRepo.save(existingResident); // save changes to resident
         }
 
-  return visitorRepo.save(existingVisitor);
+
+        return visitorRepo.save(existingVisitor);
     }
 
+    //method to delete visitor
     @Override
     public Visitor deleteVisitor(int id) {
        Visitor visitor = visitorRepo.findById(id)
