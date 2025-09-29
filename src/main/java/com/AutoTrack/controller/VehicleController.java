@@ -1,6 +1,7 @@
 package com.AutoTrack.controller;
 
 import com.AutoTrack.Service.VehicleService;
+import com.AutoTrack.dtoClasses.VehicleDTO;
 import com.AutoTrack.entity.Resident;
 import com.AutoTrack.entity.Vehicles;
 import jakarta.validation.Valid;
@@ -35,9 +36,9 @@ public class VehicleController {
 
     // API to get alll vehicles data
     @GetMapping("/getallVehicles")
-    public ResponseEntity<List<Vehicles>> getallvehicles()
+    public ResponseEntity<List<VehicleDTO>> getallvehicles()
     {
-       List<Vehicles> vehiclesList1 =  vehicleService.getallvehiclesdata();
+       List<VehicleDTO> vehiclesList1 =  vehicleService.getallvehiclesdata();
        return new ResponseEntity<>(vehiclesList1, HttpStatus.OK);
 
     }
