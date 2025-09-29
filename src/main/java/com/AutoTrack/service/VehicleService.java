@@ -11,7 +11,7 @@ public interface VehicleService  {
 
 
     //method to get all vehicle data
-    public List<Vehicles> getallvehiclesdata(List<Vehicles> vehiclesList);
+    public List<Vehicles> getallvehiclesdata();
 
     public Resident getResidentByRegNum(String regNum);
 
