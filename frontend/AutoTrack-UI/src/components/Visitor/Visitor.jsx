@@ -3,10 +3,9 @@ import "./Visitor.css";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
-// import delete + update + add components
 import DeleteVisitor from "../deleteVisitor/DeleteVisitor";
 import UpdateVisitor from "../updateVisitor/UpdateVisitor";
-import AddVisitor from "./AddVisitor"; //
+import AddVisitor from "./AddVisitor";
 
 function Visitor() {
   const [visitors, setVisitors] = useState([]);
@@ -14,18 +13,12 @@ function Visitor() {
   const rowsPerPage = 7;
   const [toast, setToast] = useState("");
 
-  // state for update modal
   const [editingVisitor, setEditingVisitor] = useState(null);
   const [showUpdate, setShowUpdate] = useState(false);
 
-  // state for delete modal
   const [deletingVisitor, setDeletingVisitor] = useState(null);
-
-  // state for add visitor modal
   const [showAdd, setShowAdd] = useState(false);
 
-
-  // fetch all visitors
   useEffect(() => {
     fetchAllVisitors();
   }, []);
@@ -37,16 +30,10 @@ function Visitor() {
       .catch((err) => console.error("Error fetching visitors:", err));
   };
 
-  const handleVisitorAdded = (newVisitor) => {
-    setVisitors((prev) => [...prev, newVisitor]); // ✅ add visitor without reload
-  };
-
-  // pagination
   const startIndex = (page - 1) * rowsPerPage;
   const selectedVisitors = visitors.slice(startIndex, startIndex + rowsPerPage);
   const totalPages = Math.ceil(visitors.length / rowsPerPage);
 
-  // export to PDF
   const exportToPDF = () => {
     if (visitors.length === 0) {
       alert("No visitor data to export!");
@@ -97,14 +84,13 @@ function Visitor() {
 
   return (
     <div className="visitor-container">
-      <h2 className="visitor-title">Visitor List</h2>
+      <h2 className="visitor-title">👥 Visitor Management</h2>
 
       <div className="visitor-actions">
-        <button className="btn-export" onClick={exportToPDF}>
+        <button className="btn export-btn" onClick={exportToPDF}>
           Export to PDF
         </button>
-
-        <button className="btn-addVisitor" onClick={() => setShowAdd(true)}>
+        <button className="btn add-btn" onClick={() => setShowAdd(true)}>
           Add Visitor
         </button>
       </div>
@@ -128,7 +114,7 @@ function Visitor() {
         </thead>
         <tbody>
           {selectedVisitors.map((visitor) => (
-            <tr key={visitor.id}>
+            <tr key={visitor.id} className="visitor-row">
               <td>{visitor.id}</td>
               <td>{visitor.visitorName}</td>
               <td>{visitor.residentName || "N/A"}</td>
@@ -142,7 +128,7 @@ function Visitor() {
               <td>{visitor.visitorType}</td>
               <td className="actions-col">
                 <button
-                  className="btn-update"
+                  className="btn update-btn"
                   onClick={() => {
                     setEditingVisitor(visitor);
                     setShowUpdate(true);
@@ -151,7 +137,7 @@ function Visitor() {
                   Update
                 </button>
                 <button
-                  className="btn-delete"
+                  className="btn delete-btn"
                   onClick={() => setDeletingVisitor(visitor)}
                 >
                   Delete
@@ -176,23 +162,7 @@ function Visitor() {
       </div>
 
       {/* Toast */}
-      {toast && (
-        <div
-          style={{
-            position: "fixed",
-            bottom: "20px",
-            right: "20px",
-            backgroundColor: "#333",
-            color: "#fff",
-            padding: "12px 20px",
-            borderRadius: "6px",
-            boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
-            zIndex: 1000,
-          }}
-        >
-          {toast}
-        </div>
-      )}
+      {toast && <div className="toast">{toast}</div>}
 
       {/* DeleteVisitor modal */}
       {deletingVisitor && (
@@ -223,24 +193,12 @@ function Visitor() {
         />
       )}
 
-      {/* Auto reload after adding data */}
-      {showAdd && (
-        <AddVisitor
-          setToast={setToast}
-          onVisitorAdded={(newVisitor) => {
-            setVisitors((prev) => [newVisitor, ...prev]); // prepend new visitor
-          }}
-          onClose={() => setShowAdd(false)}
-        />
-      )}
-
-
       {/* AddVisitor modal */}
       {showAdd && (
         <AddVisitor
           setToast={setToast}
-          onAdded={(newVisitor) => {
-            setVisitors((prev) => [newVisitor, ...prev]); // prepend new visitor
+          onVisitorAdded={(newVisitor) => {
+            setVisitors((prev) => [newVisitor, ...prev]);
           }}
           onClose={() => setShowAdd(false)}
         />
