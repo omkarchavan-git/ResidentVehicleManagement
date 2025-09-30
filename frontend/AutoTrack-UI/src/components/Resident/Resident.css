@@ -42,18 +42,46 @@ table th:hover {
 /* =======================
    Table Rows
    ======================= */
-table td {
-  padding: 12px;
-  border: 1px dotted #686363;
-  background: #fff;
- 
-  transition: background-color 0.3s ease;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  font-family: "Poppins", Arial, sans-serif; /* modern font */
+  font-size: 16px; /* increased font size */
+  text-align: center; /* center align all text */
 }
 
-table tbody tr:hover {
-  background-color: #fbe9e7;
-  /* light orange tint */
+table td, table th {
+  padding: 14px;
+  border: 1px dotted #686363;
+  background: #fff;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+/* Header styling */
+table th {
+  background: #e65100;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Row hover effect */
+table tbody tr:hover {
+  background: linear-gradient(135deg, #ffe0cc, #fff5f0);
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+/* Smooth return */
+table tbody tr {
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
 
 /* =======================
    Action Buttons (inside table)
