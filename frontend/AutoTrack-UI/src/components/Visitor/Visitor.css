@@ -1,122 +1,171 @@
+/* Container with page-load animation */
 .visitor-container {
   padding: 20px;
-  font-family: Arial, sans-serif;
+  background: #f9fafb;
+  min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+  color: rgb(110, 109, 109);
+  animation: fadeInUp 0.6s ease-out; /* Page load transition */
 }
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Title */
 .visitor-title {
-  margin-bottom: 15px;
-  color: #e65100;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #222;
+  font-size: 26px;
+  font-weight: 600;
 }
 
+/* Actions bar */
 .visitor-actions {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 15px;
 }
 
-.btn-export {
-  padding: 6px 12px;
-  background: #e65100;
-  color: #fff;
+.btn {
+  padding: 8px 16px;
   border: none;
+  border-radius: 6px;
   cursor: pointer;
-  border-radius: 4px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  color: white;
 }
 
-.btn-export:hover {
-  background: #bf360c;
+.export-btn {
+  background: #3b82f6;
+}
+.add-btn {
+  background: #10b981;
+}
+.update-btn {
+  background: #f59e0b;
+}
+.delete-btn {
+  background: #ef4444;
 }
 
-.btn-addVisitor {
-  padding: 6px 12px;
-  background: #e65100;
-  color: #fff;
-  border: none;
-  margin-left: 10px;
-  cursor: pointer;
-  border-radius: 4px;
+.btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
 }
 
-.btn-addVisitor:hover{
-  background: #bf360c;
-}
-
+/* Table with vertical lines */
 .visitor-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 
 .visitor-table th,
 .visitor-table td {
-  border: 1px solid #999999;
-  padding: 8px;
+  padding: 10px 12px;
   text-align: center;
+  border-bottom: 1px solid #9b9b9b;
+  border-right: 1px solid #9b9b9b; /* Vertical lines */
 }
+
+  .visitor-table th:last-child,
+  .visitor-table td:last-child {
+    border-right: none;
+  }
 
 .visitor-table th {
-  background-color: #333;
-  color: rgb(172, 172, 172);
+  background: #ee6b24;
+  font-weight: 600;
+  color: #ffffff;
 }
 
-.actions-col button {
-  margin: 2px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  cursor: pointer;
-  border: none;
+/* Hover effect with transition */
+.visitor-row {
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-.btn-update {
-  background-color: #09d102be;
-  color: white;
+.visitor-row:hover {
+  background: #e5e7eb;
+  color: #000;
 }
 
-.btn-update:hover {
-  background-color: #04fd2d;
-}
-
-.btn-delete {
-  background-color: #d32f2f;
-  color: white;
-}
-
-.btn-delete:hover {
-  background-color: #9a0007;
-}
-
-.no-data {
-  text-align: center;
-  color: #888;
-}
-
+/* Pagination */
 .pagination {
-  margin-top: 20px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
 }
 
 .page-btn {
-  margin: 0 5px;
+  margin: 0 3px;
   padding: 6px 12px;
-  border: 1px solid #ccc;
-  background: #fff;
+  border: 1px solid #ddd;
+  background: white;
   cursor: pointer;
   border-radius: 4px;
-  color: black;
+  color: #000;
+  transition: background 0.2s ease;
 }
 
 .page-btn.active {
-  background-color: #e65100;
-  color: #fff;
-  border-color: #e65100;
+  background: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+  
 }
 
+.page-btn:hover {
+  background: #f3f4f6;
+}
+
+/* Toast Notification */
 .toast {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #333;
-  color: #bbbbbb;
+  background: #333;
+  color: white;
   padding: 12px 20px;
   border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body::-webkit-scrollbar {
+  display: none;  
+}
+
+.visitor-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  position: sticky;       
+  top: 70px;             
+  z-index: 10;           
+  background: #f9fafb;   
+  border-bottom: 1px solid #eee;
 }
