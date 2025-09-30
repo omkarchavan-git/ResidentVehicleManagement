@@ -4,12 +4,14 @@ import com.AutoTrack.Service.VehicleService;
 import com.AutoTrack.dtoClasses.VehicleDTO;
 import com.AutoTrack.entity.Resident;
 import com.AutoTrack.entity.Vehicles;
+import com.AutoTrack.exception.FieldMissingException;
 import com.AutoTrack.repository.ResidentRepo;
 import com.AutoTrack.repository.VehicleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -99,6 +101,15 @@ public class VehicleServiceImpl implements VehicleService {
 
 
         return vehiclrRepo.save(existingvehicles);
+    }
+
+    @Override
+    public Vehicles deletebyid(int id) {
+        Vehicles vehileUser = vehiclrRepo.findById(id)
+                .orElseThrow( ()-> new FieldMissingException("Vehicle with ID : " +id + " not foudn"));
+
+         vehiclrRepo.deleteAllById(Collections.singleton(id));
+         return null;
     }
 
 
