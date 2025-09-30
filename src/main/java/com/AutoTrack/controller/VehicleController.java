@@ -34,7 +34,7 @@ public class VehicleController {
         }
     }
 
-    // API to get alll vehicles data
+    // API to get all vehicles data
     @GetMapping("/getallVehicles")
     public ResponseEntity<List<VehicleDTO>> getallvehicles()
     {

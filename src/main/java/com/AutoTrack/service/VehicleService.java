@@ -22,5 +22,8 @@ public interface VehicleService  {
     //method to update vehicle data
     public Vehicles updatevehicle(int id, Vehicles vehicles);
 
+    //method to delete vehicle by id
+    public Vehicles deletebyid(int id);
+
 
 }
