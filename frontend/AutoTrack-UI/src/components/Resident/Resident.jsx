@@ -77,31 +77,7 @@ function Resident() {
     setResidents(residents.filter((r) => r.id !== id));
   };
 
-  // const [toast, setToast] = useState("");
-
-  // const handleDelete = async (id) => {
-  //   const confirmDelete = window.confirm("Are you sure you want to delete this resident?");
-  //   if (!confirmDelete) return;
-
-  //   try {
-  //     const response = await fetch(`http://localhost:8085/Resident/deleteResidentById/${id}`, {
-  //       method: "DELETE",
-  //     });
-
-  //     if (response.ok) {
-  //       alert("Resident deleted successfully!");
-  //       // Remove deleted resident from state to refresh table
-  //       setResidents(residents.filter(resident => resident.id !== id));
-  //     } else {
-  //       const errorText = await response.text();
-  //       alert("Failed to delete: " + errorText);
-  //     }
-  //   } catch (error) {
-  //     alert("Error connecting to server!");
-  //     console.error(error);
-  //   }
-  // };
-
+ 
   // export to pdf functionalityt
   const exportToPDF = () => {
     if (residents.length === 0) {
@@ -146,12 +122,12 @@ function Resident() {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Resident List</h2>
+    <div style={{ padding: "20px" }} className="residentContainer">
+      <h2 className="heading">Resident List</h2>
 
       {/* Search Bar */}
 
-      <div style={{ marginBottom: "20px" }}>
+      <div style={{ marginBottom: "20px" }} className="searchBar">
         <input
           type="text"
           placeholder="First Name"
@@ -166,15 +142,9 @@ function Resident() {
           onChange={(e) => setLastname(e.target.value)}
           style={{ marginRight: "10px", padding: "6px" }}
         />
-        <button
+        <button className="searchButton"
           onClick={handleSearch}
-          style={{
-            padding: "6px 12px",
-            background: "#e65100",
-            color: "#fff",
-            border: "none",
-            cursor: "pointer",
-          }}
+         
         >
           Search
         </button>
@@ -184,14 +154,7 @@ function Resident() {
             setLastname("");
             fetchAllResidents();
           }}
-          style={{
-            padding: "6px 12px",
-            marginLeft: "10px",
-            background: "#555",
-            color: "#fff",
-            border: "none",
-            cursor: "pointer",
-          }}
+          
         >
           Reset
         </button>
@@ -246,13 +209,7 @@ function Resident() {
                 <td>{resident.residentType}</td>
                 <td>{resident.parkinglot || "N/A"}</td>
                 <td>
-                  {/* <button className="update-btn" onClick={() => console.log("Update", resident.id)}>Update</button>
-                  <button
-                    className="delete-btn"
-                    onClick={() => handleDelete(resident.id)}
-                  >
-                    Delete
-                  </button> */}
+                   
 
                   <button
                     className="update-btn"
