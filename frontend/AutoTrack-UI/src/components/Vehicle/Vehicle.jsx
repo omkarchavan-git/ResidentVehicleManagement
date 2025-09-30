@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "./Vehicle.css";
 import UpdateVehicle from "./UpdateVehicle";
+import AddVehicle from "./AddVehicle"; // new component
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 function Vehicle() {
   const [vehicles, setVehicles] = useState([]);
+  const [filteredVehicles, setFilteredVehicles] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
   const [showToast, setShowToast] = useState(false);
 
@@ -16,6 +22,7 @@ function Vehicle() {
       if (!res.ok) throw new Error("Failed to fetch vehicles");
       const data = await res.json();
       setVehicles(data);
+      setFilteredVehicles(data);
     } catch (err) {
       console.error("Error fetching vehicles:", err);
       showToastMsg("Failed to load vehicles ❌");
@@ -51,7 +58,6 @@ function Vehicle() {
 
   // Open modal for editing
   const handleUpdate = (vehicle) => {
-    // clone to avoid mutating original list while editing
     setSelectedVehicle({ ...vehicle });
     setShowModal(true);
   };
@@ -64,7 +70,6 @@ function Vehicle() {
     if (type === "checkbox") {
       newValue = checked;
     } else if (type === "datetime-local") {
-      // convert local datetime-local value (YYYY-MM-DDTHH:mm) -> ISO string
       newValue = value ? new Date(value).toISOString() : null;
     } else {
       newValue = value;
@@ -76,29 +81,22 @@ function Vehicle() {
     }));
   };
 
-  // Save updated vehicle.
-  // Accepts optional vehicle override to avoid any state race between toggle and immediate save.
+  // Save updated vehicle
   const handleSave = async (vehicleOverride) => {
     const vehicleToSave = vehicleOverride || selectedVehicle;
     if (!vehicleToSave) return;
 
-    // Build the payload: send booleans and ISO datetimes
     const bodyData = {
       regNum: vehicleToSave.regNum ?? null,
       vehName: vehicleToSave.vehName ?? null,
       color: vehicleToSave.color ?? null,
       vehicleType: vehicleToSave.vehicleType ?? null,
-      // ensure ISO strings or null
       intime: vehicleToSave.intime ? new Date(vehicleToSave.intime).toISOString() : null,
       outtime: vehicleToSave.outtime ? new Date(vehicleToSave.outtime).toISOString() : null,
-      // resident: prefer resident.id if present; keep residentName as-is
       resident: vehicleToSave.resident?.id ? { id: vehicleToSave.resident.id } : null,
       residentName: vehicleToSave.residentName ?? null,
-      // ensure boolean
       vehActive: !!vehicleToSave.vehActive,
     };
-
-    console.log("PATCH payload ->", bodyData);
 
     try {
       const res = await fetch(
@@ -113,15 +111,8 @@ function Vehicle() {
         }
       );
 
-      // helpful verbose error capture
-      if (!res.ok) {
-        const text = await res.text().catch(() => "");
-        throw new Error(`Server responded ${res.status}: ${text}`);
-      }
-
-      const updated = await res.json().catch(() => null);
-      console.log("PATCH response ->", updated);
-
+      if (!res.ok) throw new Error("Update failed");
+      await res.json();
       setShowModal(false);
       showToastMsg("Vehicle updated successfully ✅");
       fetchVehicles();
@@ -131,12 +122,64 @@ function Vehicle() {
     }
   };
 
+  // 🔹 Search filter
+  const handleSearch = () => {
+    const term = searchTerm.toLowerCase();
+    const filtered = vehicles.filter(
+      (v) =>
+        v.regNum.toLowerCase().includes(term) ||
+        v.vehName.toLowerCase().includes(term) ||
+        v.color.toLowerCase().includes(term) ||
+        (v.residentName && v.residentName.toLowerCase().includes(term))
+    );
+    setFilteredVehicles(filtered);
+  };
+
+  const handleReset = () => {
+    setSearchTerm("");
+    setFilteredVehicles(vehicles);
+  };
+
+  // 🔹 Export to PDF
+  const exportToPDF = () => {
+    const doc = new jsPDF();
+    doc.text("Vehicle Report", 14, 15);
+    doc.autoTable({
+      head: [["ID", "Reg. Number", "Name", "Color", "Type", "Resident", "Active"]],
+      body: filteredVehicles.map((v) => [
+        v.id,
+        v.regNum,
+        v.vehName,
+        v.color,
+        v.vehicleType,
+        v.residentName || (v.resident ? `${v.resident.firstname} ${v.resident.lastname}` : "N/A"),
+        v.vehActive ? "Yes" : "No",
+      ]),
+    });
+    doc.save("vehicles.pdf");
+  };
+
   return (
     <div className="vehicle-container">
       <h2 className="vehicle-title">🚗 Vehicle Management</h2>
 
       {showToast && <div className="toast">{toastMsg}</div>}
 
+      {/* 🔹 Toolbar */}
+      <div className="toolbar">
+        <input
+          type="text"
+          placeholder="Search vehicles..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button onClick={handleSearch}>Search</button>
+        <button onClick={handleReset}>Reset</button>
+        <button onClick={exportToPDF}>Export to PDF</button>
+        <button onClick={() => setShowAddModal(true)}>+ Add Vehicle</button>
+      </div>
+
+      {/* Table */}
       <table className="vehicle-table">
         <thead>
           <tr>
@@ -153,7 +196,7 @@ function Vehicle() {
           </tr>
         </thead>
         <tbody>
-          {vehicles.map((vehicle) => (
+          {filteredVehicles.map((vehicle) => (
             <tr key={vehicle.id} className="vehicle-row">
               <td>{vehicle.id}</td>
               <td>{vehicle.regNum}</td>
@@ -183,15 +226,18 @@ function Vehicle() {
         </tbody>
       </table>
 
+      {/* Update Modal */}
       {showModal && (
         <UpdateVehicle
           selectedVehicle={selectedVehicle}
           handleChange={handleChange}
-          // pass handleSave so UpdateVehicle can send the current modal values directly
           handleSave={handleSave}
           handleCancel={() => setShowModal(false)}
         />
       )}
+
+      {/* Add Modal */}
+      {showAddModal && <AddVehicle handleCancel={() => setShowAddModal(false)} />}
     </div>
   );
 }
