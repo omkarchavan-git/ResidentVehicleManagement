@@ -46,7 +46,6 @@
 
 .modal {
   background: white;
-  
   padding: 25px;
   border-radius: 12px;
   width: 400px;
@@ -181,4 +180,13 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+.toolbar button{
+  margin: 5px;
+}
+.toolbar input{
+  margin: 5px;
+  padding: 8px;
+  background-color: #f8f9fa;
+  border-radius: 20px;
 }
