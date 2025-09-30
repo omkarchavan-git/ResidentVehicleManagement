@@ -9,82 +9,134 @@ function Vehicle() {
   const [toastMsg, setToastMsg] = useState("");
   const [showToast, setShowToast] = useState(false);
 
-  // ✅ Fetch vehicle data
-  const fetchVehicles = () => {
-    fetch("http://localhost:8085/vehicle/getallVehicles")
-      .then((res) => res.json())
-      .then((data) => setVehicles(data))
-      .catch((err) => console.error("Error fetching vehicles:", err));
+  // Fetch vehicles
+  const fetchVehicles = async () => {
+    try {
+      const res = await fetch("http://localhost:8085/vehicle/getallVehicles");
+      if (!res.ok) throw new Error("Failed to fetch vehicles");
+      const data = await res.json();
+      setVehicles(data);
+    } catch (err) {
+      console.error("Error fetching vehicles:", err);
+      showToastMsg("Failed to load vehicles ❌");
+    }
   };
 
   useEffect(() => {
     fetchVehicles();
   }, []);
 
-  // ✅ Toast helper
+  // Toast helper
   const showToastMsg = (message) => {
     setToastMsg(message);
     setShowToast(true);
     setTimeout(() => setShowToast(false), 3000);
   };
 
-  // ✅ Delete vehicle
-  const handleDelete = (id) => {
-    if (window.confirm("Are you sure you want to delete this vehicle?")) {
-      fetch(`http://localhost:8085/vehicle/vehicles/${id}`, { method: "DELETE" })
-        .then(() => {
-          showToastMsg("Vehicle deleted successfully ✅");
-          fetchVehicles();
-        })
-        .catch((err) => console.error("Error deleting vehicle:", err));
+  // Delete vehicle
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this vehicle?")) return;
+    try {
+      const res = await fetch(`http://localhost:8085/vehicle/vehicles/${id}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) throw new Error("Delete failed");
+      showToastMsg("Vehicle deleted successfully ✅");
+      fetchVehicles();
+    } catch (err) {
+      console.error("Error deleting vehicle:", err);
+      showToastMsg("Delete failed ❌");
     }
   };
 
-  // ✅ Open update modal
+  // Open modal for editing
   const handleUpdate = (vehicle) => {
+    // clone to avoid mutating original list while editing
     setSelectedVehicle({ ...vehicle });
     setShowModal(true);
   };
 
-  // ✅ Handle form input change
+  // Handle form input changes from UpdateVehicle
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+    let newValue;
+
+    if (type === "checkbox") {
+      newValue = checked;
+    } else if (type === "datetime-local") {
+      // convert local datetime-local value (YYYY-MM-DDTHH:mm) -> ISO string
+      newValue = value ? new Date(value).toISOString() : null;
+    } else {
+      newValue = value;
+    }
+
     setSelectedVehicle((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: newValue,
     }));
   };
 
-  // ✅ Save updated vehicle
-  const handleSave = () => {
-    // Prepare data: send only resident id if nested
+  // Save updated vehicle.
+  // Accepts optional vehicle override to avoid any state race between toggle and immediate save.
+  const handleSave = async (vehicleOverride) => {
+    const vehicleToSave = vehicleOverride || selectedVehicle;
+    if (!vehicleToSave) return;
+
+    // Build the payload: send booleans and ISO datetimes
     const bodyData = {
-      ...selectedVehicle,
-      resident: selectedVehicle.resident?.id ? { id: selectedVehicle.resident.id } : null,
+      regNum: vehicleToSave.regNum ?? null,
+      vehName: vehicleToSave.vehName ?? null,
+      color: vehicleToSave.color ?? null,
+      vehicleType: vehicleToSave.vehicleType ?? null,
+      // ensure ISO strings or null
+      intime: vehicleToSave.intime ? new Date(vehicleToSave.intime).toISOString() : null,
+      outtime: vehicleToSave.outtime ? new Date(vehicleToSave.outtime).toISOString() : null,
+      // resident: prefer resident.id if present; keep residentName as-is
+      resident: vehicleToSave.resident?.id ? { id: vehicleToSave.resident.id } : null,
+      residentName: vehicleToSave.residentName ?? null,
+      // ensure boolean
+      vehActive: !!vehicleToSave.vehActive,
     };
 
-    fetch(`http://localhost:8085/vehicle/updateVehicleById/${selectedVehicle.id}`, {
-      method: "PATCH", // ✅ use PATCH since backend is @PatchMapping
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(bodyData),
-    })
-      .then((res) => res.json())
-      .then(() => {
-        setShowModal(false);
-        showToastMsg("Vehicle updated successfully ✅");
-        fetchVehicles();
-      })
-      .catch((err) => console.error("Error updating vehicle:", err));
+    console.log("PATCH payload ->", bodyData);
+
+    try {
+      const res = await fetch(
+        `http://localhost:8085/vehicle/updateVehicleById/${vehicleToSave.id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(bodyData),
+        }
+      );
+
+      // helpful verbose error capture
+      if (!res.ok) {
+        const text = await res.text().catch(() => "");
+        throw new Error(`Server responded ${res.status}: ${text}`);
+      }
+
+      const updated = await res.json().catch(() => null);
+      console.log("PATCH response ->", updated);
+
+      setShowModal(false);
+      showToastMsg("Vehicle updated successfully ✅");
+      fetchVehicles();
+    } catch (err) {
+      console.error("Error updating vehicle:", err);
+      showToastMsg("Update failed ❌ (see console/network tab)");
+    }
   };
 
   return (
     <div className="vehicle-container">
       <h2 className="vehicle-title">🚗 Vehicle Management</h2>
 
-      {/* Toast Notification */}
       {showToast && <div className="toast">{toastMsg}</div>}
 
-      {/* Vehicle Table */}
       <table className="vehicle-table">
         <thead>
           <tr>
@@ -131,11 +183,11 @@ function Vehicle() {
         </tbody>
       </table>
 
-      {/* Update Modal */}
       {showModal && (
         <UpdateVehicle
           selectedVehicle={selectedVehicle}
           handleChange={handleChange}
+          // pass handleSave so UpdateVehicle can send the current modal values directly
           handleSave={handleSave}
           handleCancel={() => setShowModal(false)}
         />
