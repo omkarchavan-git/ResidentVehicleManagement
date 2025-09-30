@@ -63,4 +63,13 @@ public class VehicleController {
         Vehicles updatedVehicle =  vehicleService.updatevehicle(id, vehicles);
         return new ResponseEntity<>(updatedVehicle,HttpStatus.OK);
     }
+
+    //api to delete
+    @DeleteMapping("/deletevehiclebyid/{id}")
+    public ResponseEntity<Vehicles> deletebyid(@PathVariable("id") int id)
+    {
+        Vehicles deletedVehicle = vehicleService.deletebyid(id);
+        return new ResponseEntity<>(deletedVehicle,HttpStatus.OK);
+
+    }
 }
