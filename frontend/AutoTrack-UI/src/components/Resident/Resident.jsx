@@ -199,7 +199,7 @@ function Resident() {
         <tbody>
           {selectedResidents.length > 0 ? (
             selectedResidents.map((resident) => (
-              <tr key={resident.id}>
+              <tr key={resident.id} >
                 <td>{resident.id}</td>
                 <td>{resident.contactno}</td>
                 <td>{resident.email}</td>
