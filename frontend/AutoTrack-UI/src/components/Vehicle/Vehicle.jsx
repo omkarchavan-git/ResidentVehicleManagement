@@ -37,7 +37,7 @@ function Vehicle() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this vehicle?")) return;
     try {
-      const res = await fetch(`http://localhost:8085/vehicle/vehicles/${id}`, {
+      const res = await fetch(`http://localhost:8085/vehicle/deletevehiclebyid/${id}`, {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Delete failed");
