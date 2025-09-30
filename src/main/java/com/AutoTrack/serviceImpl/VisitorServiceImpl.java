@@ -114,6 +114,7 @@ public class VisitorServiceImpl implements VisitorService {
 
         return visitorList.stream().map(visitor -> {
             VisitorDTO dto = new VisitorDTO();
+
             dto.setId(visitor.getId());
             dto.setVisitorName(visitor.getVisitorName());
             dto.setVehicleName(visitor.getVehicleName());
