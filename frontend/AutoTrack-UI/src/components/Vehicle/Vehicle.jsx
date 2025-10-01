@@ -6,6 +6,9 @@ import AddVehicle from "./AddVehicle";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
+ 
+
+
 
 function Vehicle() {
   const [vehicles, setVehicles] = useState([]);
@@ -144,36 +147,44 @@ function Vehicle() {
 
 
   // 🔹 Export to PDF
-  const exportToPDF = () => {
-    try {
-      const doc = new jsPDF();
-      doc.text("Vehicle Report", 14, 15);
+const exportToPDF = () => {
+  try {
+    const doc = new jsPDF();
 
-      // ✅ Use imported autoTable
-      autoTable(doc, {
-        startY: 25,
-        head: [["ID", "Reg. Number", "Name", "Color", "Type", "Resident", "Active"]],
-        body: filteredVehicles.map((v) => [
-          v.id,
-          v.regNum,
-          v.vehName,
-          v.color,
-          v.vehicleType,
-          v.residentName || (v.resident ? `${v.resident.firstname} ${v.resident.lastname}` : "N/A"),
-          v.vehActive ? "Yes" : "No",
-        ]),
-      });
+    // 🔹 If logo exists later,  
+    // doc.addImage("/logo.png", "PNG", 10, 5, 30, 30);
 
-      // ✅ Filename with date
-      const date = new Date();
-      const formattedDate = date.toISOString().split("T")[0]; // yyyy-mm-dd
-      const fileName = `vehicleData-${formattedDate}.pdf`;
+    // 🔹 Add Title text
+    doc.setFontSize(18);
+    doc.text("Vehicle Report", 14, 20);
 
-      doc.save(fileName);
-    } catch (error) {
-      console.error("Error exporting PDF:", error);
-    }
-  };
+    // 🔹 Build table below title
+    autoTable(doc, {
+      startY: 30, // keep space for logo later
+      head: [["ID", "Reg. Number", "Name", "Color", "Type", "Resident", "Active"]],
+      body: filteredVehicles.map((v) => [
+        v.id,
+        v.regNum,
+        v.vehName,
+        v.color,
+        v.vehicleType,
+        v.residentName || (v.resident ? `${v.resident.firstname} ${v.resident.lastname}` : "N/A"),
+        v.vehActive ? "Yes" : "No",
+      ]),
+    });
+
+    // 🔹 Add timestamp footer
+    const date = new Date();
+    const formattedDate = date.toLocaleString();
+    doc.setFontSize(10);
+    doc.text(`Generated on: ${formattedDate}`, 14, doc.internal.pageSize.height - 10);
+
+    // 🔹 Save file
+    doc.save(`vehicleData-${date.toISOString().split("T")[0]}.pdf`);
+  } catch (error) {
+    console.error("Error exporting PDF:", error);
+  }
+};
 
 
 
