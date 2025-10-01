@@ -37,7 +37,7 @@ function AddVehicle({ handleCancel }) {
     return (
         <div className={`modal show`}>
             <div className="modal-content">
-                <h3>➕ Add New Vehicle</h3>
+                <h3> Add New Vehicle</h3>
                 <form onSubmit={handleSubmit}>
                     <label>Registration Number:</label>
                     <input type="text" name="regNum" value={formData.regNum} onChange={handleChange} required />
