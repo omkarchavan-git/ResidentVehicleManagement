@@ -7,8 +7,6 @@ function AddVehicle({ handleCancel }) {
     vehName: "",
     color: "",
     vehicleType: "",
-    residentName: "",
-    meetResident: "",
     vehActive: true, // default Yes
   });
 
@@ -65,12 +63,7 @@ function AddVehicle({ handleCancel }) {
             <option value="SCOOTER">Scooter</option>
           </select>
 
-          <label>Resident Name:</label>
-          <input type="text" name="residentName" value={formData.residentName} onChange={handleChange} required />
-
-          <label>Resident to Meet:</label>
-          <input type="text" name="meetResident" value={formData.meetResident} onChange={handleChange} />
-
+          
           {/* Radio buttons for Active */}
           <label>Is Vehicle Active?</label>
           <div className="radio-group">
