@@ -17,12 +17,14 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
+
 public class VehicleServiceImpl implements VehicleService {
 
     @Autowired
     private VehicleRepo vehiclrRepo;
 
     @Autowired
+
     private ResidentRepo residentRepo;
 
     @Override
@@ -60,10 +62,9 @@ public class VehicleServiceImpl implements VehicleService {
 
 
     @Override
-    public Vehicles createVehicle(Vehicles vehicles, int residentId) {
+    public Vehicles createVehicle(Vehicles vehicles) {
 
-            Resident resident =  residentRepo.findById(residentId)
-                    .orElseThrow( () -> new IllegalArgumentException("Resident not found with id : " + residentId));
+            Resident resident = null;
 
             // validate reg num
             if (vehicles.getRegNum() == null || vehicles.getRegNum().trim().isEmpty())
