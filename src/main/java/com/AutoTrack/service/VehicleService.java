@@ -17,7 +17,7 @@ public interface VehicleService  {
     public Resident getResidentByRegNum(String regNum);
 
     // method to add vehicle with resident
-    public Vehicles createVehicle (Vehicles vehicles, int residentId);
+    public Vehicles createVehicle (Vehicles vehicles);
 
     //method to update vehicle data
     public Vehicles updatevehicle(int id, Vehicles vehicles);
