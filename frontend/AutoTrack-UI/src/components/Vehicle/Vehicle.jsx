@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Vehicle.css";
 import UpdateVehicle from "./UpdateVehicle";
-import AddVehicle from "./AddVehicle"; // new component
+import AddVehicle from "./AddVehicle";
+
 import jsPDF from "jspdf";
-import "jspdf-autotable";
+import autoTable from "jspdf-autotable";
+
 
 function Vehicle() {
   const [vehicles, setVehicles] = useState([]);
@@ -140,24 +142,40 @@ function Vehicle() {
     setFilteredVehicles(vehicles);
   };
 
+
   // 🔹 Export to PDF
   const exportToPDF = () => {
-    const doc = new jsPDF();
-    doc.text("Vehicle Report", 14, 15);
-    doc.autoTable({
-      head: [["ID", "Reg. Number", "Name", "Color", "Type", "Resident", "Active"]],
-      body: filteredVehicles.map((v) => [
-        v.id,
-        v.regNum,
-        v.vehName,
-        v.color,
-        v.vehicleType,
-        v.residentName || (v.resident ? `${v.resident.firstname} ${v.resident.lastname}` : "N/A"),
-        v.vehActive ? "Yes" : "No",
-      ]),
-    });
-    doc.save("vehicles.pdf");
+    try {
+      const doc = new jsPDF();
+      doc.text("Vehicle Report", 14, 15);
+
+      // ✅ Use imported autoTable
+      autoTable(doc, {
+        startY: 25,
+        head: [["ID", "Reg. Number", "Name", "Color", "Type", "Resident", "Active"]],
+        body: filteredVehicles.map((v) => [
+          v.id,
+          v.regNum,
+          v.vehName,
+          v.color,
+          v.vehicleType,
+          v.residentName || (v.resident ? `${v.resident.firstname} ${v.resident.lastname}` : "N/A"),
+          v.vehActive ? "Yes" : "No",
+        ]),
+      });
+
+      // ✅ Filename with date
+      const date = new Date();
+      const formattedDate = date.toISOString().split("T")[0]; // yyyy-mm-dd
+      const fileName = `vehicleData-${formattedDate}.pdf`;
+
+      doc.save(fileName);
+    } catch (error) {
+      console.error("Error exporting PDF:", error);
+    }
   };
+
+
 
   return (
     <div className="vehicle-container">
@@ -207,8 +225,8 @@ function Vehicle() {
                 {vehicle.residentName
                   ? vehicle.residentName
                   : vehicle.resident
-                  ? `${vehicle.resident.firstname} ${vehicle.resident.lastname}`
-                  : "N/A"}
+                    ? `${vehicle.resident.firstname} ${vehicle.resident.lastname}`
+                    : "N/A"}
               </td>
               <td>{vehicle.vehActive ? "Yes ✅" : "No ❌"}</td>
               <td>{vehicle.intime ? new Date(vehicle.intime).toLocaleString() : "—"}</td>
