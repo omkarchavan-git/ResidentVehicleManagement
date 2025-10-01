@@ -23,11 +23,10 @@ public class VehicleController {
 
     // API to add vehicle data with resident
     @PostMapping("/addVehicle")
-    public ResponseEntity<?> addVehicle (@Valid @RequestBody Vehicles vehicles,
-                                         @RequestParam int residentId)
+    public ResponseEntity<?> addVehicle (@Valid @RequestBody Vehicles vehicles)
     {
         try {
-            Vehicles savedVehicle = vehicleService.createVehicle(vehicles, residentId);
+            Vehicles savedVehicle = vehicleService.createVehicle(vehicles);
             return new ResponseEntity<>(savedVehicle, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
