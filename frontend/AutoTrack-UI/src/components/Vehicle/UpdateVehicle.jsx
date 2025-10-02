@@ -14,10 +14,13 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
 
   return (
     <div className="modal-overlay">
+          <div className="formtitle">
+            <h3 className="">Update Vehicle</h3>
+          </div>
       <div className="modal update-vehicle-modal">
-        <h3 className="modal-title">Update Vehicle</h3>
-        <form className="form-grid" onSubmit={(e) => e.preventDefault()}>
           {/* Row 1 */}
+        <form className="form-grid" onSubmit={(e) => e.preventDefault()}>
+
           <div className="form-group-row">
             <label>Registration Number:</label>
             <input
@@ -121,16 +124,16 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
               </label>
             </div>
           </div>
+          <div className="form-actions">
+            <button className="btn update-btn" onClick={() => handleSave(selectedVehicle)}>
+              Save
+            </button>
+            <button className="btn cancel-btn" onClick={handleCancel}>
+              Cancel
+            </button>
+          </div>
         </form>
 
-        <div className="form-actions">
-          <button className="btn update-btn" onClick={() => handleSave(selectedVehicle)}>
-            Save
-          </button>
-          <button className="btn cancel-btn" onClick={handleCancel}>
-            Cancel
-          </button>
-        </div>
       </div>
     </div>
   );
