@@ -88,8 +88,8 @@ public class VehicleServiceImpl implements VehicleService {
         if (vehicles.getRegNum() != null) existingvehicles.setRegNum(vehicles.getRegNum());
         if (vehicles.getVehicleType() != null) existingvehicles.setVehicleType(vehicles.getVehicleType());
         if (vehicles.getColor() != null) existingvehicles.setColor(vehicles.getColor());
-        if (vehicles.getIntime() != null) existingvehicles.setIntime(vehicles.getIntime());
-        if (vehicles.getOuttime() != null) existingvehicles.setOuttime(vehicles.getOuttime());
+       existingvehicles.setIntime(vehicles.getIntime());
+      existingvehicles.setOuttime(vehicles.getOuttime());
         if (vehicles.getResident() != null) existingvehicles.setResident(vehicles.getResident());
 
         //to update the resident as well
