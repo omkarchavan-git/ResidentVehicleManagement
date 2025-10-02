@@ -1,0 +1,35 @@
+.form-grid{
+background-color: rgb(175, 189, 201);
+border: 2px solid black;
+
+padding: 30px;
+border-radius: 20px;
+}
+.modal-overlay{
+  display: block;
+}
+
+.modal-title{
+  display: block;
+}
+.formtitle h3{
+  display: block;
+  font-size: 30px;
+  color: rgb(255, 106, 6);
+}
+.form-group-row input{
+  background-color: aliceblue;
+  color: black;
+}
+ 
+/* Force show the calendar/clock icon properly */
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  opacity: 1 !important;
+  display: block !important;
+  filter: invert(1) brightness(0) !important; /* force black */
+  background-color: transparent !important;
+  cursor: pointer;
+}
+
+
+
