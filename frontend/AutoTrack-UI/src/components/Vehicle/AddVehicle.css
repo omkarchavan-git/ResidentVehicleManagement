@@ -35,6 +35,8 @@ body.modal-open {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 15px 20px; /* row gap, column gap */
+  background-color: #ffffff;
+  border: none;
 }
 
 /* Label above input, left aligned */
@@ -53,7 +55,7 @@ body.modal-open {
   padding: 8px 10px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  background-color: #fff;
+  background-color: #ffffff;
   color: #000;
   font-size: 14px;
   box-sizing: border-box;
