@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Vehicle.css";
-import UpdateVehicle from "./UpdateVehicle";
-import AddVehicle from "./AddVehicle";
+import UpdateVehicle from "./updateVehicle/UpdateVehicle";
+import AddVehicle from "./addVehicle/AddVehicle";
 
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
