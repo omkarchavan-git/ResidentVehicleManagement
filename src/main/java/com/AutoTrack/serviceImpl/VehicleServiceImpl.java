@@ -53,10 +53,8 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public Resident getResidentByRegNum(String regNum) {
-
         Vehicles vehicle = vehiclrRepo.findByRegNum(regNum)
                 .orElseThrow(() -> new RuntimeException("Vehicle not found with registration number: " + regNum));
-
         return vehicle.getResident();
     }
 
@@ -80,6 +78,7 @@ public class VehicleServiceImpl implements VehicleService {
 
     }
 
+    //update vehicle
     @Override
     public Vehicles updatevehicle(int id, Vehicles vehicles) {
 
