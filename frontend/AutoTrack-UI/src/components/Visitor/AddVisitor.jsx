@@ -28,7 +28,7 @@ const AddVisitor = ({ onClose, onVisitorAdded, setToast }) => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     ...formData,
-                    resident: { id: formData.residentId } // ✅ link with resident
+                    resident: { id: formData.residentId } 
                 }),
             });
 
