@@ -80,7 +80,7 @@ public class Vehicles {
     }
 
     public void setRegNum(String regNum) {
-        this.regNum = regNum;
+        this.regNum = regNum.toUpperCase();
     }
 
     public boolean isVehActive() {
