@@ -77,7 +77,7 @@ function Resident() {
     setResidents(residents.filter((r) => r.id !== id));
   };
 
- 
+
   // export to pdf functionalityt
   const exportToPDF = () => {
     if (residents.length === 0) {
@@ -144,7 +144,7 @@ function Resident() {
         />
         <button className="searchButton"
           onClick={handleSearch}
-         
+
         >
           Search
         </button>
@@ -154,7 +154,7 @@ function Resident() {
             setLastname("");
             fetchAllResidents();
           }}
-          
+
         >
           Reset
         </button>
@@ -178,11 +178,7 @@ function Resident() {
       </div>
 
       {/* Table */}
-      <table
-        border="1"
-        cellPadding="8"
-        style={{ width: "100%", marginTop: "15px" }}
-      >
+      <table>
         <thead>
           <tr>
             <th>ID</th>
@@ -209,7 +205,15 @@ function Resident() {
                 <td>{resident.residentType}</td>
                 <td>{resident.parkinglot || "N/A"}</td>
                 <td>
-                   
+                  <button
+                    className="add-btn"
+                    onClick={() => {
+                      setEditingResident(resident);
+                      setShowUpdate(true);
+                    }}
+                  >
+                    Add
+                  </button>
 
                   <button
                     className="update-btn"

@@ -98,6 +98,11 @@ table button.delete-btn {
   margin-right: 6px;
 }
 
+/* add button */
+table button.add-btn {
+  background: #1d86e7;
+  margin-right: 15px;
+}
 /* Update button */
 table button.update-btn {
   background: #4CAF50;
@@ -107,6 +112,8 @@ table button.update-btn:hover {
   background: #388e3c;
   transform: scale(1.08);
 }
+
+
 
 /* Delete button */
 table button.delete-btn {
@@ -149,7 +156,7 @@ div button:hover {
 .residentContainer {
   background-color: #fff;
   border-radius: 10px;
-  border: 2px solid black;
+  border: 2px solid rgb(0, 0, 0);
 }
 
 /* Search bar */
