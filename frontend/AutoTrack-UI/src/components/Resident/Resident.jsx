@@ -123,58 +123,60 @@ function Resident() {
 
   return (
     <div style={{ padding: "20px" }} className="residentContainer">
-      <h2 className="heading">Resident List</h2>
 
-      {/* Search Bar */}
 
-      <div style={{ marginBottom: "20px" }} className="searchBar">
-        <input
-          type="text"
-          placeholder="First Name"
-          value={firstname}
-          onChange={(e) => setFirstname(e.target.value)}
-          style={{ marginRight: "10px", padding: "6px" }}
-        />
-        <input
-          type="text"
-          placeholder="Last Name"
-          value={lastname}
-          onChange={(e) => setLastname(e.target.value)}
-          style={{ marginRight: "10px", padding: "6px" }}
-        />
-        <button className="searchButton"
-          onClick={handleSearch}
+      <div className="headingPanel">
 
-        >
-          Search
-        </button>
-        <button
-          onClick={() => {
-            setFirstname("");
-            setLastname("");
-            fetchAllResidents();
-          }}
+        <h2 className="heading">Resident List</h2>
+        {/* Search Bar */}
+        <div style={{ marginBottom: "20px" }} className="searchBar">
+          <input
+            type="text"
+            placeholder="First Name"
+            value={firstname}
+            onChange={(e) => setFirstname(e.target.value)}
+            style={{ marginRight: "10px", padding: "6px" }}
+          />
+          <input
+            type="text"
+            placeholder="Last Name"
+            value={lastname}
+            onChange={(e) => setLastname(e.target.value)}
+            style={{ marginRight: "10px", padding: "6px" }}
+          />
+          <button className="searchButton"
+            onClick={handleSearch}
 
-        >
-          Reset
-        </button>
+          >
+            Search
+          </button>
+          <button
+            onClick={() => {
+              setFirstname("");
+              setLastname("");
+              fetchAllResidents();
+            }}
+          >
+            Reset
+          </button>
 
-        {/* Export to pdf button */}
+          {/* Export to pdf button */}
 
-        <button
-          onClick={exportToPDF}
-          style={{
-            padding: "6px 12px",
-            margin: "10px",
-            marginRight: "10px",
-            background: "#e65100",
-            color: "#fff",
-            border: "none",
-            cursor: "pointer",
-          }}
-        >
-          Export to PDF
-        </button>
+          <button
+            onClick={exportToPDF}
+            style={{
+              padding: "6px 12px",
+              margin: "10px",
+              marginRight: "10px",
+              background: "#e65100",
+              color: "#fff",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            Export to PDF
+          </button>
+        </div>
       </div>
 
       {/* Table */}
