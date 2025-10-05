@@ -28,12 +28,12 @@ table {
 .searchBar input{
   background: #e2e2e2;
   border-radius: 5px;
-   
 }
 
 /* =======================
    Table Header
    ======================= */
+   
 table th {
   background: #e65100;
   /* deep orange */
