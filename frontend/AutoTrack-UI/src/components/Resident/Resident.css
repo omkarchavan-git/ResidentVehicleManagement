@@ -14,10 +14,21 @@ table {
   color: rgb(0, 0, 0);
 
 }
+.headingPanel{
+  display: flex;
+  justify-content: space-between;
+ align-items: baseline;
+}
 
 .heading {
   color: black;
   font-size: 35px;
+   
+}
+.searchBar input{
+  background: #e2e2e2;
+  border-radius: 5px;
+   
 }
 
 /* =======================
@@ -159,11 +170,9 @@ div button:hover {
   border: 2px solid rgb(0, 0, 0);
 }
 
-/* Search bar */
-.searchBar input {
-  background-color: #fff;
-  padding: 10px;
-}
+
+
+
 
 .searchButton {
   padding: "6px 12px";
