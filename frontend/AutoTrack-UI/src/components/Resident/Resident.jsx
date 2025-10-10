@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import DeleteResident from "../deleteResident/DeleteResident";
 import "./Resident.css";
 import UpdateResident from "../updateResident/UpdateResident";
+import { useNavigate } from "react-router-dom";
 
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
@@ -63,6 +64,13 @@ function Resident() {
       });
   };
 
+  // add button
+  const navigate = useNavigate();
+  const handleAddClick = () => {
+    // You can add logic here before navigating
+    navigate("/resident/AddResident");
+  };
+
   // pagination logic
   const startIndex = (page - 1) * rowsPerPage;
   const selectedResidents = residents.slice(
@@ -71,7 +79,7 @@ function Resident() {
   );
   const totalPages = Math.ceil(residents.length / rowsPerPage);
 
-  // // delete function
+  // delete function
 
   const removeResidentFromTable = (id) => {
     setResidents(residents.filter((r) => r.id !== id));
@@ -207,13 +215,7 @@ function Resident() {
                 <td>{resident.residentType}</td>
                 <td>{resident.parkinglot || "N/A"}</td>
                 <td>
-                  <button
-                    className="add-btn"
-                    onClick={() => {
-                      setEditingResident(resident);
-                      setShowUpdate(true);
-                    }}
-                  >
+                  <button className="add-btn" onClick={handleAddClick}>
                     Add
                   </button>
 
@@ -307,3 +309,5 @@ function Resident() {
 }
 
 export default Resident;
+
+
