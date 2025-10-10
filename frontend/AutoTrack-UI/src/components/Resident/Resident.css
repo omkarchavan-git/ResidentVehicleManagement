@@ -57,9 +57,9 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 15px;
-  font-family: "Poppins", Arial, sans-serif; /* modern font */
-  font-size: 16px; /* increased font size */
-  text-align: center; /* center align all text */
+  font-family: "Poppins", Arial, sans-serif;  
+  font-size: 16px;  
+  text-align: center;  
 }
 
 table td, table th {
@@ -170,10 +170,6 @@ div button:hover {
   border: 2px solid rgb(0, 0, 0);
 }
 
-
-
-
-
 .searchButton {
   padding: "6px 12px";
     background: "#e65100";
@@ -183,5 +179,4 @@ div button:hover {
     margin: 5px;
     background-color: "#e65100";
     
-
 }
