@@ -22,11 +22,11 @@ function Navbar({ residentList, exportToPDF }) {
           <div className="nav-links">
             <div className="dropdown">
               <Link to="/resident/Resident" className="nav-item">Resident</Link>
-              <div className="dropdown-content">
+              {/* <div className="dropdown-content">
                 <Link to="/resident/AddResident">Add Resident</Link>
                 <Link to="/resident/payments">Payments</Link>
                 <Link to="/resident/settings">Settings</Link>
-              </div>
+              </div> */}
             </div>
 
             <Link to="/visitor" className="nav-item">Visitor</Link>
