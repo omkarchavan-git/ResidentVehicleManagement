@@ -40,36 +40,31 @@ function Navbar() {
           <div className={`nav-links ${isMenuOpen ? "show" : ""}`}>
             <Link
               to="/resident/Resident"
-              className={`nav-item ${
-                location.pathname === "/resident/Resident" ? "active" : ""
-              }`}
+              className={`nav-item ${location.pathname === "/resident/Resident" ? "active" : ""
+                }`}
               onClick={handleLinkClick}
             >  <p>
-
-              Resident
-            </p>
+                Resident
+              </p>
             </Link>
             <Link
               to="/visitor"
-              className={`nav-item ${
-                location.pathname === "/visitor" ? "active" : ""
-              }`}
+              className={`nav-item ${location.pathname === "/visitor" ? "active" : ""
+                }`}
               onClick={handleLinkClick}
             > <p>
-
-              Visitor
-            </p>
+                Visitor
+              </p>
             </Link>
             <Link
               to="/vehicle"
-              className={`nav-item ${
-                location.pathname === "/vehicle" ? "active" : ""
-              }`}
+              className={`nav-item ${location.pathname === "/vehicle" ? "active" : ""
+                }`}
               onClick={handleLinkClick}
             > <p>
 
-              Vehicle
-            </p>
+                Vehicle
+              </p>
             </Link>
           </div>
         </div>
