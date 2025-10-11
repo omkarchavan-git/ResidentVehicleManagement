@@ -62,60 +62,19 @@
   }
 }
 
-/* Dropdown wrapper */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  top: 100%; /* just below parent */
-  left: 0;
-  background-color: #ffffff;
-  min-width: 180px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.15);
-  z-index: 1001;
-}
-
-/* Dropdown links */
-.dropdown-content a {
-  color: #333;
-  padding: 10px 14px;
-  text-decoration: none;
-  display: block;
-  transition: background 0.3s ease;
-}
-
-.dropdown-content a:hover {
-  background-color: #525050;
-  color: #e65100;
-}
-
-/* Show dropdown on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
+ 
 .logoimage{
   width: 90px;
 }
 
 /* ✅ Logo styling */
-.logo-wrapper {
+.logo-wrapper{
   display: flex;
-  
 }
 
 .logo-image {
-  width: 100px;        
-  height: 100px;
-  border-radius: 50%;  
-  border: 3px solid #beb6b0; 
-  object-fit: cover;
+  width: 60px;        
+  height: 60px;
+  margin-right: 25px;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
-  z-index: 100;
-  position: fixed;
 }

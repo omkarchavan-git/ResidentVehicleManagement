@@ -4,19 +4,20 @@ import "./Navbar.css";
 function Navbar({ residentList, exportToPDF }) {
   return (
     <>
-       
-      {/* <div className="logo-wrapper">
-        <img
-          src="./images/logo.png"
-          alt="Logo"
-          className="logo-image"
-        />
-      </div> */}
+
 
       <nav className="navbar">
         <div className="navbar-container">
           <div className="logo-text">
-            <Link to="/" className="nav-item">Vehicle Management</Link>
+            
+            <div className="logo-wrapper">
+              <img
+                src="./images/logo2.png"
+                alt="Logo"
+                className="logo-image"
+              />
+              <Link to="/" className="nav-item">Vehicle Management</Link>
+            </div>
           </div>
 
           <div className="nav-links">
