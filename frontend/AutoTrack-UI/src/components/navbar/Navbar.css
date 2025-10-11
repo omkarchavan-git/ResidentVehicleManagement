@@ -1,14 +1,14 @@
 /* Navbar Container */
 .navbar {
-  position: fixed;          
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #e65100;    
+  height: 65px;
+  background-color: #e65100;
   color: white;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  
- 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
 }
 
 /* Inside Navbar */
@@ -22,12 +22,15 @@
 }
 
 /* Logo */
-.logo-text{
+.logo-text {
   font-size: 25px;
   font-weight: bold;
   letter-spacing: 1px;
- 
-  
+
+}
+
+.nav-item p {
+  margin-top: 5px;
 }
 
 /* Links container */
@@ -40,12 +43,13 @@
 .nav-item {
   color: white;
   text-decoration: none;
-  font-size: 20px;
-  transition: color 0.3s ease;
+  font-size: 19px;
+  transition: color 0.5s ease;
 }
 
 .nav-item:hover {
-  color: #49320f; /* lighter shade on hover */
+  color: #49320f;
+  /* lighter shade on hover */
 }
 
 /* Responsive for mobile */
@@ -54,27 +58,27 @@
     flex-direction: column;
     align-items: flex-start;
   }
-  .nav-links {
-    margin-top: 10px;
+
+  .nav-links{
     flex-direction: column;
     gap: 12px;
     width: 100%;
   }
 }
 
- 
-.logoimage{
+
+.logoimage {
   width: 90px;
 }
 
 /* ✅ Logo styling */
-.logo-wrapper{
+.logo-wrapper {
   display: flex;
 }
 
 .logo-image {
-  width: 60px;        
-  height: 60px;
+  width: 50px;
+  height: 50px;
   margin-right: 25px;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
 }
