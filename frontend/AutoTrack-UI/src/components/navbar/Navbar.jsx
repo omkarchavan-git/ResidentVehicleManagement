@@ -1,6 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import "./Navbar.css";
+import logo from "../../assets/images/logo2.png"
+
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,12 +19,10 @@ function Navbar() {
           {/*  Logo Section */}
           <Link to="/" className="logo-text" onClick={handleLinkClick}>
             <div className="logo-wrapper">
-              <img
-                src="./images/logo2.png"
-                alt="Logo"
-                className="logo-image"
-              />
-              <p className="appname">Vehicle Management</p>
+
+             <img src={logo} alt="Logo" className="logo-image" />
+
+              <p className="appname"> Vehicle Management</p>
             </div>
           </Link>
 
