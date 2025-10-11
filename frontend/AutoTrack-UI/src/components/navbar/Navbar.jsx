@@ -44,8 +44,10 @@ function Navbar() {
                 location.pathname === "/resident/Resident" ? "active" : ""
               }`}
               onClick={handleLinkClick}
-            >
+            >  <p>
+
               Resident
+            </p>
             </Link>
             <Link
               to="/visitor"
@@ -53,8 +55,10 @@ function Navbar() {
                 location.pathname === "/visitor" ? "active" : ""
               }`}
               onClick={handleLinkClick}
-            >
+            > <p>
+
               Visitor
+            </p>
             </Link>
             <Link
               to="/vehicle"
@@ -62,8 +66,10 @@ function Navbar() {
                 location.pathname === "/vehicle" ? "active" : ""
               }`}
               onClick={handleLinkClick}
-            >
+            > <p>
+
               Vehicle
+            </p>
             </Link>
           </div>
         </div>
