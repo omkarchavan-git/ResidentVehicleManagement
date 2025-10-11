@@ -22,10 +22,12 @@ table {
 
 .resident-title {
   margin-left: 7%;
+  font-family: 'Courier New', Courier;
    font-size: 28px;
   font-weight: bold;
-  color: #ff6600;
+  color: #000000;
   margin-bottom: 20px;
+  font-weight: bolder;
   text-transform: uppercase;
   animation: fadeInDown 1s ease-in-out;
 }
