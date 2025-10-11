@@ -43,7 +43,7 @@ function Navbar() {
               className={`nav-item ${location.pathname === "/resident/Resident" ? "active" : ""
                 }`}
               onClick={handleLinkClick}
-            >  <p>
+            >  <p className="navpage"> 
                 Resident
               </p>
             </Link>
