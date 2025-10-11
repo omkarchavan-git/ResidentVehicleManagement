@@ -17,13 +17,17 @@ table {
 .headingPanel{
   display: flex;
   justify-content: space-between;
- align-items: baseline;
+  align-items: baseline;
 }
 
-.heading {
-  color: black;
-  font-size: 35px;
-   
+.resident-title {
+  margin-left: 7%;
+   font-size: 28px;
+  font-weight: bold;
+  color: #ff6600;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  animation: fadeInDown 1s ease-in-out;
 }
 .searchBar input{
   background: #e2e2e2;
