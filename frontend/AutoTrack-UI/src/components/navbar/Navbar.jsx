@@ -4,34 +4,28 @@ import "./Navbar.css";
 function Navbar({ residentList, exportToPDF }) {
   return (
     <>
-
-
       <nav className="navbar">
         <div className="navbar-container">
           <div className="logo-text">
-            
-            <div className="logo-wrapper">
-              <img
-                src="./images/logo2.png"
-                alt="Logo"
-                className="logo-image"
-              />
-              <Link to="/" className="nav-item">Vehicle Management</Link>
-            </div>
+
+            <Link to="/" className="nav-item">
+              <div className="logo-wrapper">
+                <img
+                  src="./images/logo2.png"
+                  alt="Logo"
+                  className="logo-image"
+                />
+                <p className="appname">
+                  Vehicle Management
+                </p>
+              </div>
+            </Link>
           </div>
 
           <div className="nav-links">
-            <div className="dropdown">
-              <Link to="/resident/Resident" className="nav-item">Resident</Link>
-              {/* <div className="dropdown-content">
-                <Link to="/resident/AddResident">Add Resident</Link>
-                <Link to="/resident/payments">Payments</Link>
-                <Link to="/resident/settings">Settings</Link>
-              </div> */}
-            </div>
-
-            <Link to="/visitor" className="nav-item">Visitor</Link>
-            <Link to="/vehicle" className="nav-item">Vehicle</Link>
+            <Link to="/resident/Resident" className="nav-item"><p>Resident </p></Link>
+            <Link to="/visitor" className="nav-item"><p>Visitor </p></Link>
+            <Link to="/vehicle" className="nav-item"><p>Vehicle </p></Link>
           </div>
         </div>
       </nav>
