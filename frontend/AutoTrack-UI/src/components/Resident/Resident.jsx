@@ -135,7 +135,7 @@ function Resident() {
 
       <div className="headingPanel">
 
-        <h2 className="resident-title">Resident List</h2>
+        <h2 className="resident-title">Resident Details</h2>
         
         {/* Search Bar */}
         <div style={{ marginBottom: "20px" }} className="searchBar">
