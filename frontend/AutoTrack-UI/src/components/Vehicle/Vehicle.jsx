@@ -6,10 +6,6 @@ import AddVehicle from "./addVehicle/AddVehicle";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
- 
-
-
-
 function Vehicle() {
   const [vehicles, setVehicles] = useState([]);
   const [filteredVehicles, setFilteredVehicles] = useState([]);
@@ -151,9 +147,7 @@ const exportToPDF = () => {
   try {
     const doc = new jsPDF();
 
-    // 🔹 If logo exists later,  
-    // doc.addImage("/logo.png", "PNG", 10, 5, 30, 30);
-
+  
     // 🔹 Add Title text
     doc.setFontSize(18);
     doc.text("Vehicle Report", 14, 20);
