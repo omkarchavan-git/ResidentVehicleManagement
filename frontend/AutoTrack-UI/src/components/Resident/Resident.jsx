@@ -4,6 +4,8 @@ import "./Resident.css";
 import UpdateResident from "../updateResident/UpdateResident";
 import { useNavigate } from "react-router-dom";
 
+import AddResident from "./AddResident";
+
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
@@ -65,12 +67,12 @@ function Resident() {
   };
 
   // add button
-  const navigate = useNavigate();
-  const handleAddClick = () => {
-    // You can add logic here before navigating
-    navigate("/resident/AddResident");
-  };
+ const [showAddModal, setShowAddModal] = useState(false);
 
+  // handle add button click
+  const handleAddClick = () => {
+    setShowAddModal(true);
+  };
   // pagination logic
   const startIndex = (page - 1) * rowsPerPage;
   const selectedResidents = residents.slice(
@@ -269,6 +271,27 @@ function Resident() {
           </button>
         ))}
       </div>
+
+       {/*  Add Resident Modal */}
+      {showAddModal && (
+        <div className="modal-overlay" onClick={() => setShowAddModal(false)}>
+          <div
+            className="modal-content"
+            onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+          >
+            <button
+              className="modal-close"
+              onClick={() => setShowAddModal(false)}
+            >
+              &times;
+            </button>
+            <AddResident
+              onClose={() => setShowAddModal(false)}
+              // optional: you can pass a callback to refresh table after adding
+            />
+          </div>
+        </div>
+      )}
 
       {/* for deltete to render the page as we delete */}
       {toast && (
