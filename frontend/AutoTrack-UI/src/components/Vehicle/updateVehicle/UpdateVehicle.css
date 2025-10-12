@@ -5,9 +5,7 @@ border: 2px solid black;
 padding: 30px;
 border-radius: 20px;
 }
-.modal-overlay{
-  display: block;
-}
+
 
 .modal-title{
   display: block;
