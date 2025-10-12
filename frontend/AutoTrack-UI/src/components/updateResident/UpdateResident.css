@@ -15,10 +15,11 @@
 .update-modal-overlay.show {
   opacity: 1;
   pointer-events: auto;
+  
 }
 
 /* Modal box */
-.update-modal {
+.update-modal.show {
   background-color: #fff;
   padding: 30px 25px;
   border-radius: 12px;
@@ -30,7 +31,7 @@
   transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
 }
 
-.update-modal.show {
+.update-modal.show{
   transform: scale(1);
   opacity: 1;
   box-shadow: 0 12px 30px rgba(0,0,0,0.35);
@@ -39,23 +40,23 @@
 .update-modal h2 {
   margin-top: 0;
   margin-bottom: 20px;
-  font-size: 1.5rem;
+  font-size: 1rem;
   text-align: center;
-  color: #333;
+  color: #000000;
 }
 
-.form-row {
-  display: flex;
+.form-row {   
   flex-direction: column;
   margin-bottom: 15px;
+  width: 85%;
 }
 
 .form-row input,
 .form-row select {
-  padding: 10px 12px;
   border-radius: 6px;
-  border: 1px solid #ccc;
   font-size: 0.95rem;
+  background-color: #ffffff;
+  color: black;
   transition: border 0.2s, box-shadow 0.2s;
 }
 

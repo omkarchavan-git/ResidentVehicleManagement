@@ -67,7 +67,7 @@ function Resident() {
   };
 
   // add button
- const [showAddModal, setShowAddModal] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
 
   // handle add button click
   const handleAddClick = () => {
@@ -137,7 +137,7 @@ function Resident() {
 
       <div className="headingPanel">
 
-       <h2 className="resident-title">🏘️ Resident Details</h2>
+        <h2 className="resident-title">🏘️ Resident Details</h2>
 
         {/* Search Bar */}
         <div style={{ marginBottom: "20px" }} className="searchBar">
@@ -272,7 +272,7 @@ function Resident() {
         ))}
       </div>
 
-       {/*  Add Resident Modal */}
+      {/* Add Resident Modal */}
       {showAddModal && (
         <div className="modal-overlay" onClick={() => setShowAddModal(false)}>
           <div
@@ -285,9 +285,10 @@ function Resident() {
             >
               &times;
             </button>
+
+            {/* Add Resident Form */}
             <AddResident
               onClose={() => setShowAddModal(false)}
-              // optional: you can pass a callback to refresh table after adding
             />
           </div>
         </div>
