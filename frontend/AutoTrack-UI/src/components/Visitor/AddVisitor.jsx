@@ -182,8 +182,8 @@ const AddVisitor = ({ onClose, onVisitorAdded, setToast }) => {
                     </div>
 
                     <div className="form-actions">
-                        <button type="submit" className="visitor-btn-submit">Submit</button>
-                        <button type="button" className="visitor-btn-cancel" onClick={onClose}>Cancel</button>
+                        <button type="submit" className="btn-submit-visitor">Submit</button>
+                        <button type="button" className="btn-cancel-visitor" onClick={onClose}>Cancel</button>
                     </div>
 
                 </form>
