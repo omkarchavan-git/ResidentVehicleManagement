@@ -279,13 +279,6 @@ function Resident() {
             className="modal-content"
             onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
           >
-            <button
-              className="modal-close"
-              onClick={() => setShowAddModal(false)}
-            >
-              &times;
-            </button>
-
             {/* Add Resident Form */}
             <AddResident
               onClose={() => setShowAddModal(false)}

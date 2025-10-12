@@ -1,4 +1,3 @@
-
 table {
   width: 100%;
   border-collapse: collapse;
@@ -58,7 +57,8 @@ table {
   text-align: center;
 }
 
-table td, table th {
+table td,
+table th {
   padding: 14px;
   border: 1px dotted #686363;
   background: #fff;
@@ -91,13 +91,14 @@ table button.delete-btn {
   padding: 6px 12px;
   cursor: pointer;
   border-radius: 4px;
- 
+
   color: #fff;
   font-size: 14px;
   transition: transform 0.2s, background 0.2s;
   margin-top: 6px;
 }
-table button{
+
+table button {
   margin-left: 5px;
 }
 
@@ -139,6 +140,7 @@ div button:hover {
     opacity: 0;
     transform: translateY(15px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -165,7 +167,7 @@ div button:hover {
 
 /* --- Modal Overlay --- */
 .modal-overlay {
-  position: fixed;
+
   top: 0;
   left: 0;
   width: 100vw;
@@ -180,8 +182,10 @@ div button:hover {
 
 /* --- Modal Content --- */
 .modal-content {
-  background: #fff;
-  padding: 30px 35px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  
   border-radius: 12px;
   max-width: 600px;
   width: 90%;
@@ -192,30 +196,13 @@ div button:hover {
   text-align: left;
 }
 
-/* --- Close Button --- */
-.modal-close {
-  position: absolute;
-  top: 12px;
-  right: 18px;
-  background: none;
-  border: none;
-  font-size: 30px;
-  font-weight: bold;
-  cursor: pointer;
-  color: #555;
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-
-.modal-close:hover {
-  color: #e65100;
-  transform: scale(1.2);
-}
 
 /* --- Animations --- */
 @keyframes fadeIn {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -226,6 +213,7 @@ div button:hover {
     opacity: 0;
     transform: scale(0.7);
   }
+
   100% {
     opacity: 1;
     transform: scale(1);
@@ -234,13 +222,25 @@ div button:hover {
 
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideDown {
-  from { transform: translateY(-50px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 
@@ -250,7 +250,8 @@ div button:hover {
     font-size: 26px;
   }
 
-  table td, table th {
+  table td,
+  table th {
     padding: 12px;
     font-size: 15px;
   }
@@ -288,7 +289,8 @@ div button:hover {
     font-size: 14px;
   }
 
-  table td, table th {
+  table td,
+  table th {
     padding: 10px;
   }
 
