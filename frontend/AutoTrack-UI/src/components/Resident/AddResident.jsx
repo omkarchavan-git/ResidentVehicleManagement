@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./addResident.css"; 
+import "./addResident.css";
 import { useNavigate } from "react-router-dom";
 
 function AddResident() {
@@ -26,12 +26,12 @@ function AddResident() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // prepare payload
+     
     const payload = {
       ...formData,
       contactno: Number(formData.contactno),
-      residentType: formData.residentType.toUpperCase(), // must match enum
-      vehicles: [] // empty array if not handling vehicles yet
+      residentType: formData.residentType.toUpperCase(),  
+      vehicles: []  
     };
 
     try {
@@ -65,16 +65,18 @@ function AddResident() {
   };
 
   // handle cancel/reset
-  const navigate = useNavigate();
+   
   const handleCancel = () => {
-      navigate("/resident/Resident");
+    setShow(false);
+    setTimeout(onClose, 300);
+
   };
 
   return (
     <div className=".popup-overlay ">
       <form onSubmit={handleSubmit} className="popup-form">
-      <h2>Add Resident</h2>
-       
+        <h2>Add Resident</h2>
+
         <input
           type="text"
           name="firstname"
@@ -82,7 +84,7 @@ function AddResident() {
           onChange={handleChange}
           placeholder="First Name"
           required
-       
+
         />
         <input
           type="text"
@@ -98,7 +100,7 @@ function AddResident() {
           value={formData.parkinglot}
           onChange={handleChange}
           placeholder="parking-lot"
-          
+
         />
         <input
           type="email"
@@ -137,10 +139,8 @@ function AddResident() {
 
         <div className="form-buttons">
           <button type="submit">Submit</button>
+
           
-          <button type="button" onClick={handleCancel} >
-            Cancel
-          </button>
         </div>
       </form>
 
