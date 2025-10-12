@@ -45,12 +45,12 @@ function UpdateResident({ resident, setToast, onClose, onUpdated }) {
 
   const handleCancel = () => {
     setShow(false);
-    setTimeout(onClose, 300); // wait for animation
+    setTimeout(onClose, 200); // wait for animation
   };
 
   return (
-    <div className={`update-modal-overlay ${show ? "show" : ""}`}>
-      <div className={`update-modal ${show ? "show" : ""}`}>
+     <div className="popup-overlay">
+            <div className="popup-form animate-popup">
         <h2>Update Resident</h2>
 
         <div className="form-row">
