@@ -1,5 +1,16 @@
 import React, { useState } from "react";
 import "./addVisitor.css"; // your styles
+import {
+    FaUser,
+    FaCarSide,
+    FaIdCard,
+    FaClipboardList,
+    FaPhone,
+    FaClock,
+    FaUsers,
+    FaHome
+} from "react-icons/fa";
+
 
 const AddVisitor = ({ onClose, onVisitorAdded, setToast }) => {
     const [formData, setFormData] = useState({
@@ -28,7 +39,7 @@ const AddVisitor = ({ onClose, onVisitorAdded, setToast }) => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     ...formData,
-                    resident: { id: formData.residentId } 
+                    resident: { id: formData.residentId }
                 }),
             });
 
@@ -64,29 +75,117 @@ const AddVisitor = ({ onClose, onVisitorAdded, setToast }) => {
     };
 
     return (
-        <div className="popup-overlay">
-            <div className="popup-form animate-popup">
+        <div className="visitor-popup-overlay">
+            <div className="visitor-popup-form animate-popup">
                 <h2>Add Visitor</h2>
                 <form onSubmit={handleSubmit}>
-                    <input type="text" name="visitorName" placeholder="Visitor Name" onChange={handleChange} required />
-                    <input type="text" name="vehicleName" placeholder="Vehicle Name" onChange={handleChange} required />
-                    <input type="text" name="vehicalRegisterationNum" placeholder="Vehicle Reg. Number" onChange={handleChange} required />
-                    <input type="text" name="visitPurpose" placeholder="Visit Purpose" onChange={handleChange} />
-                    <input type="number" name="phoneNumber" placeholder="Phone Number" onChange={handleChange} required />
-                    <input type="datetime-local" name="timeIn" onChange={handleChange} />
-                    <input type="datetime-local" name="timeOut" onChange={handleChange} />
-                    <select name="visitorType" onChange={handleChange}>
-                        <option value="">Select Visitor Type</option>
-                        <option value="GUEST">Guest</option>
-                        <option value="DELIVERY">Delivery</option>
-                        <option value="SERVICE">Service</option>
-                    </select>
-                    <input type="number" name="residentId" placeholder="Resident ID" onChange={handleChange} required />
+                    <div className="input-group-visitor">
+                        <FaUser className="icon" />
+                        <input
+                            type="text"
+                            name="visitorName"
+                            placeholder=" "
+                            onChange={handleChange}
+                            required
+                        />
+                        <label>Visitor Name</label>
+                    </div>
+
+                    <div className="input-group-visitor">
+                        <FaCarSide className="icon" />
+                        <input
+                            type="text"
+                            name="vehicleName"
+                            placeholder=" "
+                            onChange={handleChange}
+                            required
+                        />
+                        <label>Vehicle Name</label>
+                    </div>
+
+                    <div className="input-group-visitor">
+                        <FaIdCard className="icon" />
+                        <input
+                            type="text"
+                            name="vehicalRegisterationNum"
+                            placeholder=" "
+                            onChange={handleChange}
+                            required
+                        />
+                        <label>Vehicle Reg. Number</label>
+                    </div>
+
+                    <div className="input-group-visitor">
+                        <FaClipboardList className="icon" />
+                        <input
+                            type="text"
+                            name="visitPurpose"
+                            placeholder=" "
+                            onChange={handleChange}
+                        />
+                        <label>Visit Purpose</label>
+                    </div>
+
+                    <div className="input-group-visitor">
+                        <FaPhone className="icon" />
+                        <input
+                            type="number"
+                            name="phoneNumber"
+                            placeholder=" "
+                            onChange={handleChange}
+                            required
+                        />
+                        <label>Phone Number</label>
+                    </div>
+
+                    <div className="input-group-visitor">
+                        <FaClock className="icon" />
+                        <input
+                            type="datetime-local"
+                            name="timeIn"
+                            onChange={handleChange}
+                        />
+                        <label>Time In</label>
+                    </div>
+
+                    <div className="input-group-visitor">
+                        <FaClock className="icon" />
+                        <input
+                            type="datetime-local"
+                            name="timeOut"
+                            onChange={handleChange}
+                        />
+                        <label>Time Out</label>
+                    </div>
+
+                    <div className="input-group-visitor">
+                        <FaUsers className="icon" />
+                        <select name="visitorType" onChange={handleChange}>
+                            <option value="">Select Visitor Type</option>
+                            <option value="GUEST">Guest</option>
+                            <option value="DELIVERY">Delivery</option>
+                            <option value="SERVICE">Service</option>
+                        </select>
+                        <label>Visitor Type</label>
+                    </div>
+
+                    <div className="input-group-visitor">
+                        <FaHome className="icon" />
+                        <input
+                            type="number"
+                            name="residentId"
+                            placeholder=" "
+                            onChange={handleChange}
+                            required
+                        />
+                        <label>Resident ID</label>
+                    </div>
 
                     <div className="form-actions">
-                        <button type="submit" className="btn-submit">Submit</button>
-                        <button type="button" className="btn-cancel" onClick={onClose}>Cancel</button>
+                        <button type="submit" className="visitor-btn-submit">Submit</button>
+                        <button type="button" className="visitor-btn-cancel" onClick={onClose}>Cancel</button>
                     </div>
+
                 </form>
             </div>
         </div>
