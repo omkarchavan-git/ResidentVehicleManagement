@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "./addResident.css"; // optional, for styling
+import "./addResident.css"; 
+import { useNavigate } from "react-router-dom";
 
 function AddResident() {
   // form state
@@ -64,17 +65,9 @@ function AddResident() {
   };
 
   // handle cancel/reset
+  const navigate = useNavigate();
   const handleCancel = () => {
-    setFormData({
-      firstname: "",
-      lastname: "",
-      parkinglot: "",
-      email: "",
-      contactno: "",
-      flatno: "",
-      residentType: ""
-    });
-    setMessage("");
+      navigate("/resident/Resident");
   };
 
   return (
@@ -144,7 +137,8 @@ function AddResident() {
 
         <div className="form-buttons">
           <button type="submit">Submit</button>
-          <button type="button" onClick={handleCancel}>
+          
+          <button type="button" onClick={handleCancel} >
             Cancel
           </button>
         </div>
