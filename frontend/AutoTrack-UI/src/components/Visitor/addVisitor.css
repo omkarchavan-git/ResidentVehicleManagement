@@ -15,8 +15,11 @@
 
 /* Main popup form box */
 .visitor-popup-form {
+  margin-top: 20px;
+  height: 90vh;
+  margin-bottom: 10px;
   background: #fff;
-  width: 500px;
+  width: 400px;
   padding: 2rem;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(151, 28, 28, 0.25);
@@ -34,7 +37,7 @@
 
 /* Input fields */
 .input-group-visitor {
-  width: 80%;
+  width: 100%;
   position: relative;
   margin-bottom: 1.2rem;
 }
@@ -68,7 +71,7 @@
   position: absolute;
   left: 40px;
   top: 12px;
-  color: #777;
+  color: #0c0c0c;
   font-size: 14px;
   transition: 0.2s;
   pointer-events: none;
@@ -114,21 +117,21 @@
   transition: background 0.3s;
 }
 
-.visitor-btn-submit {
+.btn-submit-visitor {
   background: #ff6600;
   color: white;
 }
 
-.visitor-btn-submit:hover {
+.btn-submit-visitor:hover {
   background: #e55500;
 }
 
-.visitor-btn-cancel {
+.btn-cancel-visitor{
   background: #ccc;
   color: #333;
 }
 
-.visitor-btn-cancel:hover {
+.btn-cancel-visitor:hover {
   background: #aaa;
 }
 
