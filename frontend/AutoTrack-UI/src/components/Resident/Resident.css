@@ -166,12 +166,10 @@ div button:hover {
 /* // add button */
 
 /* --- Modal Overlay --- */
-.modal-overlay {
+.modal-overlay-resident {
 
   top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  left: 0;  
   background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
@@ -181,17 +179,6 @@ div button:hover {
 }
 
 /* --- Modal Content --- */
-.modal-content-resident {
-  justify-content: center;
- display: flex;
-  /* align-items: center; */
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(238, 25, 25, 0.25);
-  position: relative;
-  transform: scale(0.8);
-  animation: popUp 0.35s ease forwards;
-  text-align: left;
-}
 
 
 /* --- Animations --- */
