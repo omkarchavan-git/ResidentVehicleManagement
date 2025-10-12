@@ -71,9 +71,9 @@ function AddResident() {
   };
 
   return (
-    <div className="resident-container">
+    <div className=".popup-overlay ">
+      <form onSubmit={handleSubmit} className="popup-form">
       <h2>Add Resident</h2>
-      <form onSubmit={handleSubmit} className="resident-form">
        
         <input
           type="text"
@@ -97,7 +97,7 @@ function AddResident() {
           name="parkinglot"
           value={formData.parkinglot}
           onChange={handleChange}
-          placeholder="parkinglot"
+          placeholder="parking-lot"
           
         />
         <input
