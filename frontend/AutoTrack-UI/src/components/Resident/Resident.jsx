@@ -276,7 +276,7 @@ function Resident() {
       {showAddModal && (
         <div className="modal-overlay" onClick={() => setShowAddModal(false)}>
           <div
-            className="modal-content"
+            className="modal-content-resident"
             onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
           >
             {/* Add Resident Form */}

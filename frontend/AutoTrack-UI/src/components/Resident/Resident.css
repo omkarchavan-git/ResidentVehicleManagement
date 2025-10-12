@@ -181,15 +181,12 @@ div button:hover {
 }
 
 /* --- Modal Content --- */
-.modal-content {
+.modal-content-resident {
   justify-content: center;
-  display: flex;
-  align-items: center;
-  
+ display: flex;
+  /* align-items: center; */
   border-radius: 12px;
-  max-width: 600px;
-  width: 90%;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 20px rgba(238, 25, 25, 0.25);
   position: relative;
   transform: scale(0.8);
   animation: popUp 0.35s ease forwards;
