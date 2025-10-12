@@ -1,20 +1,17 @@
-/* =======================
-   Table Container
-   ======================= */
+
 table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 15px;
   background: #ffffff;
-  /* white background */
   animation: fadeInUp 0.6s ease-in-out;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
   color: rgb(0, 0, 0);
-
 }
-.headingPanel{
+
+.headingPanel {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -23,7 +20,7 @@ table {
 .resident-title {
   margin-left: 7%;
   font-family: 'Courier New', Courier;
-   font-size: 28px;
+  font-size: 28px;
   font-weight: bold;
   color: #000000;
   margin-bottom: 20px;
@@ -31,19 +28,15 @@ table {
   text-transform: uppercase;
   animation: fadeInDown 1s ease-in-out;
 }
-.searchBar input{
+
+.searchBar input {
   background: #e2e2e2;
   border-radius: 15px;
   width: 20%;
 }
 
-/* =======================
-   Table Header
-   ======================= */
-   
 table th {
   background: #e65100;
-  /* deep orange */
   color: #fff;
   padding: 12px;
   text-align: left;
@@ -54,19 +47,15 @@ table th {
 
 table th:hover {
   background: #d84315;
-  /* darker orange */
 }
 
-/* =======================
-   Table Rows
-   ======================= */
 table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 15px;
-  font-family: "Poppins", Arial, sans-serif;  
-  font-size: 16px;  
-  text-align: center;  
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 16px;
+  text-align: center;
 }
 
 table td, table th {
@@ -76,7 +65,6 @@ table td, table th {
   transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Header styling */
 table th {
   background: #e65100;
   color: #fff;
@@ -85,7 +73,6 @@ table th {
   text-transform: uppercase;
 }
 
-/* Row hover effect */
 table tbody tr:hover {
   background: linear-gradient(135deg, #ffe0cc, #fff5f0);
   transform: scale(1.02);
@@ -94,34 +81,28 @@ table tbody tr:hover {
   cursor: pointer;
 }
 
-/* Smooth return */
 table tbody tr {
   transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-
-
-/* =======================
-   Action Buttons (inside table)
-   ======================= */
 table button.update-btn,
 table button.delete-btn {
   border: none;
   padding: 6px 12px;
   cursor: pointer;
   border-radius: 4px;
+ 
   color: #fff;
   font-size: 14px;
   transition: transform 0.2s, background 0.2s;
-  margin-right: 6px;
+  margin-top: 6px;
 }
 
-/* add button */
 table button.add-btn {
   background: #1d86e7;
   margin-right: 15px;
 }
-/* Update button */
+
 table button.update-btn {
   background: #4CAF50;
 }
@@ -131,21 +112,16 @@ table button.update-btn:hover {
   transform: scale(1.08);
 }
 
-
-
-/* Delete button */
-table button.delete-btn {
+/* table button.delete-btn {
   background: #f44336;
-}
+} */
 
 table button.delete-btn:hover {
   background: #d32f2f;
   transform: scale(1.08);
+
 }
 
-/* =======================
-   Pagination Buttons
-   ======================= */
 div button {
   transition: background 0.3s, transform 0.2s;
   border-radius: 4px;
@@ -156,15 +132,11 @@ div button:hover {
   transform: scale(1.05);
 }
 
-/* =======================
-   Fade In Animation
-   ======================= */
 @keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translateY(15px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -179,18 +151,14 @@ div button:hover {
 
 .searchButton {
   padding: "6px 12px";
-    background: "#e65100";
-    color: "#fff";
-    border: "none";
-    cursor: "pointer";
-    margin: 5px;
-    background-color: "#e65100";
-    
+  background: "#e65100";
+  color: "#fff";
+  border: "none";
+  cursor: "pointer";
+  margin: 5px;
+  background-color: "#e65100";
 }
 
-
-/* add button  */
-/* Modal overlay */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -205,7 +173,6 @@ div button:hover {
   z-index: 1000;
 }
 
-/* Modal content */
 .modal-content {
   background: #fff;
   padding: 25px 30px;
@@ -218,7 +185,6 @@ div button:hover {
   position: relative;
 }
 
-/* Close button */
 .modal-close {
   position: absolute;
   top: 12px;
@@ -236,7 +202,6 @@ div button:hover {
   color: #e65100;
 }
 
-/* Animations */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -245,4 +210,76 @@ div button:hover {
 @keyframes slideDown {
   from { transform: translateY(-50px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
+}
+
+
+/* Large desktops (≤1200px) */
+@media (max-width: 1200px) {
+  .resident-title {
+    font-size: 26px;
+  }
+
+  table td, table th {
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  .searchBar input {
+    width: 25%;
+  }
+
+  table button {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+}
+
+/* Tablets and small laptops (≤992px) */
+@media (max-width: 992px) {
+  .headingPanel {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .resident-title {
+    font-size: 24px;
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .searchBar input {
+    width: 40%;
+    font-size: 15px;
+  }
+
+  table {
+    font-size: 14px;
+  }
+
+  table td, table th {
+    padding: 10px;
+  }
+
+  table button {
+    font-size: 12px;
+    padding: 5px 8px;
+    width: 60%;
+  }
+
+  .modal-content {
+    width: 95%;
+    padding: 20px;
+  }
+}
+
+/* Hide scrollbar overflow gracefully */
+@media (max-width: 992px) {
+  .residentContainer {
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 700px;
+  }
 }
