@@ -42,7 +42,7 @@ function AddVehicle({ handleCancel }) {
   };
 
   return (
-    <div className="modal show">
+    <div className="modal">
       <div className="modal-content">
         <h3>Add New Vehicle</h3>
         <form onSubmit={handleSubmit} className="form-grid">
