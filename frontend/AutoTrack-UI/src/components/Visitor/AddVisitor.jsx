@@ -166,7 +166,7 @@ const AddVisitor = ({ onClose, onVisitorAdded, setToast }) => {
                             <option value="DELIVERY">Delivery</option>
                             <option value="SERVICE">Service</option>
                         </select>
-                        <label>Visitor Type</label>
+                        
                     </div>
 
                     <div className="input-group-visitor">
