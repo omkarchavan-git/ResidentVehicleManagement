@@ -34,6 +34,7 @@ function Visitor() {
   const selectedVisitors = visitors.slice(startIndex, startIndex + rowsPerPage);
   const totalPages = Math.ceil(visitors.length / rowsPerPage);
 
+  // Export PDF
   const exportToPDF = () => {
     if (visitors.length === 0) {
       alert("No visitor data to export!");
@@ -82,12 +83,15 @@ function Visitor() {
     doc.save("visitor_list.pdf");
   };
 
+  // Get recent visitors for dashboard/card
+  const recentVisitors = visitors.slice(0, 5);
+
   return (
     <div className="visitor-container">
-      <h2 className="visitor-title">👥 Visitor Management</h2>
+      <h2 className="heading-title">👥 Visitor Management</h2>
 
       <div className="visitor-actions">
-        <button className="btn export-btn" onClick={exportToPDF}>
+        <button className="export-btn" onClick={exportToPDF}>
           Export to PDF
         </button>
         <button className="btn add-btn" onClick={() => setShowAdd(true)}>
@@ -203,6 +207,8 @@ function Visitor() {
           onClose={() => setShowAdd(false)}
         />
       )}
+
+     
     </div>
   );
 }
