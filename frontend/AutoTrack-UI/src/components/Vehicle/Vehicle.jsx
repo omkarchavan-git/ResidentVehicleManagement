@@ -184,7 +184,7 @@ const exportToPDF = () => {
 
   return (
     <div className="vehicle-container">
-      <h2 className="vehicle-title">🚗 Vehicle Management</h2>
+      <h2 className="heading-title">🚗 Vehicle Management</h2>
 
       {showToast && <div className="toast">{toastMsg}</div>}
 
