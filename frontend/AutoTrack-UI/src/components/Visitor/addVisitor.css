@@ -16,6 +16,7 @@
 /* Main popup form box */
 .visitor-popup-form {
   margin-top: 20px;
+ 
   height: 90vh;
   margin-bottom: 10px;
   background: #fff;
@@ -45,6 +46,7 @@
 .input-group-visitor input,
 .input-group-visitor select {
   border: none ;
+  color: black;
   border-bottom: 1px solid black;
   background-color: #ffffff;
   width: 80%;
