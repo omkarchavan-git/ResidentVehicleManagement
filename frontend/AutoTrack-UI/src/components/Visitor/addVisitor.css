@@ -205,4 +205,18 @@ form::-webkit-scrollbar {
     font-size: 13px;
     padding: 10px 10px 10px 40px;
   }
+    .input-group-visitor label {
+    left: 30px;
+    font-size: 12px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .btn-submit,
+  .btn-cancel {
+    width: 100%;
+    font-size: 14px;
+  }
 }
