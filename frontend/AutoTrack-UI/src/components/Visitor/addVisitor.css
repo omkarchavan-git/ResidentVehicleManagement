@@ -220,3 +220,22 @@ form::-webkit-scrollbar {
     font-size: 14px;
   }
 }
+
+/* Large screens */
+@media (min-width: 1200px) {
+  .visitor-popup-form {
+    width: 450px;
+    max-height: 90vh;
+  }
+
+  .input-group-visitor input,
+  .input-group-visitor select {
+    font-size: 16px;
+  }
+
+  .btn-submit,
+  .btn-cancel {
+    font-size: 16px;
+    padding: 12px;
+  }
+}
