@@ -159,3 +159,28 @@ form::-webkit-scrollbar {
   }
 }
 
+/* Tablets (max-width: 768px) */
+@media (max-width: 768px) {
+  .visitor-popup-form {
+    width: 80%;
+    max-width: 350px;
+    max-height: 85vh;
+    padding: 1rem;
+  }
+
+  .visitor-popup-form h2 {
+    font-size: 1.4rem;
+  }
+
+  .input-group-visitor input,
+  .input-group-visitor select {
+    width: 85%;
+    font-size: 14px;
+  }
+
+  .btn-submit,
+  .btn-cancel {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
