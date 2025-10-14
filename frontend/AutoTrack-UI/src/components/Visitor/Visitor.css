@@ -1,17 +1,20 @@
 /* Container with page-load animation */
 .visitor-container {
-  padding: 20px;
-  background: #f9fafb;
+  padding: 30px;
+  background: #e8eef3;
   min-height: 100vh;
+  width: 100%;
   font-family: "Segoe UI", sans-serif;
-  color: rgb(43, 43, 43);
+  border-radius: 10px;
+  border: 1px solid rgb(0, 0, 0);
+  color: rgb(80, 78, 78);
   animation: fadeInUp 0.6s ease-out; /* Page load transition */
 }
 
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(20px);/
   }
   to {
     opacity: 1;
@@ -19,13 +22,16 @@
   }
 }
 
-
-
 /* Actions bar */
 .visitor-actions {
   display: flex;
   justify-content: space-between;
   margin-bottom: 15px;
+  position: sticky;
+  top: 70px;
+  z-index: 10;
+   
+  border-bottom: 1px solid #eee;
 }
 
 .btn {
@@ -60,26 +66,27 @@
 
 /* Table with vertical lines */
 .visitor-table {
-  width: 100%;
   border-collapse: collapse;
   background: white;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   overflow: hidden;
+  width: 100%;
 }
 
 .visitor-table th,
 .visitor-table td {
+  width: 50%;
   padding: 5px 15px;
   text-align: center;
   border-bottom: 1px solid #9b9b9b;
   border-right: 1px solid #9b9b9b; /* Vertical lines */
 }
 
-  .visitor-table th:last-child,
-  .visitor-table td:last-child {
-    border-right: none;
-  }
+.visitor-table th:last-child,
+.visitor-table td:last-child {
+  border-right: none;
+}
 
 .visitor-table th {
   background: #ee6b24;
@@ -102,6 +109,7 @@
   display: flex;
   justify-content: center;
   margin-top: 15px;
+  flex-wrap: wrap;
 }
 
 .page-btn {
@@ -119,7 +127,6 @@
   background: #3b82f6;
   color: white;
   border-color: #3b82f6;
-  
 }
 
 .page-btn:hover {
@@ -154,13 +161,95 @@ body::-webkit-scrollbar {
   display: none;  
 }
 
-.visitor-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
-  position: sticky;       
-  top: 70px;             
-  z-index: 10;           
-  background: #f9fafb;   
-  border-bottom: 1px solid #eee;
+/* ========================= */
+/* RESPONSIVE DESIGN SECTION */
+/* ========================= */
+
+/* For tablets (768px and below) */
+@media (max-width: 768px) {
+  .visitor-actions {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .btn {
+    width: 90%;
+    max-width: 300px;
+  }
+
+  .export-btn {
+    margin-left: 0;
+  }
+
+  .visitor-table th,
+  .visitor-table td {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  .visitor-table {
+    font-size: 14px;
+    overflow-x: auto;
+    display: block;
+  }
+
+  .pagination {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+}
+
+/* For mobile phones (480px and below) */
+@media (max-width: 480px) {
+  .visitor-container {
+    padding: 10px;
+  }
+
+  .visitor-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .btn {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .visitor-table th,
+  .visitor-table td {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .toast {
+    right: 10px;
+    left: 10px;
+    text-align: center;
+  }
+
+  .page-btn {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
+
+/* For large screens (above 1200px) */
+@media (min-width: 900px) {
+  .visitor-container {
+    padding: 10px;
+  }
+
+  .visitor-table th,
+  .visitor-table td {
+    padding: 1px 10px;
+    font-size: 16px;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
 }
