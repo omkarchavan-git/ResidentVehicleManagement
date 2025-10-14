@@ -184,3 +184,25 @@ form::-webkit-scrollbar {
     padding: 8px;
   }
 }
+
+/* Mobile devices (max-width: 480px) */
+@media (max-width: 480px) {
+  .visitor-popup-form {
+    width: 90%;
+    max-width: 320px;
+    height: auto;
+    max-height: 85vh;
+    border-radius: 15px;
+  }
+
+  .visitor-popup-form h2 {
+    font-size: 1.2rem;
+  }
+
+  .input-group-visitor input,
+  .input-group-visitor select {
+    width: 90%;
+    font-size: 13px;
+    padding: 10px 10px 10px 40px;
+  }
+}
