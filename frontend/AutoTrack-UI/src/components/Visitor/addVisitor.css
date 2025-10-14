@@ -6,7 +6,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.80);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,17 +17,22 @@
 .visitor-popup-form {
   margin-top: 20px;
  
-  height: 90vh;
+  height: 100vh;
   margin-bottom: 10px;
   background: #fff;
   width: 400px;
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(151, 28, 28, 0.25);
   position: relative;
   animation: fadeIn 0.35s ease-out;
 }
 
+form{
+  position: relative;
+  height: 80%;
+  
+}
 /* Title */
 .visitor-popup-form h2 {
   text-align: center;
