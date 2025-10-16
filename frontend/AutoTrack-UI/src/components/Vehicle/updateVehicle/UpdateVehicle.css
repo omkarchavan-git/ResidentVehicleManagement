@@ -1,7 +1,4 @@
 .form-grid{
-background-color: rgb(175, 189, 201);
-border: 2px solid black;
-
 padding: 30px;
 border-radius: 20px;
 }
@@ -9,6 +6,7 @@ border-radius: 20px;
 
  
 .formtitle h3{
+
   display: block;
   font-size: 30px;
   color: rgb(255, 106, 6);
