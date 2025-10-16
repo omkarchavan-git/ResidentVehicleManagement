@@ -1,7 +1,7 @@
 #root {
   width: 90%;         
   margin: 0;          /* remove auto-centering */
-  padding: 2rem;
+  padding-top: 2rem;
   text-align: left;   /* align text normally */
 }
 body {
