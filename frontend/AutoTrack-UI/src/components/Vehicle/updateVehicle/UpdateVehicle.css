@@ -24,7 +24,7 @@
   animation: update-vehicle-slideUp 0.4s ease-in-out;
 }
 
-/* Title with animated underline */
+/* Title */
 .update-vehicle-title h3 {
   text-align: center;
   margin-bottom: 20px;
@@ -63,6 +63,14 @@
   font-weight: 600;
   margin-bottom: 6px;
   color: #333;
+  display: flex;
+  align-items: center;
+  gap: 6px; /* space between icon and text */
+}
+
+.update-vehicle-icon {
+  color: #ff5722;
+  font-size: 16px;
 }
 
 .update-vehicle-row input {
@@ -85,7 +93,6 @@
 .update-vehicle-radio-group {
   display: flex;
   gap: 15px;
-
 }
 
 .update-vehicle-radio-group label {
@@ -111,7 +118,6 @@
   padding: 10px 22px;
   border: none;
   border-radius: 8px;
-
   cursor: pointer;
   font-weight: 600;
   font-size: 15px;
@@ -142,7 +148,6 @@
     opacity: 0;
     transform: scale(0.95);
   }
-
   to {
     opacity: 1;
     transform: scale(1);
@@ -154,7 +159,6 @@
     transform: translateY(40px);
     opacity: 0;
   }
-
   to {
     transform: translateY(0);
     opacity: 1;
@@ -166,12 +170,10 @@
     width: 0;
     left: 50%;
   }
-
   50% {
     width: 30%;
     left: 35%;
   }
-
   100% {
     width: 60%;
     left: 20%;
@@ -191,4 +193,28 @@
   .update-vehicle-title h3 {
     font-size: 20px;
   }
+}
+
+/* DateTime input styling */
+.update-vehicle-row input[type="datetime-local"] {
+  background-color: #fff; /* input background */
+  color: #000; /* text color */
+  padding: 10px 12px; /* add space for icon visibility */
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+/* For webkit browsers (Chrome, Safari) */
+.update-vehicle-row input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(1); /* invert icon color to make it visible */
+  cursor: pointer;
+}
+
+/* On focus */
+.update-vehicle-row input[type="datetime-local"]:focus {
+  border-color: #ff5722;
+  box-shadow: 0 0 4px rgba(255, 87, 34, 0.4);
+  outline: none;
 }
