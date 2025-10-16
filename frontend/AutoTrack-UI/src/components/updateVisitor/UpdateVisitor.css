@@ -1,140 +1,152 @@
-/* Overlay effect */
+/* Overlay */
 .update-modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(15, 15, 15, 0.65);
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  z-index: 2000;
   opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease-in-out;
-  z-index: 999;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
 }
 
 .update-modal-overlay.show {
   opacity: 1;
-  visibility: visible;
+  pointer-events: auto;
 }
 
-/* Modal container */
+/* Modal box */
 .update-modal {
-  background: #fff;
-  width: 420px;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
-  transform: translateY(-40px);
-  transition: all 0.3s ease-in-out;
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 30px;
+  width: 750px;
+  max-width: 95%;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  transform: scale(0.9);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
 }
 
 .update-modal.show {
-  transform: translateY(0);
+  transform: scale(1);
+  opacity: 1;
 }
 
+/* Heading */
 .update-modal h2 {
-  margin-bottom: 18px;
-  font-size: 22px;
-  color: #ff6600;
   text-align: center;
+  color: #ff4b2b;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+  font-weight: bold;
 }
 
-/* Form styling */
+/* Animated HR Line   */
+.center-line {
+  border: none;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #ff4b2b, transparent);
+  width: 0;
+  margin: 10px auto 25px;
+  transition: width 0.8s ease;
+}
+
+.update-modal.show .center-line {
+  width: 80%;
+}
+
+/* Form Grid - Two Columns */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px 25px;
+}
+
+/* Input Group */
 .form-row {
-  margin: 14px;
-  
+  position: relative;
+}
+
+.form-row .icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ff4b2b;
+  font-size: 18px;
 }
 
 .form-row input,
 .form-row select {
-  color: black;
-    background-color: #ffffff;
-  width: 100%;
-  padding: 10px 12px;
+  width: 80%;
+  padding: 10px 10px 10px 38px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  font-size: 25px;
-  transition: border 0.3s, box-shadow 0.3s;
-  
+  font-size: 14px;
+  background: #fff;
+  color: #000;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .form-row input:focus,
 .form-row select:focus {
-  border-color: #ff6600;
-  box-shadow: 0 0 6px rgba(255, 102, 0, 0.3);
+  border-color: #ff4b2b;
+  box-shadow: 0 0 8px rgba(255, 75, 43, 0.3);
   outline: none;
 }
 
 /* Buttons */
 .modal-buttons {
   display: flex;
-  justify-content: space-between;
-  margin-top: 18px;
-  height: 40px;
-}
-
-.submit-btn,
-.cancel-btn {
-  flex: 1;
-  margin: 0 5px;
-  padding: 10px 0;
-  border-radius: 8px;
-  border: none;
-  font-size: 15px;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  justify-content: flex-end;
+  gap: 30px;
+  margin-top: 25px;
+  
 }
 
 .submit-btn {
-  background: linear-gradient(135deg, #ff7a00, #ff4500);
-  color: white;
-  font-weight: bold;
+  background: linear-gradient(45deg, #ff4b2b, #ff416c);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 20%;
 }
 
 .submit-btn:hover {
-  background: linear-gradient(135deg, #ff944d, #ff5c33);
-  transform: scale(1.05);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(255, 75, 43, 0.3);
 }
 
-.cancel-btn {
-  background: #ddd;
-  color: #000000;
+.cancel-btn-visitor {
+
+  margin-right: 30px;
+  width: 20%;
+  background: #ccc;
+  color: #ff4b2b;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
 .cancel-btn:hover {
-  background: #bbb;
-  transform: scale(1.05);
+  background: #999;
 }
 
-/* Modal container (  2 columns) */
-.update-modal {
-  background: #fff;
-  width: 600px; /* increased from 420px */
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
-  transform: translateY(-40px);
-  transition: all 0.3s ease-in-out;
-}
-
- 
-/* Grid layout for form */
-.form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* two equal columns */
-  gap: 10px;
-  margin: 10px;
-}
-
-/* Buttons should span across both columns */
-.form-full {
-  grid-column: span 2;
-}
-
-.form-row input{
-  font-size: large;
-  height: 30px;
+/* Responsive */
+@media (max-width: 600px) {
+  .update-modal {
+    width: 95%;
+    padding: 20px;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
 }
