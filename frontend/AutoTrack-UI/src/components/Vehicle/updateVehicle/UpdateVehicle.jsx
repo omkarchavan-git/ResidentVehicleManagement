@@ -1,5 +1,6 @@
 import React from "react";
 import "./UpdateVehicle.css";
+import { FaCar, FaIdCard, FaPalette, FaUser, FaClock, FaCheckCircle } from "react-icons/fa";
 
 function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel }) {
   if (!selectedVehicle) return null;
@@ -25,7 +26,7 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
         >
           {/* Row 1 */}
           <div className="update-vehicle-row">
-            <label>Registration Number:</label>
+            <label><FaIdCard className="update-vehicle-icon" /> Registration Number:</label>
             <input
               type="text"
               name="regNum"
@@ -36,7 +37,7 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
           </div>
 
           <div className="update-vehicle-row">
-            <label>Vehicle Name:</label>
+            <label><FaCar className="update-vehicle-icon" /> Vehicle Name:</label>
             <input
               type="text"
               name="vehName"
@@ -48,7 +49,7 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
 
           {/* Row 2 */}
           <div className="update-vehicle-row">
-            <label>Color:</label>
+            <label><FaPalette className="update-vehicle-icon" /> Color:</label>
             <input
               type="text"
               name="color"
@@ -59,7 +60,7 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
           </div>
 
           <div className="update-vehicle-row">
-            <label>Vehicle Type:</label>
+            <label><FaCar className="update-vehicle-icon" /> Vehicle Type:</label>
             <input
               type="text"
               name="vehicleType"
@@ -71,7 +72,7 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
 
           {/* Row 3 */}
           <div className="update-vehicle-row">
-            <label>Time In:</label>
+            <label><FaClock className="update-vehicle-icon" /> Time In:</label>
             <input
               type="datetime-local"
               name="intime"
@@ -81,7 +82,7 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
           </div>
 
           <div className="update-vehicle-row">
-            <label>Time Out:</label>
+            <label><FaClock className="update-vehicle-icon" /> Time Out:</label>
             <input
               type="datetime-local"
               name="outtime"
@@ -92,7 +93,7 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
 
           {/* Row 4 */}
           <div className="update-vehicle-row">
-            <label>Resident Name:</label>
+            <label><FaUser className="update-vehicle-icon" /> Resident Name:</label>
             <input
               type="text"
               name="residentName"
@@ -103,7 +104,7 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
           </div>
 
           <div className="update-vehicle-row">
-            <label>Is Vehicle Active?</label>
+            <label><FaCheckCircle className="update-vehicle-icon" /> Is Vehicle Active?</label>
             <div className="update-vehicle-radio-group">
               <label>
                 <input
