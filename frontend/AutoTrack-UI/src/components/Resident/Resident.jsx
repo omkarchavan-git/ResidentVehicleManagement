@@ -191,7 +191,7 @@ function Resident() {
       {/* Table */}
       <table>
         <thead>
-          <tr>
+          <tr >
             <th>ID</th>
             <th>Contact No</th>
             <th>Email</th>

@@ -40,8 +40,8 @@ table {
 table th {
   background: #e65100;
   color: #fff;
-  padding: 12px;
-  text-align: left;
+  padding: 10px;
+  text-align: center;
   font-weight: 600;
   letter-spacing: 0.5px;
   transition: background 0.3s ease;
@@ -62,7 +62,7 @@ table {
 
 table td,
 table th {
-  padding: 14px;
+  padding: 9px;
   border: 1px dotted #686363;
   background: #fff;
   transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
