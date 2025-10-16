@@ -1,5 +1,5 @@
-/* === Vehicle Modal Overlay === */
-.vehicle-popup-overlay {
+/* === Overlay === */
+.add-vehicle-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -12,44 +12,44 @@
   z-index: 9999;
 }
 
-/* === Main Form Box === */
-.vehicle-popup-form {
+/* === Modal Box === */
+.add-vehicle-form {
   width: 400px;
   max-height: 90vh;
   overflow-y: auto;
   background: #fff;
   border-radius: 20px;
-  padding: 1.5rem;
+  padding: 2rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-  animation: fadeIn 0.35s ease-out;
+  animation: fadeInAddVehicle 0.35s ease-out;
   position: relative;
-  scrollbar-width: none; /* hide scrollbar for Firefox */
+  scrollbar-width: none;
 }
 
-.vehicle-popup-form::-webkit-scrollbar {
-  display: none; /* hide scrollbar for Chrome/Safari */
+.add-vehicle-form::-webkit-scrollbar {
+  display: none;
 }
 
 /* === Form Title === */
-.vehicle-popup-form h2 {
+.add-vehicle-title {
   text-align: center;
   margin-bottom: 1.5rem;
-  color: #000;
   font-size: 1.6rem;
   font-weight: 600;
+  color: #000;
 }
 
-/* === Input Fields === */
-.input-group-vehicle {
+/* === Input Groups === */
+.add-vehicle-input-group {
   width: 100%;
   position: relative;
   margin-bottom: 1.2rem;
 }
 
-.input-group-vehicle input,
-.input-group-vehicle select {
-  width: 80%;
-  padding: 12px 12px 12px 50px;
+.add-vehicle-input-group input,
+.add-vehicle-input-group select {
+  width: 100%;
+  padding: 12px 12px 12px 45px;
   border: none;
   border-bottom: 1px solid #000;
   background: #fff;
@@ -57,15 +57,16 @@
   color: #000;
   outline: none;
   transition: all 0.2s ease;
+  border-radius: 6px;
 }
 
-.input-group-vehicle input:focus,
-.input-group-vehicle select:focus {
-  box-shadow: 0 0 5px rgba(202, 87, 20, 0.5);
+.add-vehicle-input-group input:focus,
+.add-vehicle-input-group select:focus {
+  box-shadow: 0 0 5px rgba(255, 87, 20, 0.5);
 }
 
 /* === Floating Label === */
-.input-group-vehicle label {
+.add-vehicle-label {
   position: absolute;
   left: 40px;
   top: 12px;
@@ -75,9 +76,9 @@
   transition: 0.2s ease;
 }
 
-.input-group-vehicle input:focus + label,
-.input-group-vehicle input:not(:placeholder-shown) + label,
-.input-group-vehicle select:focus + label {
+.add-vehicle-input-group input:focus + .add-vehicle-label,
+.add-vehicle-input-group input:not(:placeholder-shown) + .add-vehicle-label,
+.add-vehicle-input-group select:focus + .add-vehicle-label {
   top: -8px;
   left: 35px;
   background: #fff;
@@ -87,49 +88,57 @@
   color: #000;
 }
 
-/* === Icon Styling === */
-.input-group-vehicle .icon {
+/* === Icons === */
+.add-vehicle-icon {
   position: absolute;
   left: 10px;
   top: 12px;
-  color: #ff6600;
   font-size: 18px;
+  color: #000; /* black icon for visibility on white bg */
 }
 
-/* === Radio Group === */
-.radio-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
+/* === Radio Buttons === */
+.add-vehicle-radio-group-container {
+  margin-top: 1rem;
 }
 
-.radio-label {
+.add-vehicle-radio-label {
   font-size: 15px;
   font-weight: 500;
   margin-bottom: 5px;
+  display: block;
 }
 
-.radio-options {
+.add-vehicle-radio-options {
   display: flex;
-  gap: 20px;
+  gap: 25px;
+  align-items: center;
+  margin-top: 6px;
 }
 
-.radio-options label {
+.add-vehicle-radio-options label {
   display: flex;
   align-items: center;
   gap: 5px;
+  cursor: pointer;
+  font-size: 14px;
   color: #111;
 }
 
+.add-vehicle-radio-options input {
+  cursor: pointer;
+  margin: 0;
+}
+
 /* === Form Buttons === */
-.form-actions {
+.add-vehicle-form-actions {
   display: flex;
   justify-content: space-between;
   margin-top: 1.5rem;
 }
 
-.btn-submit-vehicle,
-.btn-cancel-vehicle {
+.add-vehicle-btn-submit,
+.add-vehicle-btn-cancel {
   width: 48%;
   padding: 10px;
   border: none;
@@ -140,28 +149,28 @@
   transition: all 0.3s ease;
 }
 
-.btn-submit-vehicle {
+.add-vehicle-btn-submit {
   background: #ff6600;
   color: #fff;
 }
 
-.btn-submit-vehicle:hover {
+.add-vehicle-btn-submit:hover {
   background: #e55500;
   transform: translateY(-2px);
 }
 
-.btn-cancel-vehicle {
+.add-vehicle-btn-cancel {
   background: #ccc;
   color: #333;
 }
 
-.btn-cancel-vehicle:hover {
+.add-vehicle-btn-cancel:hover {
   background: #aaa;
   transform: translateY(-2px);
 }
 
-/* === Animation === */
-@keyframes fadeIn {
+/* === Animations === */
+@keyframes fadeInAddVehicle {
   from {
     opacity: 0;
     transform: scale(0.95);
@@ -172,26 +181,25 @@
   }
 }
 
-/* === Responsive Design === */
+/* === Responsive === */
 @media (max-width: 480px) {
-  .vehicle-popup-form {
+  .add-vehicle-form {
     width: 90%;
-    padding: 1rem;
+    padding: 1.5rem;
     border-radius: 15px;
   }
 
-  .input-group-vehicle input,
-  .input-group-vehicle select {
-    width: 85%;
-    padding-left: 45px;
+  .add-vehicle-input-group input,
+  .add-vehicle-input-group select {
+    padding-left: 40px;
   }
 
-  .vehicle-popup-form h2 {
+  .add-vehicle-title {
     font-size: 1.4rem;
   }
 
-  .btn-submit-vehicle,
-  .btn-cancel-vehicle {
+  .add-vehicle-btn-submit,
+  .add-vehicle-btn-cancel {
     font-size: 14px;
   }
 }
