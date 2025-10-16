@@ -1,5 +1,5 @@
 import React from "react";
-import "../updateVehicle/UpdateVehicle.css";
+import "./UpdateVehicle.css";
 
 function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel }) {
   if (!selectedVehicle) return null;
@@ -13,15 +13,18 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
   };
 
   return (
-    <div className="modal-overlay">
-          <div className="formtitle">
-            <h3 className="">Update Vehicle</h3>
-          </div>
-      <div className="modal update-vehicle-modal">
-          {/* Row 1 */}
-        <form className="form-grid" onSubmit={(e) => e.preventDefault()}>
+    <div className="update-vehicle-overlay">
+      <div className="update-vehicle-modal">
+        <div className="update-vehicle-title">
+          <h3>Update Vehicle</h3>
+        </div>
 
-          <div className="form-group-row">
+        <form
+          className="update-vehicle-form"
+          onSubmit={(e) => e.preventDefault()}
+        >
+          {/* Row 1 */}
+          <div className="update-vehicle-row">
             <label>Registration Number:</label>
             <input
               type="text"
@@ -32,7 +35,7 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
             />
           </div>
 
-          <div className="form-group-row">
+          <div className="update-vehicle-row">
             <label>Vehicle Name:</label>
             <input
               type="text"
@@ -44,7 +47,7 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
           </div>
 
           {/* Row 2 */}
-          <div className="form-group-row">
+          <div className="update-vehicle-row">
             <label>Color:</label>
             <input
               type="text"
@@ -55,7 +58,7 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
             />
           </div>
 
-          <div className="form-group-row">
+          <div className="update-vehicle-row">
             <label>Vehicle Type:</label>
             <input
               type="text"
@@ -67,7 +70,7 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
           </div>
 
           {/* Row 3 */}
-          <div className="form-group-row">
+          <div className="update-vehicle-row">
             <label>Time In:</label>
             <input
               type="datetime-local"
@@ -77,7 +80,7 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
             />
           </div>
 
-          <div className="form-group-row">
+          <div className="update-vehicle-row">
             <label>Time Out:</label>
             <input
               type="datetime-local"
@@ -88,7 +91,7 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
           </div>
 
           {/* Row 4 */}
-          <div className="form-group-row">
+          <div className="update-vehicle-row">
             <label>Resident Name:</label>
             <input
               type="text"
@@ -99,16 +102,20 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
             />
           </div>
 
-          <div className="form-group-row">
+          <div className="update-vehicle-row">
             <label>Is Vehicle Active?</label>
-            <div className="radio-group">
+            <div className="update-vehicle-radio-group">
               <label>
                 <input
                   type="radio"
                   name="vehActive"
                   value="true"
                   checked={selectedVehicle.vehActive === true}
-                  onChange={() => handleChange({ target: { name: "vehActive", value: true, type: "radio" } })}
+                  onChange={() =>
+                    handleChange({
+                      target: { name: "vehActive", value: true, type: "radio" },
+                    })
+                  }
                 />
                 Yes
               </label>
@@ -118,27 +125,36 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
                   name="vehActive"
                   value="false"
                   checked={selectedVehicle.vehActive === false}
-                  onChange={() => handleChange({ target: { name: "vehActive", value: false, type: "radio" } })}
+                  onChange={() =>
+                    handleChange({
+                      target: { name: "vehActive", value: false, type: "radio" },
+                    })
+                  }
                 />
                 No
               </label>
             </div>
           </div>
-          <div className="form-actions">
-            <button className="btn update-btn" onClick={() => handleSave(selectedVehicle)}>
+
+          {/* Buttons */}
+          <div className="update-vehicle-actions">
+            <button
+              className="update-vehicle-btn save"
+              onClick={() => handleSave(selectedVehicle)}
+            >
               Save
             </button>
-            <button className="btn cancel-btn" onClick={handleCancel}>
+            <button
+              className="update-vehicle-btn cancel"
+              onClick={handleCancel}
+            >
               Cancel
             </button>
           </div>
         </form>
-
       </div>
     </div>
   );
 }
 
 export default UpdateVehicle;
-
-
