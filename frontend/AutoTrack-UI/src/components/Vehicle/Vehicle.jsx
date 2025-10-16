@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./Vehicle.css";
 import UpdateVehicle from "./updateVehicle/UpdateVehicle";
 import AddVehicle from "./addVehicle/AddVehicle";
-
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
@@ -15,6 +14,10 @@ function Vehicle() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
   const [showToast, setShowToast] = useState(false);
+
+  // Pagination states
+  const [page, setPage] = useState(1);
+  const [rowsPerPage] = useState(7);
 
   // Fetch vehicles
   const fetchVehicles = async () => {
@@ -63,7 +66,7 @@ function Vehicle() {
     setShowModal(true);
   };
 
-  // Handle form input changes from UpdateVehicle
+  // Handle form input changes
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     let newValue;
@@ -134,53 +137,51 @@ function Vehicle() {
         (v.residentName && v.residentName.toLowerCase().includes(term))
     );
     setFilteredVehicles(filtered);
+    setPage(1); // reset pagination after search
   };
 
   const handleReset = () => {
     setSearchTerm("");
     setFilteredVehicles(vehicles);
+    setPage(1);
   };
 
+  // 🔹 Pagination logic
+  const startIndex = (page - 1) * rowsPerPage;
+  const paginatedVehicles = filteredVehicles.slice(startIndex, startIndex + rowsPerPage);
+  const totalPages = Math.ceil(filteredVehicles.length / rowsPerPage);
 
   // 🔹 Export to PDF
-const exportToPDF = () => {
-  try {
-    const doc = new jsPDF();
+  const exportToPDF = () => {
+    try {
+      const doc = new jsPDF();
+      doc.setFontSize(18);
+      doc.text("Vehicle Report", 14, 20);
 
-  
-    // 🔹 Add Title text
-    doc.setFontSize(18);
-    doc.text("Vehicle Report", 14, 20);
+      autoTable(doc, {
+        startY: 30,
+        head: [["ID", "Reg. Number", "Name", "Color", "Type", "Resident", "Active"]],
+        body: filteredVehicles.map((v) => [
+          v.id,
+          v.regNum,
+          v.vehName,
+          v.color,
+          v.vehicleType,
+          v.residentName ||
+            (v.resident ? `${v.resident.firstname} ${v.resident.lastname}` : "N/A"),
+          v.vehActive ? "Yes" : "No",
+        ]),
+      });
 
-    // 🔹 Build table below title
-    autoTable(doc, {
-      startY: 30, // keep space for logo later
-      head: [["ID", "Reg. Number", "Name", "Color", "Type", "Resident", "Active"]],
-      body: filteredVehicles.map((v) => [
-        v.id,
-        v.regNum,
-        v.vehName,
-        v.color,
-        v.vehicleType,
-        v.residentName || (v.resident ? `${v.resident.firstname} ${v.resident.lastname}` : "N/A"),
-        v.vehActive ? "Yes" : "No",
-      ]),
-    });
-
-    // 🔹 Add timestamp footer
-    const date = new Date();
-    const formattedDate = date.toLocaleString();
-    doc.setFontSize(10);
-    doc.text(`Generated on: ${formattedDate}`, 14, doc.internal.pageSize.height - 10);
-
-    // 🔹 Save file
-    doc.save(`vehicleData-${date.toISOString().split("T")[0]}.pdf`);
-  } catch (error) {
-    console.error("Error exporting PDF:", error);
-  }
-};
-
-
+      const date = new Date();
+      const formattedDate = date.toLocaleString();
+      doc.setFontSize(10);
+      doc.text(`Generated on: ${formattedDate}`, 14, doc.internal.pageSize.height - 10);
+      doc.save(`vehicleData-${date.toISOString().split("T")[0]}.pdf`);
+    } catch (error) {
+      console.error("Error exporting PDF:", error);
+    }
+  };
 
   return (
     <div className="vehicle-container">
@@ -219,7 +220,7 @@ const exportToPDF = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredVehicles.map((vehicle) => (
+          {paginatedVehicles.map((vehicle) => (
             <tr key={vehicle.id} className="vehicle-row">
               <td>{vehicle.id}</td>
               <td>{vehicle.regNum}</td>
@@ -230,8 +231,8 @@ const exportToPDF = () => {
                 {vehicle.residentName
                   ? vehicle.residentName
                   : vehicle.resident
-                    ? `${vehicle.resident.firstname} ${vehicle.resident.lastname}`
-                    : "N/A"}
+                  ? `${vehicle.resident.firstname} ${vehicle.resident.lastname}`
+                  : "N/A"}
               </td>
               <td>{vehicle.vehActive ? "Yes ✅" : "No ❌"}</td>
               <td>{vehicle.intime ? new Date(vehicle.intime).toLocaleString() : "—"}</td>
@@ -249,7 +250,28 @@ const exportToPDF = () => {
         </tbody>
       </table>
 
-      {/* Update Modal */}
+      {/* Pagination */}
+      <div style={{ marginTop: "20px" }}>
+        {Array.from({ length: totalPages }, (_, i) => (
+          <button
+            key={i}
+            onClick={() => setPage(i + 1)}
+            style={{
+              margin: "0 5px",
+              padding: "6px 12px",
+              background: page === i + 1 ? "#e65100" : "#fff",
+              color: page === i + 1 ? "#fff" : "#000",
+              border: "1px solid #ccc",
+              cursor: "pointer",
+              borderRadius: "5px",
+            }}
+          >
+            {i + 1}
+          </button>
+        ))}
+      </div>
+
+      {/* Modals */}
       {showModal && (
         <UpdateVehicle
           selectedVehicle={selectedVehicle}
@@ -259,7 +281,6 @@ const exportToPDF = () => {
         />
       )}
 
-      {/* Add Modal */}
       {showAddModal && <AddVehicle handleCancel={() => setShowAddModal(false)} />}
     </div>
   );
