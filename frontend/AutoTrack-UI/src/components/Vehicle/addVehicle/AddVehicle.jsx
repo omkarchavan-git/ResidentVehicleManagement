@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
-import "../addVehicle/AddVehicle.css";
+import React, { useState, useEffect } from "react";
+import "./addVehicle.css";
+import { FaCarSide, FaIdCard, FaPalette, FaTag } from "react-icons/fa";
 
-function AddVehicle({ handleCancel }) {
+const AddVehicle = ({ handleCancel }) => {
   const [formData, setFormData] = useState({
     regNum: "",
     vehName: "",
     color: "",
     vehicleType: "",
-    vehActive: true, // default Yes
+    vehActive: true,
   });
 
   useEffect(() => {
@@ -17,8 +18,8 @@ function AddVehicle({ handleCancel }) {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    if (type === "checkbox") {
-      setFormData({ ...formData, [name]: checked });
+    if (type === "radio") {
+      setFormData({ ...formData, vehActive: value === "true" });
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -33,72 +34,107 @@ function AddVehicle({ handleCancel }) {
         body: JSON.stringify(formData),
       });
       if (!res.ok) throw new Error("Failed to add vehicle");
-      alert("Vehicle added successfully ✅");
+      alert("✅ Vehicle added successfully");
       handleCancel();
     } catch (err) {
       console.error("Error:", err);
-      alert("Failed to add vehicle ❌");
+      alert("❌ Failed to add vehicle");
     }
   };
 
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <h3>Add New Vehicle</h3>
-        <form onSubmit={handleSubmit} className="form-grid">
-          <label>Registration Number:</label>
-          <input type="text" name="regNum" value={formData.regNum} onChange={handleChange} required />
+    <div className="vehicle-popup-overlay">
+      <div className="vehicle-popup-form animate-popup">
+        <h2>Add Vehicle</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="input-group-vehicle">
+            <FaIdCard className="icon" />
+            <input
+              type="text"
+              name="regNum"
+              placeholder=" "
+              value={formData.regNum}
+              onChange={handleChange}
+              required
+            />
+            <label>Registration Number</label>
+          </div>
 
-          <label>Vehicle Name:</label>
-          <input type="text" name="vehName" value={formData.vehName} onChange={handleChange} required />
+          <div className="input-group-vehicle">
+            <FaCarSide className="icon" />
+            <input
+              type="text"
+              name="vehName"
+              placeholder=" "
+              value={formData.vehName}
+              onChange={handleChange}
+              required
+            />
+            <label>Vehicle Name</label>
+          </div>
 
-          <label>Color:</label>
-          <input type="text" name="color" value={formData.color} onChange={handleChange} required />
+          <div className="input-group-vehicle">
+            <FaPalette className="icon" />
+            <input
+              type="text"
+              name="color"
+              placeholder=" "
+              value={formData.color}
+              onChange={handleChange}
+              required
+            />
+            <label>Color</label>
+          </div>
 
-          <label>Vehicle Type:</label>
-          <select name="vehicleType" value={formData.vehicleType} onChange={handleChange} required>
-            <option value="">Select</option>
-            <option value="CAR">Car</option>
-            <option value="BIKE">Bike</option>
-            <option value="SCOOTER">Scooter</option>
-          </select>
+          <div className="input-group-vehicle">
+            <FaTag className="icon" />
+            <select
+              name="vehicleType"
+              value={formData.vehicleType}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select Vehicle Type</option>
+              <option value="CAR">Car</option>
+              <option value="BIKE">Bike</option>
+              <option value="SCOOTER">Scooter</option>
+            </select>
+          </div>
 
-          
-          {/* Radio buttons for Active */}
-          <label>Is Vehicle Active?</label>
-          <div className="radio-group">
-            <label>
-              <input
-                type="radio"
-                name="vehActive"
-                value="true"
-                checked={formData.vehActive === true}
-                onChange={() => setFormData({ ...formData, vehActive: true })}
-              />
-              Yes
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="vehActive"
-                value="false"
-                checked={formData.vehActive === false}
-                onChange={() => setFormData({ ...formData, vehActive: false })}
-              />
-              No
-            </label>
+          <div className="input-group-vehicle radio-group">
+            <label className="radio-label">Is Vehicle Active?</label>
+            <div className="radio-options">
+              <label>
+                <input
+                  type="radio"
+                  name="vehActive"
+                  value="true"
+                  checked={formData.vehActive === true}
+                  onChange={handleChange}
+                />
+                Yes
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="vehActive"
+                  value="false"
+                  checked={formData.vehActive === false}
+                  onChange={handleChange}
+                />
+                No
+              </label>
+            </div>
           </div>
 
           <div className="form-actions">
-            <button type="submit">Add Vehicle</button>
-            <button type="button" onClick={handleCancel} className="cancel-btn">
-              Cancel
-            </button>
+            <button type="submit" className="btn-submit-vehicle">Submit</button>
+            <button type="button" onClick={handleCancel} className="btn-cancel-vehicle">Cancel</button>
           </div>
         </form>
       </div>
     </div>
   );
-}
+};
 
 export default AddVehicle;
