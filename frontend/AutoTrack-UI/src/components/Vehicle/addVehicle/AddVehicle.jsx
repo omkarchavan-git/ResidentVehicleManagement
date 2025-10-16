@@ -12,12 +12,12 @@ const AddVehicle = ({ handleCancel }) => {
   });
 
   useEffect(() => {
-    document.body.classList.add("modal-open");
-    return () => document.body.classList.remove("modal-open");
+    document.body.classList.add("add-vehicle-modal-open");
+    return () => document.body.classList.remove("add-vehicle-modal-open");
   }, []);
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value, type } = e.target;
     if (type === "radio") {
       setFormData({ ...formData, vehActive: value === "true" });
     } else {
@@ -43,12 +43,12 @@ const AddVehicle = ({ handleCancel }) => {
   };
 
   return (
-    <div className="vehicle-popup-overlay">
-      <div className="vehicle-popup-form animate-popup">
-        <h2>Add Vehicle</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="input-group-vehicle">
-            <FaIdCard className="icon" />
+    <div className="add-vehicle-overlay">
+      <div className="add-vehicle-form animate-add-vehicle">
+        <h2 className="add-vehicle-title">Add Vehicle</h2>
+        <form className="add-vehicle-form-grid" onSubmit={handleSubmit}>
+          <div className="add-vehicle-input-group">
+            <FaIdCard className="add-vehicle-icon" />
             <input
               type="text"
               name="regNum"
@@ -57,11 +57,11 @@ const AddVehicle = ({ handleCancel }) => {
               onChange={handleChange}
               required
             />
-            <label>Registration Number</label>
+            <label className="add-vehicle-label">Registration Number</label>
           </div>
 
-          <div className="input-group-vehicle">
-            <FaCarSide className="icon" />
+          <div className="add-vehicle-input-group">
+            <FaCarSide className="add-vehicle-icon" />
             <input
               type="text"
               name="vehName"
@@ -70,11 +70,11 @@ const AddVehicle = ({ handleCancel }) => {
               onChange={handleChange}
               required
             />
-            <label>Vehicle Name</label>
+            <label className="add-vehicle-label">Vehicle Name</label>
           </div>
 
-          <div className="input-group-vehicle">
-            <FaPalette className="icon" />
+          <div className="add-vehicle-input-group">
+            <FaPalette className="add-vehicle-icon" />
             <input
               type="text"
               name="color"
@@ -83,11 +83,11 @@ const AddVehicle = ({ handleCancel }) => {
               onChange={handleChange}
               required
             />
-            <label>Color</label>
+            <label className="add-vehicle-label">Color</label>
           </div>
 
-          <div className="input-group-vehicle">
-            <FaTag className="icon" />
+          <div className="add-vehicle-input-group">
+            <FaTag className="add-vehicle-icon" />
             <select
               name="vehicleType"
               value={formData.vehicleType}
@@ -101,9 +101,9 @@ const AddVehicle = ({ handleCancel }) => {
             </select>
           </div>
 
-          <div className="input-group-vehicle radio-group">
-            <label className="radio-label">Is Vehicle Active?</label>
-            <div className="radio-options">
+          <div className="add-vehicle-radio-group-container">
+            <label className="add-vehicle-radio-label">Is Vehicle Active?</label>
+            <div className="add-vehicle-radio-options">
               <label>
                 <input
                   type="radio"
@@ -127,9 +127,9 @@ const AddVehicle = ({ handleCancel }) => {
             </div>
           </div>
 
-          <div className="form-actions">
-            <button type="submit" className="btn-submit-vehicle">Submit</button>
-            <button type="button" onClick={handleCancel} className="btn-cancel-vehicle">Cancel</button>
+          <div className="add-vehicle-form-actions">
+            <button type="submit" className="add-vehicle-btn-submit">Submit</button>
+            <button type="button" onClick={handleCancel} className="add-vehicle-btn-cancel">Cancel</button>
           </div>
         </form>
       </div>
