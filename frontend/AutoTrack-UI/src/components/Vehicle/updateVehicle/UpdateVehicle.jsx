@@ -146,7 +146,7 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
               Save
             </button>
             <button
-              className="update-vehicle-btn cancel"
+              className="update-vehicle-btn"
               onClick={handleCancel}
             >
               Cancel
