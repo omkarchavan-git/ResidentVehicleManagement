@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import DeleteResident from "../deleteResident/DeleteResident";
-import UpdateResident from "../updateResident/UpdateResident";
+import DeleteResident from "./DeleteResident";
+import UpdateResident from "./UpdateResident";
 import AddResident from "./AddResident";
 import AddVehicle from "../Vehicle/addVehicle/AddVehicle";
 import AddVisitor from "../Visitor/AddVisitor";

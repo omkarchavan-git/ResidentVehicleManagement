@@ -3,8 +3,8 @@ import "./Visitor.css";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
-import DeleteVisitor from "../deleteVisitor/DeleteVisitor";
-import UpdateVisitor from "../updateVisitor/UpdateVisitor";
+import DeleteVisitor from "./deleteVisitor/DeleteVisitor";
+import UpdateVisitor from "./updateVisitor/UpdateVisitor";
 import AddVisitor from "./AddVisitor";
 
 function Visitor() {
