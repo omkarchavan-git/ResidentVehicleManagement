@@ -7,6 +7,7 @@ import Navbar from './components/navbar/Navbar';
 import HomeDashboard from './components/Dashboard/HomeDashboard';
 import AddResident from './components/Resident/AddResident';
 import Vehicle from './components/Vehicle/Vehicle';
+import Footer from './components/footer/Footer';
 
 import './App.css';
 
@@ -18,7 +19,7 @@ function App() {
       <div>
         <Router>
           <Navbar />
-          <div className="pt-16"> {/* padding so content doesn’t hide behind navbar */}
+          <div className="pt-16">
             <Routes>
               <Route path='/' element={<Navigate to="/Dashboard" />} />
               <Route path='/Dashboard' element={<HomeDashboard />} />
@@ -28,8 +29,8 @@ function App() {
               <Route path="/Vehicle" element={<Vehicle />} />
 
             </Routes>
-
           </div>
+          <Footer />
         </Router>
       </div>
     </>
