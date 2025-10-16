@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import DeleteResident from "../deleteResident/DeleteResident";
-import "./Resident.css";
 import UpdateResident from "../updateResident/UpdateResident";
-import { useNavigate } from "react-router-dom";
-
 import AddResident from "./AddResident";
+import AddVehicle from "../Vehicle/addVehicle/AddVehicle";
+import AddVisitor from "../Visitor/AddVisitor";
+import "./Resident.css";
 
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
@@ -18,11 +18,20 @@ function Resident() {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
 
-  const [toast, setToast] = useState(""); // to handle delte
+  const [toast, setToast] = useState(""); // for delete notifications
 
   // handle update
   const [editingResident, setEditingResident] = useState(null);
   const [showUpdate, setShowUpdate] = useState(false);
+
+  // Add forms
+  const [showAddResidentModal, setShowAddResidentModal] = useState(false);
+  const [showAddVehicleModal, setShowAddVehicleModal] = useState(false);
+  const [showAddVisitorModal, setShowAddVisitorModal] = useState(false);
+  const [selectedResidentId, setSelectedResidentId] = useState(null);
+
+  // dropdown tracking
+  const [openDropdownId, setOpenDropdownId] = useState(null);
 
   // fetch all residents initially
   useEffect(() => {
@@ -58,7 +67,7 @@ function Resident() {
       .then((data) => {
         const sorted = data.sort((a, b) => b.id - a.id);
         setResidents(sorted);
-        setPage(1); // reset page
+        setPage(1);
       })
       .catch((err) => {
         console.error("Error fetching search results:", err);
@@ -66,29 +75,17 @@ function Resident() {
       });
   };
 
-  // add button
-  const [showAddModal, setShowAddModal] = useState(false);
-
-  // handle add button click
-  const handleAddClick = () => {
-    setShowAddModal(true);
-  };
   // pagination logic
   const startIndex = (page - 1) * rowsPerPage;
-  const selectedResidents = residents.slice(
-    startIndex,
-    startIndex + rowsPerPage
-  );
+  const selectedResidents = residents.slice(startIndex, startIndex + rowsPerPage);
   const totalPages = Math.ceil(residents.length / rowsPerPage);
 
   // delete function
-
   const removeResidentFromTable = (id) => {
     setResidents(residents.filter((r) => r.id !== id));
   };
 
-
-  // export to pdf functionalityt
+  // export to PDF
   const exportToPDF = () => {
     if (residents.length === 0) {
       alert("No resident data to export!");
@@ -134,7 +131,6 @@ function Resident() {
   return (
     <div style={{ padding: "20px" }} className="residentContainer">
       <div className="headingPanel">
-
         <h2 className="heading-title">🏘️ Resident Details</h2>
 
         {/* Search Bar */}
@@ -153,12 +149,7 @@ function Resident() {
             onChange={(e) => setLastname(e.target.value)}
             style={{ marginRight: "10px", padding: "6px" }}
           />
-          <button className="searchButton"
-            onClick={handleSearch}
-
-          >
-            Search
-          </button>
+          <button className="searchButton" onClick={handleSearch}>Search</button>
           <button
             onClick={() => {
               setFirstname("");
@@ -168,9 +159,6 @@ function Resident() {
           >
             Reset
           </button>
-
-          {/* Export to pdf button */}
-
           <button
             onClick={exportToPDF}
             style={{
@@ -191,7 +179,7 @@ function Resident() {
       {/* Table */}
       <table>
         <thead>
-          <tr >
+          <tr>
             <th>ID</th>
             <th>Contact No</th>
             <th>Email</th>
@@ -200,13 +188,13 @@ function Resident() {
             <th>Flat No</th>
             <th>Resident Type</th>
             <th>Parking Lot</th>
-            <th>Actions</th> {/* New column */}
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {selectedResidents.length > 0 ? (
             selectedResidents.map((resident) => (
-              <tr key={resident.id} >
+              <tr key={resident.id} className={openDropdownId === resident.id ? "dropdown-open" : ""}>
                 <td>{resident.id}</td>
                 <td>{resident.contactno}</td>
                 <td>{resident.email}</td>
@@ -216,9 +204,39 @@ function Resident() {
                 <td>{resident.residentType}</td>
                 <td>{resident.parkinglot || "N/A"}</td>
                 <td>
-                  <button className="add-btn" onClick={handleAddClick}>
-                    Add
-                  </button>
+                  <div
+                    className="add-dropdown"
+                    onMouseEnter={() => setOpenDropdownId(resident.id)}
+                    onMouseLeave={() => setOpenDropdownId(null)}
+                  >
+                    <button
+                      className="add-btn"
+                      onClick={() => {
+                        setSelectedResidentId(resident.id);
+                        setShowAddResidentModal(true);
+                      }}
+                    >
+                      Add
+                    </button>
+                    <div className="add-dropdown-content">
+                      <button
+                        onClick={() => {
+                          setSelectedResidentId(resident.id);
+                          setShowAddVehicleModal(true);
+                        }}
+                      >
+                        Add Vehicle
+                      </button>
+                      <button
+                        onClick={() => {
+                          setSelectedResidentId(resident.id);
+                          setShowAddVisitorModal(true);
+                        }}
+                      >
+                        Add Visitor
+                      </button>
+                    </div>
+                  </div>
 
                   <button
                     className="update-btn"
@@ -232,10 +250,8 @@ function Resident() {
 
                   <DeleteResident
                     resident={resident}
-                    onDeleted={(id) =>
-                      setResidents(residents.filter((r) => r.id !== id))
-                    }
-                    setToast={setToast} // <-- Pass the parent toast setter here
+                    onDeleted={removeResidentFromTable}
+                    setToast={setToast}
                   />
                 </td>
               </tr>
@@ -270,22 +286,45 @@ function Resident() {
         ))}
       </div>
 
-      {/* Add Resident Modal */}
-      {showAddModal && (
-        <div className="modal-overlay" onClick={() => setShowAddModal(false)}>
-          <div
-            
-            onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
-          >
-            {/* Add Resident Form */}
-            <AddResident
-              onClose={() => setShowAddModal(false)}
-            />
-          </div>
-        </div>
+      {/* Modals */}
+      {showAddResidentModal && (
+        <AddResident
+          residentId={selectedResidentId}
+          onClose={() => setShowAddResidentModal(false)}
+        />
       )}
 
-      {/* for deltete to render the page as we delete */}
+      {showAddVehicleModal && (
+        <AddVehicle
+          residentId={selectedResidentId}
+          onClose={() => setShowAddVehicleModal(false)}
+        />
+      )}
+
+      {showAddVisitorModal && (
+        <AddVisitor
+          residentId={selectedResidentId}
+          onClose={() => setShowAddVisitorModal(false)}
+        />
+      )}
+
+      {showUpdate && editingResident && (
+        <UpdateResident
+          resident={editingResident}
+          setToast={setToast}
+          onUpdated={(updated) => {
+            setResidents((prev) =>
+              prev.map((r) => (r.id === updated.id ? { ...r, ...updated } : r))
+            );
+          }}
+          onClose={() => {
+            setShowUpdate(false);
+            setEditingResident(null);
+          }}
+        />
+      )}
+
+      {/* Toast */}
       {toast && (
         <div
           style={{
@@ -303,27 +342,8 @@ function Resident() {
           {toast}
         </div>
       )}
-
-      {/*updation */}
-      {showUpdate && editingResident && (
-        <UpdateResident
-          resident={editingResident}
-          setToast={setToast} // ← pass setToast here
-          onUpdated={(updated) => {
-            setResidents((prev) =>
-              prev.map((r) => (r.id === updated.id ? { ...r, ...updated } : r))
-            );
-          }}
-          onClose={() => {
-            setShowUpdate(false);
-            setEditingResident(null);
-          }}
-        />
-      )}
     </div>
   );
 }
 
 export default Resident;
-
-
