@@ -77,7 +77,8 @@ const AddVisitor = ({ onClose, onVisitorAdded, setToast }) => {
     return (
         <div className="visitor-popup-overlay">
             <div className="visitor-popup-form animate-popup">
-                <h2>Add Visitor</h2>
+                <h2>Add Visitor <hr className="hrline" /></h2> 
+                
                 <form onSubmit={handleSubmit} className="form-visitor">
                     <div className="input-group-visitor">
                         <FaUser className="icon" />
