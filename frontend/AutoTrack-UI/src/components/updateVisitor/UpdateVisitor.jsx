@@ -1,32 +1,36 @@
 import React, { useState, useEffect } from "react";
 import "./UpdateVisitor.css";
+import {
+  FaUser,
+  FaCar,
+  FaIdCard,
+  FaPhone,
+  FaClipboardList,
+  FaClock,
+  FaUserFriends,
+} from "react-icons/fa";
 
 function UpdateVisitor({ visitor, setToast, onClose, onUpdated }) {
   const [formData, setFormData] = useState({
     ...visitor,
-    residentId: visitor.resident?.id || "", // initialize residentId
+    residentId: visitor.resident?.id || "",
   });
-  const [residents, setResidents] = useState([]); // for dropdown
+  const [residents, setResidents] = useState([]);
   const [show, setShow] = useState(false);
 
-  // Open modal
   useEffect(() => {
     setShow(true);
-
-    // Fetch all residents for the dropdown
     fetch("http://localhost:8085/Resident/getAllResident")
       .then((res) => res.json())
       .then((data) => setResidents(data))
       .catch((err) => console.error("Error fetching residents:", err));
   }, []);
 
-  // Handle form field changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Update visitor
   const handleUpdate = async () => {
     try {
       const res = await fetch(
@@ -41,11 +45,9 @@ function UpdateVisitor({ visitor, setToast, onClose, onUpdated }) {
       if (res.ok) {
         const updated = await res.json();
         onUpdated(updated);
-
         setToast(
           `✅ Visitor ${updated.visitorName} (ID ${updated.id}) updated successfully!`
         );
-
         setShow(false);
         setTimeout(onClose, 300);
       } else {
@@ -57,7 +59,6 @@ function UpdateVisitor({ visitor, setToast, onClose, onUpdated }) {
     }
   };
 
-  // Cancel modal
   const handleCancel = () => {
     setShow(false);
     setTimeout(onClose, 300);
@@ -67,9 +68,11 @@ function UpdateVisitor({ visitor, setToast, onClose, onUpdated }) {
     <div className={`update-modal-overlay ${show ? "show" : ""}`}>
       <div className={`update-modal ${show ? "show" : ""}`}>
         <h2>Update Visitor</h2>
+        <hr className="center-line" />
 
         <div className="form-grid">
           <div className="form-row">
+            <FaUser className="icon" />
             <input
               type="text"
               name="visitorName"
@@ -80,6 +83,7 @@ function UpdateVisitor({ visitor, setToast, onClose, onUpdated }) {
           </div>
 
           <div className="form-row">
+            <FaCar className="icon" />
             <input
               type="text"
               name="vehicleName"
@@ -90,6 +94,7 @@ function UpdateVisitor({ visitor, setToast, onClose, onUpdated }) {
           </div>
 
           <div className="form-row">
+            <FaIdCard className="icon" />
             <input
               type="text"
               name="vehicalRegisterationNum"
@@ -100,6 +105,7 @@ function UpdateVisitor({ visitor, setToast, onClose, onUpdated }) {
           </div>
 
           <div className="form-row">
+            <FaPhone className="icon" />
             <input
               type="text"
               name="phoneNumber"
@@ -110,6 +116,7 @@ function UpdateVisitor({ visitor, setToast, onClose, onUpdated }) {
           </div>
 
           <div className="form-row">
+            <FaClipboardList className="icon" />
             <input
               type="text"
               name="visitPurpose"
@@ -120,6 +127,7 @@ function UpdateVisitor({ visitor, setToast, onClose, onUpdated }) {
           </div>
 
           <div className="form-row">
+            <FaClock className="icon" />
             <input
               type="datetime-local"
               name="timeIn"
@@ -129,6 +137,7 @@ function UpdateVisitor({ visitor, setToast, onClose, onUpdated }) {
           </div>
 
           <div className="form-row">
+            <FaClock className="icon" />
             <input
               type="datetime-local"
               name="timeOut"
@@ -138,6 +147,7 @@ function UpdateVisitor({ visitor, setToast, onClose, onUpdated }) {
           </div>
 
           <div className="form-row">
+            <FaClock className="icon" />
             <input
               type="text"
               name="visitDuration"
@@ -160,8 +170,8 @@ function UpdateVisitor({ visitor, setToast, onClose, onUpdated }) {
             </select>
           </div>
 
-          {/* ✅ Resident dropdown */}
           <div className="form-row">
+            <FaUserFriends className="icon" />
             <input
               type="text"
               name="residentName"
@@ -171,16 +181,15 @@ function UpdateVisitor({ visitor, setToast, onClose, onUpdated }) {
             />
           </div>
         </div>
-
-        {/* Buttons full width below grid */}
         <div className="modal-buttons form-full">
           <button className="submit-btn" onClick={handleUpdate}>
             Update
           </button>
-          <button className="cancel-btn" onClick={handleCancel}>
+          <button className="cancel-btn-visitor" onClick={handleCancel}>
             Cancel
           </button>
         </div>
+
       </div>
     </div>
   );
