@@ -8,10 +8,13 @@ import autoTable from "jspdf-autotable";
 function Vehicle() {
   const [vehicles, setVehicles] = useState([]);
   const [filteredVehicles, setFilteredVehicles] = useState([]);
+
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedVehicle, setSelectedVehicle] = useState(null);
+
   const [showModal, setShowModal] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
+
   const [toastMsg, setToastMsg] = useState("");
   const [showToast, setShowToast] = useState(false);
 
@@ -98,7 +101,6 @@ function Vehicle() {
       intime: vehicleToSave.intime ? new Date(vehicleToSave.intime).toISOString() : null,
       outtime: vehicleToSave.outtime ? new Date(vehicleToSave.outtime).toISOString() : null,
       resident: vehicleToSave.resident?.id ? { id: vehicleToSave.resident.id } : null,
-      residentName: vehicleToSave.residentName ?? null,
       vehActive: !!vehicleToSave.vehActive,
     };
 
@@ -116,10 +118,18 @@ function Vehicle() {
       );
 
       if (!res.ok) throw new Error("Update failed");
-      await res.json();
+      const updatedVehicle = await res.json();
+
+      // Update frontend immediately
+      setVehicles((prev) =>
+        prev.map((v) => (v.id === updatedVehicle.id ? updatedVehicle : v))
+      );
+      setFilteredVehicles((prev) =>
+        prev.map((v) => (v.id === updatedVehicle.id ? updatedVehicle : v))
+      );
+
       setShowModal(false);
       showToastMsg("Vehicle updated successfully ✅");
-      fetchVehicles();
     } catch (err) {
       console.error("Error updating vehicle:", err);
       showToastMsg("Update failed ❌ (see console/network tab)");
@@ -137,7 +147,7 @@ function Vehicle() {
         (v.residentName && v.residentName.toLowerCase().includes(term))
     );
     setFilteredVehicles(filtered);
-    setPage(1); // reset pagination after search
+    setPage(1);
   };
 
   const handleReset = () => {
@@ -168,7 +178,7 @@ function Vehicle() {
           v.color,
           v.vehicleType,
           v.residentName ||
-            (v.resident ? `${v.resident.firstname} ${v.resident.lastname}` : "N/A"),
+          (v.resident ? `${v.resident.firstname} ${v.resident.lastname}` : "N/A"),
           v.vehActive ? "Yes" : "No",
         ]),
       });
@@ -189,7 +199,7 @@ function Vehicle() {
 
       {showToast && <div className="toast">{toastMsg}</div>}
 
-      {/* 🔹 Toolbar */}
+      {/* Toolbar */}
       <div className="toolbar">
         <input
           type="text"
@@ -221,7 +231,7 @@ function Vehicle() {
         </thead>
         <tbody>
           {paginatedVehicles.map((vehicle) => (
-            <tr key={vehicle.id} className="vehicle-row">
+            <tr key={vehicle.id}>
               <td>{vehicle.id}</td>
               <td>{vehicle.regNum}</td>
               <td>{vehicle.vehName}</td>
@@ -231,8 +241,8 @@ function Vehicle() {
                 {vehicle.residentName
                   ? vehicle.residentName
                   : vehicle.resident
-                  ? `${vehicle.resident.firstname} ${vehicle.resident.lastname}`
-                  : "N/A"}
+                    ? `${vehicle.resident.firstname} ${vehicle.resident.lastname}`
+                    : "N/A"}
               </td>
               <td>{vehicle.vehActive ? "Yes ✅" : "No ❌"}</td>
               <td>{vehicle.intime ? new Date(vehicle.intime).toLocaleString() : "—"}</td>
@@ -281,7 +291,7 @@ function Vehicle() {
         />
       )}
 
-      {showAddModal && <AddVehicle handleCancel={() => setShowAddModal(false)} />}
+      {showAddModal && <AddVehicle onClose={() => setShowAddModal(false)} />}
     </div>
   );
 }
