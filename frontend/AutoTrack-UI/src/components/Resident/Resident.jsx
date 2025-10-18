@@ -39,7 +39,7 @@ function Resident() {
   }, []);
 
   const fetchAllResidents = () => {
-    fetch("http://localhost:8085/Resident/getAllResident")
+    fetch("http://localhost:8082/Resident/getAllResident")
       .then((res) => res.json())
       .then((data) => {
         const sorted = data.sort((a, b) => b.id - a.id);
