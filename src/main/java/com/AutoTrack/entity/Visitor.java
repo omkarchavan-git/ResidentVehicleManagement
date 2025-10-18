@@ -32,10 +32,8 @@ public class Visitor {
     @Pattern(regexp = "^[A-Za-z0-9]+$", message = "Enter valid regNum")
     private String vehicalRegisterationNum;
 
-
     @Pattern(regexp = "^[A-Za-z ]+$", message = "only alphabets are allowed")
     private String visitPurpose;
-
 
     private LocalDateTime timeIn;
     private LocalDateTime timeOut;
@@ -46,7 +44,7 @@ public class Visitor {
     private boolean isActiveVisitor = true;
 
     @Column(name = "visit_duration")
-    private String visitDuration;   // HH:MM format
+    private String visitDuration;
 
     @PreUpdate                            // to auto calculate & update duration hours
     public void calculateDuration() {
@@ -104,7 +102,7 @@ public class Visitor {
     }
 
     public String getVehicalRegisterationNum() {
-        return vehicalRegisterationNum;
+        return vehicalRegisterationNum.toUpperCase();
     }
 
     public void setVehicalRegisterationNum(String vehicalRegisterationNum) {
