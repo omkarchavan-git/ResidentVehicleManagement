@@ -24,7 +24,7 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
           className="update-vehicle-form"
           onSubmit={(e) => e.preventDefault()}
         >
-          {/* Row 1 */}
+          {/* Registration Number */}
           <div className="update-vehicle-row">
             <label><FaIdCard className="update-vehicle-icon" /> Registration Number:</label>
             <input
@@ -36,6 +36,7 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
             />
           </div>
 
+          {/* Vehicle Name */}
           <div className="update-vehicle-row">
             <label><FaCar className="update-vehicle-icon" /> Vehicle Name:</label>
             <input
@@ -47,7 +48,7 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
             />
           </div>
 
-          {/* Row 2 */}
+          {/* Color */}
           <div className="update-vehicle-row">
             <label><FaPalette className="update-vehicle-icon" /> Color:</label>
             <input
@@ -59,6 +60,7 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
             />
           </div>
 
+          {/* Vehicle Type */}
           <div className="update-vehicle-row">
             <label><FaCar className="update-vehicle-icon" /> Vehicle Type:</label>
             <input
@@ -70,7 +72,7 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
             />
           </div>
 
-          {/* Row 3 */}
+          {/* Time In */}
           <div className="update-vehicle-row">
             <label><FaClock className="update-vehicle-icon" /> Time In:</label>
             <input
@@ -81,6 +83,7 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
             />
           </div>
 
+          {/* Time Out */}
           <div className="update-vehicle-row">
             <label><FaClock className="update-vehicle-icon" /> Time Out:</label>
             <input
@@ -91,7 +94,7 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
             />
           </div>
 
-          {/* Row 4 */}
+          {/* Resident Name */}
           <div className="update-vehicle-row">
             <label><FaUser className="update-vehicle-icon" /> Resident Name:</label>
             <input
@@ -103,6 +106,7 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
             />
           </div>
 
+          {/* Vehicle Active */}
           <div className="update-vehicle-row">
             <label><FaCheckCircle className="update-vehicle-icon" /> Is Vehicle Active?</label>
             <div className="update-vehicle-radio-group">
@@ -113,9 +117,7 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
                   value="true"
                   checked={selectedVehicle.vehActive === true}
                   onChange={() =>
-                    handleChange({
-                      target: { name: "vehActive", value: true, type: "radio" },
-                    })
+                    handleChange({ target: { name: "vehActive", value: true, type: "radio" } })
                   }
                 />
                 Yes
@@ -127,9 +129,7 @@ function UpdateVehicle({ selectedVehicle, handleChange, handleSave, handleCancel
                   value="false"
                   checked={selectedVehicle.vehActive === false}
                   onChange={() =>
-                    handleChange({
-                      target: { name: "vehActive", value: false, type: "radio" },
-                    })
+                    handleChange({ target: { name: "vehActive", value: false, type: "radio" } })
                   }
                 />
                 No
