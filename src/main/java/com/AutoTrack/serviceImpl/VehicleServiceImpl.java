@@ -62,54 +62,52 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public Vehicles createVehicle(Vehicles vehicles) {
 
-            Resident resident = null;
+        Resident resident = null;
 
-            // validate reg num
-            if (vehicles.getRegNum() == null || vehicles.getRegNum().trim().isEmpty())
-            {
-                throw new IllegalArgumentException("Vehicle reg num is not valid");
-            }
+        // validate reg num
+        if (vehicles.getRegNum() == null || vehicles.getRegNum().trim().isEmpty()) {
+            throw new IllegalArgumentException("Vehicle reg num is not valid");
+        }
 
-            // set resident to vehicle
-            vehicles.setResident(resident);
-            vehicles.setIntime(LocalDateTime.now().withNano(0));
+        // set resident to vehicle
+        vehicles.setResident(resident);
+        vehicles.setIntime(LocalDateTime.now().withNano(0));
 
-            return vehiclrRepo.save(vehicles);
+        return vehiclrRepo.save(vehicles);
 
     }
 
     //update vehicle
     @Override
     public Vehicles updatevehicle(int id, Vehicles vehicles) {
-
         Vehicles existingvehicles = vehiclrRepo.findById(id)
-                .orElseThrow( () -> new NoSuchElementException("Vehicle id : " + id + " Not found"));
+                .orElseThrow(() -> new NoSuchElementException("Vehicle id : " + id + " not found"));
+
         if (vehicles.getVehName() != null) existingvehicles.setVehName(vehicles.getVehName());
         if (vehicles.getRegNum() != null) existingvehicles.setRegNum(vehicles.getRegNum());
         if (vehicles.getVehicleType() != null) existingvehicles.setVehicleType(vehicles.getVehicleType());
         if (vehicles.getColor() != null) existingvehicles.setColor(vehicles.getColor());
-       existingvehicles.setIntime(vehicles.getIntime());
-      existingvehicles.setOuttime(vehicles.getOuttime());
-        if (vehicles.getResident() != null) existingvehicles.setResident(vehicles.getResident());
 
-        //to update the resident as well
+        if (vehicles.getIntime() != null) existingvehicles.setIntime(vehicles.getIntime());
+        if (vehicles.getOuttime() != null) existingvehicles.setOuttime(vehicles.getOuttime());
+
         if (vehicles.getResident() != null && vehicles.getResident().getId() != 0) {
             Resident res = residentRepo.findById(vehicles.getResident().getId())
                     .orElseThrow(() -> new NoSuchElementException("Resident not found"));
             existingvehicles.setResident(res);
         }
 
-
         return vehiclrRepo.save(existingvehicles);
     }
+
 
     @Override
     public Vehicles deletebyid(int id) {
         Vehicles vehileUser = vehiclrRepo.findById(id)
-                .orElseThrow( ()-> new FieldMissingException("Vehicle with ID : " +id + " not foudn"));
+                .orElseThrow(() -> new FieldMissingException("Vehicle with ID : " + id + " not foudn"));
 
-         vehiclrRepo.deleteAllById(Collections.singleton(id));
-         return null;
+        vehiclrRepo.deleteAllById(Collections.singleton(id));
+        return null;
     }
 
 
