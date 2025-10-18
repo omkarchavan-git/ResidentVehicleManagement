@@ -76,11 +76,11 @@ public class Vehicles {
     }
 
     public String getRegNum() {
-        return regNum;
+        return regNum.toUpperCase();
     }
 
     public void setRegNum(String regNum) {
-        this.regNum = regNum.toUpperCase();
+        this.regNum = regNum;
     }
 
     public boolean isVehActive() {
