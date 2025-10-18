@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import "./addVehicle.css";
 import { FaCarSide, FaIdCard, FaPalette, FaTag } from "react-icons/fa";
 
-const AddVehicle = ({ handleCancel }) => {
+const AddVehicle = ({ onClose, residentId }) => {
   const [formData, setFormData] = useState({
     regNum: "",
     vehName: "",
     color: "",
     vehicleType: "",
     vehActive: true,
+    resident: { id: residentId || null },
   });
 
   useEffect(() => {
@@ -35,11 +36,16 @@ const AddVehicle = ({ handleCancel }) => {
       });
       if (!res.ok) throw new Error("Failed to add vehicle");
       alert("✅ Vehicle added successfully");
-      handleCancel();
+      onClose(); // call onClose instead of handleCancel
     } catch (err) {
       console.error("Error:", err);
       alert("❌ Failed to add vehicle");
     }
+  };
+
+  const handleCancelClick = (e) => {
+    e.preventDefault();
+    onClose(); // call onClose
   };
 
   return (
@@ -128,8 +134,16 @@ const AddVehicle = ({ handleCancel }) => {
           </div>
 
           <div className="add-vehicle-form-actions">
-            <button type="submit" className="add-vehicle-btn-submit">Submit</button>
-            <button type="button" onClick={handleCancel} className="add-vehicle-btn-cancel">Cancel</button>
+            <button type="submit" className="add-vehicle-btn-submit">
+              Submit
+            </button>
+            <button
+              type="button"
+              className="cancel-btn"
+              onClick={handleCancelClick}
+            >
+              Cancel
+            </button>
           </div>
         </form>
       </div>
