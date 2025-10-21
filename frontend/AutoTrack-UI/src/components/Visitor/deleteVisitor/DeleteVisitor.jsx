@@ -11,7 +11,7 @@ function DeleteVisitor({ visitor, setToast, onClose, onDeleted }) {
   const handleDelete = async () => {
     try {
       const res = await fetch(
-        `http://localhost:8085/visitor/deleteVisitor/${visitor.id}`,
+        `https://residentvehiclemanagement.onrender.com/visitor/deleteVisitor/${visitor.id}`,
         {
           method: "DELETE",
         }
