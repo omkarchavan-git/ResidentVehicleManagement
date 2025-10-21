@@ -33,7 +33,6 @@ public class ResidentController {
         return new ResponseEntity<>(residentList1, HttpStatus.CREATED);
     }
 
-
     // API to get all resident
     @GetMapping("/getAllResident")
     public ResponseEntity<List<Resident>> getallresidents () {
