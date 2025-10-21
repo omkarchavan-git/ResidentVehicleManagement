@@ -235,14 +235,14 @@ body::-webkit-scrollbar {
 }
 
 /* For large screens (above 1200px) */
-@media (min-width: 900px) {
+@media (min-width: 850px) {
   .visitor-container {
     padding: 10px;
   }
 
   .visitor-table th,
   .visitor-table td {
-    padding: 1px 10px;
+    /* padding: 1px; */
     font-size: 16px;
   }
 
