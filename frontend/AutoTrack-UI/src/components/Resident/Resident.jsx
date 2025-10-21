@@ -39,7 +39,7 @@ function Resident() {
   }, []);
 
   const fetchAllResidents = () => {
-    fetch("http://localhost:8085/Resident/getAllResident")
+    fetch("https://residentvehiclemanagement.onrender.com/Resident/getAllResident")
       .then((res) => res.json())
       .then((data) => {
         const sorted = data.sort((a, b) => b.id - a.id);
@@ -55,7 +55,7 @@ function Resident() {
       return;
     }
 
-    let url = `http://localhost:8085/Resident/getByName?`;
+    let url = `https://residentvehiclemanagement.onrender.com/Resident/getByName?`;
     if (firstname) url += `firstname=${firstname}&`;
     if (lastname) url += `lastname=${lastname}`;
 
