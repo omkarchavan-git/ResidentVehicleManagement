@@ -25,7 +25,7 @@ function Vehicle() {
   // Fetch vehicles
   const fetchVehicles = async () => {
     try {
-      const res = await fetch("http://localhost:8085/vehicle/getallVehicles");
+      const res = await fetch("https://residentvehiclemanagement.onrender.com/vehicle/getallVehicles");
       if (!res.ok) throw new Error("Failed to fetch vehicles");
       const data = await res.json();
       setVehicles(data);
@@ -51,7 +51,7 @@ function Vehicle() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this vehicle?")) return;
     try {
-      const res = await fetch(`http://localhost:8085/vehicle/deletevehiclebyid/${id}`, {
+      const res = await fetch(`https://residentvehiclemanagement.onrender.com/vehicle/deletevehiclebyid/${id}`, {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Delete failed");
@@ -106,7 +106,7 @@ function Vehicle() {
 
     try {
       const res = await fetch(
-        `http://localhost:8085/vehicle/updateVehicleById/${vehicleToSave.id}`,
+        `https://residentvehiclemanagement.onrender.com/vehicle/updateVehicleById/${vehicleToSave.id}`,
         {
           method: "PATCH",
           headers: {
