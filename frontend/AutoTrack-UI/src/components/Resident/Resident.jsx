@@ -98,22 +98,22 @@ function Resident() {
 
     const columns = [
       "ID",
+      "First Name",
+      "Last Name",
       "Contact No",
       "Email",
-      "First Name",
       "Flat No",
-      "Last Name",
       "Resident Type",
       "Parking Lot",
     ];
 
     const rows = residents.map((res) => [
       res.id,
+      res.firstname,
+      res.lastname,
       res.contactno,
       res.email,
-      res.firstname,
       res.flatno,
-      res.lastname,
       res.residentType,
       res.parkinglot || "N/A",
     ]);
@@ -124,7 +124,6 @@ function Resident() {
       startY: 30,
       styles: { fontSize: 10 },
     });
-
     doc.save("resident_list.pdf");
   };
 
@@ -181,10 +180,10 @@ function Resident() {
         <thead>
           <tr>
             <th>ID</th>
-            <th>Contact No</th>
-            <th>Email</th>
             <th>First Name</th>
             <th>Last Name</th>
+            <th>Contact No</th>
+            <th>Email</th>
             <th>Flat No</th>
             <th>Resident Type</th>
             <th>Parking Lot</th>
@@ -196,10 +195,10 @@ function Resident() {
             selectedResidents.map((resident) => (
               <tr key={resident.id} className={openDropdownId === resident.id ? "dropdown-open" : ""}>
                 <td>{resident.id}</td>
-                <td>{resident.contactno}</td>
-                <td>{resident.email}</td>
                 <td>{resident.firstname}</td>
                 <td>{resident.lastname}</td>
+                <td>{resident.contactno}</td>
+                <td>{resident.email}</td>
                 <td>{resident.flatno}</td>
                 <td>{resident.residentType}</td>
                 <td>{resident.parkinglot || "N/A"}</td>
