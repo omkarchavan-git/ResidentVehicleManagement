@@ -56,7 +56,6 @@ public class ResidentController {
         return ResponseEntity.ok(residents);
     }
 
-
     // Delete Resident data by id
     @DeleteMapping("/deleteResidentById/{id}")
     public ResponseEntity<Resident> deleteById(@PathVariable("id") int id)

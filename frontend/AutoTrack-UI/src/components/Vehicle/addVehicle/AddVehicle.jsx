@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./addVehicle.css";
+import "./AddVehicle.css"
 import { FaCarSide, FaIdCard, FaPalette, FaTag } from "react-icons/fa";
 
 const AddVehicle = ({ onClose, residentId }) => {
