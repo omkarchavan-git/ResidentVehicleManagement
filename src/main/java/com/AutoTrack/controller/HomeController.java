@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/home")
 @CrossOrigin(origins = "https://resident-vehicle-managements.vercel.app")
+@RequestMapping("/home")
 
 public class HomeController {
 
