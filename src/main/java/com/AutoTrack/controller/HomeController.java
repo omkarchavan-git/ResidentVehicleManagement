@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/home")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://resident-vehicle-managements.vercel.app")
+
 public class HomeController {
 
     @Autowired
