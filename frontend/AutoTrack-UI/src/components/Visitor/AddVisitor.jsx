@@ -22,7 +22,7 @@ const AddVisitor = ({ onClose, onVisitorAdded, setToast }) => {
         timeIn: "",
         timeOut: "",
         visitorType: "",
-        residentId: ""
+       
     });
 
     const handleChange = (e) => {
@@ -170,17 +170,7 @@ const AddVisitor = ({ onClose, onVisitorAdded, setToast }) => {
                         
                     </div>
 
-                    <div className="input-group-visitor">
-                        <FaHome className="icon" />
-                        <input
-                            type="number"
-                            name="residentId"
-                            placeholder=" "
-                            onChange={handleChange}
-                            required
-                        />
-                        <label>Resident ID</label>
-                    </div>
+                    
 
                     <div className="form-actions">
                         <button type=" " className="btn-submit-visitor">Submit</button>
