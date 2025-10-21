@@ -34,7 +34,7 @@ const AddVisitor = ({ onClose, onVisitorAdded, setToast }) => {
         e.preventDefault();
 
         try {
-            const response = await fetch("http://localhost:8085/visitor/addVisitor", {
+            const response = await fetch("https://residentvehiclemanagement.onrender.com/visitor/addVisitor", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
