@@ -1,38 +1,37 @@
-import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import Resident from './components/Resident/Resident';
-import Visitor from './components/Visitor/Visitor';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
-import HomeDashboard from './components/Dashboard/HomeDashboard';
-import AddResident from './components/Resident/AddResident';
-import Vehicle from './components/Vehicle/Vehicle';
 import Footer from './components/footer/Footer';
+import HomeDashboard from './components/Dashboard/HomeDashboard';
+import Resident from './components/Resident/Resident';
+import AddResident from './components/Resident/AddResident';
+import Visitor from './components/Visitor/Visitor';
+import Vehicle from './components/Vehicle/Vehicle';
 
 import './App.css';
 
 function App() {
-
   return (
-    <>
-      <div>
-        <Router>
-          <Navbar />
-          <div className="pt-16">
-            <Routes>
-              <Route path='/' element={<Navigate to="/Dashboard" />} />
-              <Route path='/Dashboard' element={<HomeDashboard />} />
-              <Route path="/resident/addResident" element={<AddResident />} />
-              <Route path="/resident/Resident" element={<Resident />} />
-              <Route path="/Visitor" element={<Visitor />} />
-              <Route path="/Vehicle" element={<Vehicle />} />
+    <Router>
+      <Navbar />
+      <div className="pt-16">
+        <Routes>
+          {/* Default route */}
+          <Route path="/" element={<Navigate to="/dashboard" />} />
 
-            </Routes>
-          </div>
-          <Footer />
-        </Router>
+          {/* Dashboard */}
+          <Route path="/dashboard" element={<HomeDashboard />} />
+
+          {/* Resident routes */}
+          <Route path="/resident" element={<Resident />} />
+          <Route path="/resident/add" element={<AddResident />} />
+
+          {/* Visitor & Vehicle */}
+          <Route path="/visitor" element={<Visitor />} />
+          <Route path="/vehicle" element={<Vehicle />} />
+        </Routes>
       </div>
-    </>
+      <Footer />
+    </Router>
   );
 }
 
