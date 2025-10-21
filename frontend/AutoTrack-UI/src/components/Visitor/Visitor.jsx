@@ -24,7 +24,7 @@ function Visitor() {
   }, []);
 
   const fetchAllVisitors = () => {
-    fetch("http://localhost:8085/visitor/getAllVisitor")
+    fetch("https://residentvehiclemanagement.onrender.com/visitor/getAllVisitor")
       .then((res) => res.json())
       .then((data) => setVisitors(data.sort((a, b) => b.id - a.id)))
       .catch((err) => console.error("Error fetching visitors:", err));
