@@ -7,14 +7,14 @@ function HomeDashboard() {
   const [recentVisitors, setRecentVisitors] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8085/api/home/summary")
+    fetch("https://residentvehiclemanagement.onrender.com/api/home/summary")
       .then((res) => res.json())
       .then((data) => setSummary(data))
       .catch((err) => console.error(err));
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:8085/visitor/getAllVisitor")
+    fetch("https://residentvehiclemanagement.onrender.com/visitor/getAllVisitor")
       .then((res) => res.json())
       .then((data) => {
         setAllVisitors(data);
