@@ -20,7 +20,7 @@ function UpdateVisitor({ visitor, setToast, onClose, onUpdated }) {
 
   useEffect(() => {
     setShow(true);
-    fetch("http://localhost:8085/Resident/getAllResident")
+    fetch("https://residentvehiclemanagement.onrender.com/Resident/getAllResident")
       .then((res) => res.json())
       .then((data) => setResidents(data))
       .catch((err) => console.error("Error fetching residents:", err));
@@ -34,7 +34,7 @@ function UpdateVisitor({ visitor, setToast, onClose, onUpdated }) {
   const handleUpdate = async () => {
     try {
       const res = await fetch(
-        `http://localhost:8085/visitor/updateVisitor/${visitor.id}`,
+        `https://residentvehiclemanagement.onrender.com/visitor/updateVisitor/${visitor.id}`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
