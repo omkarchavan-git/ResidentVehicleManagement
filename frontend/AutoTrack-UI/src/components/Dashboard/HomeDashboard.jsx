@@ -7,7 +7,7 @@ function HomeDashboard() {
   const [recentVisitors, setRecentVisitors] = useState([]);
 
   useEffect(() => {
-    fetch("https://residentvehiclemanagement.onrender.com/api/home/summary")
+    fetch("https://residentvehiclemanagement.onrender.com/home/summary")
       .then((res) => res.json())
       .then((data) => setSummary(data))
       .catch((err) => console.error(err));
