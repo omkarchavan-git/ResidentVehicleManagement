@@ -30,7 +30,7 @@ function UpdateResident({ resident, setToast, onClose, onUpdated }) {
     }
 
     const res = await fetch(
-      `http://localhost:8085/Resident/updateResidentById/${resident.id}`,
+      `https://residentvehiclemanagement.onrender.com/Resident/updateResidentById/${resident.id}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
