@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/Resident")
 @CrossOrigin(origins = "https://resident-vehicle-managements.vercel.app")
-@RequestMapping("/resident")
 
 public class ResidentController {
 
