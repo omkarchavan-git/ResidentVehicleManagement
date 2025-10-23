@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Resident")
+@RequestMapping("/resident")
 @CrossOrigin(origins = "https://resident-vehicle-managements.vercel.app")
 
 public class ResidentController {
@@ -35,7 +35,7 @@ public class ResidentController {
     }
 
     // API to get all resident
-    @GetMapping("/getAllResident")
+    @GetMapping("/getAllResidents")
     public ResponseEntity<List<Resident>> getallresidents () {
         List<Resident> residentList = residentService.getAllResident();
         return new ResponseEntity<>(residentList,HttpStatus.OK);
