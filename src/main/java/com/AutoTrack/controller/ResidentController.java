@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "https://resident-vehicle-managements.vercel.app")
-@RequestMapping("/Resident")
+@RequestMapping("/resident")
 
 public class ResidentController {
 
