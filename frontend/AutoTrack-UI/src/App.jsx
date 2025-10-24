@@ -37,6 +37,11 @@ function App() {
         }, 5000);
       });
   }, []);
+  
+  if (!isBackendReady) {
+    return <Loader />; // show loader until backend wakes up
+  }
+  
   return (
     <Router>
       <Navbar />
