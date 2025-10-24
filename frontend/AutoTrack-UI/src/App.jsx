@@ -13,6 +13,16 @@ function App() {
  
   const [isBackendReady, setIsBackendReady] = useState(false);
 
+  useEffect(() => {
+    // Ping backend once when app loads
+    fetch("https://residentvehiclemanagement.onrender.com/home/summary")
+      .then((res) => {
+        if (res.ok) {
+          setIsBackendReady(true);
+        } else {
+          throw new Error("Backend not ready");
+        }
+      })
   return (
     <Router>
       <Navbar />
