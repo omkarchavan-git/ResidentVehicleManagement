@@ -23,6 +23,20 @@ function App() {
           throw new Error("Backend not ready");
         }
       })
+      .catch(() => {
+        // Keep retrying every 5 seconds until backend wakes up
+        const interval = setInterval(() => {
+          fetch("https://residentvehiclemanagement.onrender.com/home/summary")
+            .then((res) => {
+              if (res.ok) {
+                setIsBackendReady(true);
+                clearInterval(interval);
+              }
+            })
+            .catch(() => {});
+        }, 5000);
+      });
+  }, []);
   return (
     <Router>
       <Navbar />
