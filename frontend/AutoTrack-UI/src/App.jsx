@@ -10,6 +10,9 @@ import Vehicle from './components/Vehicle/Vehicle';
 import './App.css';
 
 function App() {
+ 
+  const [isBackendReady, setIsBackendReady] = useState(false);
+
   return (
     <Router>
       <Navbar />
