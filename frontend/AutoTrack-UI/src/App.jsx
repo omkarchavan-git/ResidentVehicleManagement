@@ -6,42 +6,11 @@ import Resident from './components/Resident/Resident';
 import AddResident from './components/Resident/AddResident';
 import Visitor from './components/Visitor/Visitor';
 import Vehicle from './components/Vehicle/Vehicle';
+import Loader from './components/Loader/Loader';
 
 import './App.css';
 
 function App() {
- 
-  const [isBackendReady, setIsBackendReady] = useState(false);
-
-  useEffect(() => {
-    // Ping backend once when app loads
-    fetch("https://residentvehiclemanagement.onrender.com/home/summary")
-      .then((res) => {
-        if (res.ok) {
-          setIsBackendReady(true);
-        } else {
-          throw new Error("Backend not ready");
-        }
-      })
-      .catch(() => {
-        // Keep retrying every 5 seconds until backend wakes up
-        const interval = setInterval(() => {
-          fetch("https://residentvehiclemanagement.onrender.com/home/summary")
-            .then((res) => {
-              if (res.ok) {
-                setIsBackendReady(true);
-                clearInterval(interval);
-              }
-            })
-            .catch(() => {});
-        }, 5000);
-      });
-  }, []);
-  
-  if (!isBackendReady) {
-    return <Loader />; // show loader until backend wakes up
-  }
-  
   return (
     <Router>
       <Navbar />
@@ -54,12 +23,15 @@ function App() {
           <Route path="/dashboard" element={<HomeDashboard />} />
 
           {/* Resident routes */}
-          <Route path="/resident" element={<Resident />} />
+          <Route path="/Resident" element={<Resident />} />
           <Route path="/resident/add" element={<AddResident />} />
 
           {/* Visitor & Vehicle */}
           <Route path="/visitor" element={<Visitor />} />
           <Route path="/vehicle" element={<Vehicle />} />
+
+          {/* Fallback loader for unmatched routes (optional) */}
+          <Route path="*" element={<Loader />} />
         </Routes>
       </div>
       <Footer />
