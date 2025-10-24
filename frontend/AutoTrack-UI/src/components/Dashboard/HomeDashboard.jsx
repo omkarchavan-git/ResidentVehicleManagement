@@ -12,6 +12,16 @@ function HomeDashboard() {
       .then((data) => setSummary(data))
       .catch((err) => console.error(err));
   }, []);
+  
+  if (!summary) {
+    // ⬇️ Show loader only for data section
+    return (
+      <div className="dashboard-container">
+        <h1>Community Dashboard</h1>
+        <Loader />
+      </div>
+    );
+  }
 
   useEffect(() => {
     fetch("https://residentvehiclemanagement.onrender.com/visitor/getAllVisitor")
