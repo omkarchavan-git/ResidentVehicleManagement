@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Loader from "../Loader/Loader"; // ✅ Make sure path is correct
 import "./HomeDashboard.css";
 
 function HomeDashboard() {
@@ -12,16 +13,6 @@ function HomeDashboard() {
       .then((data) => setSummary(data))
       .catch((err) => console.error(err));
   }, []);
-  
-  if (!summary) {
-    // ⬇ Show loader only for data section
-    return (
-      <div className="dashboard-container">
-        <h1>Community Dashboard</h1>
-        <Loader />
-      </div>
-    );
-  }
 
   useEffect(() => {
     fetch("https://residentvehiclemanagement.onrender.com/visitor/getAllVisitor")
@@ -36,7 +27,14 @@ function HomeDashboard() {
       .catch((err) => console.error(err));
   }, []);
 
-  if (!summary) return <p className="loading">Loading dashboard...</p>;
+  if (!summary) {
+    return (
+      <div className="dashboard-container">
+        <h1>Community Dashboard</h1>
+        <Loader /> {/* ✅ Loader shows until summary loads */}
+      </div>
+    );
+  }
 
   // Calculate visitors today and this week
   const today = new Date();
@@ -111,21 +109,19 @@ function HomeDashboard() {
           </ul>
         </div>
 
-        <div className="recent-lists">
-          <div className="recent-section">
-            <h3>Recent Visitors</h3>
-            <ul>
-              {recentVisitors.length > 0 ? (
-                recentVisitors.map((v) => <li key={v.id}>{v.visitorName}</li>)
-              ) : (
-                <li>No recent visitors</li>
-              )}
-            </ul>
-          </div>
+        <div className="recent-section">
+          <h3>Recent Visitors</h3>
+          <ul>
+            {recentVisitors.length > 0 ? (
+              recentVisitors.map((v) => <li key={v.id}>{v.visitorName}</li>)
+            ) : (
+              <li>No recent visitors</li>
+            )}
+          </ul>
         </div>
       </div>
-      </div>
-      );
+    </div>
+  );
 }
 
-      export default HomeDashboard;
+export default HomeDashboard;
