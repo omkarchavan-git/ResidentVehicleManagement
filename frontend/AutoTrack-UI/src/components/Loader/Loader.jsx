@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./Loader.css";
 
-const quotes = [
+const Loader = () => {
+ const quotes = [
   "Good things take time — please wait!",
   "Loading data... excellence in progress!",
   "Patience is the key to smooth performance!",
@@ -9,21 +10,14 @@ const quotes = [
   "Preparing dashboard data for you!"
 ];
 
-function Loader() {
-  const [quote, setQuote] = useState("");
-
-  useEffect(() => {
-    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-    setQuote(randomQuote);
-  }, []);
+  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
   return (
-    <div className="inline-loader">
-      <div className="spinner"></div>
-      <p className="loading-text">Loading...</p>
-      <p className="loading-quote">“{quote}”</p>
+    <div className="loader-container">
+      <div className="loader"></div>
+      <p className="loader-quote">{randomQuote}</p>
     </div>
   );
-}
+};
 
 export default Loader;
