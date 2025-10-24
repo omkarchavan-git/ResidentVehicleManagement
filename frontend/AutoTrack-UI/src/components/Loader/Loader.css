@@ -1,35 +1,27 @@
-.inline-loader {
+.loader-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 250px;
-  width: 100%;
-  color: #ff3c3c;
-  text-align: center;
+  margin: 30px 0;
+  min-height: 150px;
 }
 
-.spinner {
-  border: 5px solid rgba(255, 60, 60, 0.3);
-  border-top: 5px solid #ff3c3c;
+.loader {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #ff4500;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   animation: spin 1s linear infinite;
-  margin-bottom: 15px;
 }
 
-.loading-text {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #ff3c3c;
-}
-
-.loading-quote {
-  font-size: 0.9rem;
-  color: #555;
+.loader-quote {
+  margin-top: 10px;
   font-style: italic;
-  margin-top: 5px;
+  color: #555;
+  text-align: center;
+  max-width: 300px;
 }
 
 @keyframes spin {
