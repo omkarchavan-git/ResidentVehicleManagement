@@ -14,7 +14,7 @@ function HomeDashboard() {
   }, []);
   
   if (!summary) {
-    // ⬇️ Show loader only for data section
+    // ⬇ Show loader only for data section
     return (
       <div className="dashboard-container">
         <h1>Community Dashboard</h1>
