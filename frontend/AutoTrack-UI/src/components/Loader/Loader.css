@@ -1,0 +1,10 @@
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff8c42, #ff3c3c);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+}
