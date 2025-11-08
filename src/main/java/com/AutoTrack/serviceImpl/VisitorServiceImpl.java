@@ -29,8 +29,8 @@ public class VisitorServiceImpl implements VisitorService {
 
     // Method to add data
     @Override
-    public Visitor addVisitor(Visitor visitor) {
-        return visitorRepo.save(visitor);
+    public List<Visitor> addVisitor(List<Visitor> visitor) {
+        return visitorRepo.saveAll(visitor);
     }
 
     // method to get Resident details using visitor regNum

@@ -24,8 +24,8 @@ public class VisitorController {
 
     // API to add visitor data
     @PostMapping("/addVisitor")
-    public ResponseEntity<Visitor> addVisitor(@RequestBody Visitor visitor) {
-        Visitor savedVisitor = visitorService.addVisitor(visitor);
+    public ResponseEntity<List<Visitor>> addVisitor(@RequestBody List<Visitor> visitor) {
+       List<Visitor> savedVisitor = visitorService.addVisitor(visitor);
         return new ResponseEntity<>(savedVisitor, HttpStatus.CREATED);
     }
 
