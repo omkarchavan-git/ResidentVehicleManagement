@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Loader from "../Loader/Loader"; // ✅ Make sure path is correct
+import Loader from "../Loader/Loader"; 
 import "./HomeDashboard.css";
 
 function HomeDashboard() {
