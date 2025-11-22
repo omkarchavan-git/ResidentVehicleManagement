@@ -18,6 +18,7 @@ function Loginpage () {
                   <input type="text" class="form-control" name="password" id="" aria-describedby="helpId" placeholder="password" />
                  
                  <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off"> Submit </button>
+                 <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off"> Reset </button>
                 </div>
             </div>
         </div>
