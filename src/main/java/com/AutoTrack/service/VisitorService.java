@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface VisitorService {
 
-    public Visitor addVisitor(Visitor visitor);
+    public List<Visitor> addVisitor(List<Visitor> visitor);
 
     // method to get Resident details using visitor regNum
     public VisitorResidentDTO getVisitorResidentDetailsByRegNum(String regNum);
