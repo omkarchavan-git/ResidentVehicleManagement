@@ -57,7 +57,7 @@ public class Visitor {
     }
 
     @Enumerated(EnumType.STRING)
-    private VisitorType visitorType;
+    private VisitorType visitorType;           //  GUEST, DELIVERY, WORKER
 
     //  Many-to-One mapping with Resident
     @ManyToOne
